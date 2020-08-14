@@ -1,39 +1,18 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
-import GoalItem from './components/GoalItem';
-import GoalInput from './components/GoalInput';
+import Home from './screens/Home' 
+import AddSet from './screens/AddSet';
 
 export default function App() { 
- 
-  const [courseGoals, setCourseGoals] = useState([]);
+  
   const [isAddMode, setIsAddMode]= useState(false);
+  const [courseGoals, setCourseGoals] = useState([]);
 
-
-
-  const addGoalHandler = goalTitle=>{
-    setCourseGoals(currentGoals=>[...courseGoals, {id: Math.random().toString(), value: goalTitle}]);
-    setIsAddMode(false);
-  };
-
-  const removeGoalHandler = goalId=>{
-    setCourseGoals(currentGoals=>{
-      return currentGoals.filter((goal)=>goal.id !==goalId);
-    });
-  }; 
-
+  screen = <Home setScreen = {setIsAddMode} qList ={courseGoals} setQList={setCourseGoals}/>
+  if (isAddMode){
+    screen = <AddSet setScreen = {setIsAddMode} qList ={courseGoals} setQList={setCourseGoals}/>
+  }
   return (
-    <View style={styles.screen} >
-      <Button title  = 'Add New Goal' onPress={()=>setIsAddMode(true)}/>
-      <GoalInput visible = {isAddMode} onAddGoal = {addGoalHandler} />
-      <FlatList data = {courseGoals}
-      keyExtractor={(item, index)=> item.id}
-      renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={removeGoalHandler}title ={itemData.item.value}/>}/>
-    </View>
+    screen
   );
 }
-
-const styles = StyleSheet.create({
-  screen:{
-    padding:30
-  }
-});
