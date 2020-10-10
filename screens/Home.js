@@ -13,7 +13,7 @@ const Home = props =>{
       }; 
     return   (
     <View style={styles.screen}>
-      <Button title  = 'New Question Set' onPress={()=>props.setScreen(true)}/>
+      <Button title  = 'New Question Set' onPress={()=>props.setScreen(1)}/>
       <FlatList data = {props.qList}
       keyExtractor={(item, index)=> item.id}
       renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={removeGoalHandler}title ={itemData.item.value}/>}/>

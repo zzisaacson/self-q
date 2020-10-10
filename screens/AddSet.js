@@ -13,7 +13,7 @@ const AddSet = props =>{
     const [reflect, setReflect]= useState('');
     const addGoalHandler = goalTitle=>{
         props.setQList([...props.qList, {id: Math.random().toString(), value: goalTitle}]);
-        props.setScreen(false);
+        props.setScreen(0);
       };
     return(
         <ScrollView>
