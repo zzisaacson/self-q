@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View,Dimensions, Image, Button, StyleSheet,FlatList} from 'react-native';
 
 
-const Tab = props =>{
+const TabS = props =>{
     var img = "../assets/home.png";
     /*if(screen == 0){
         img = '../assets/home.png';
@@ -22,7 +22,7 @@ const Tab = props =>{
         borderColor:'grey',
         borderWidth:1}} onPress={()=> props.setScreen(props.screen)}>
         <Image 
-            source={require('../assets/home.png')}
+            source={require('../assets/settings.png')}
             style={styles.logo}
             resizeMode={"stretch"}/>
     </View>
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
     
 });
 
-export default Tab;
+export default TabS;
