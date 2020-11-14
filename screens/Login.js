@@ -7,8 +7,19 @@ import firebase from 'firebase';
 
 
 const Login = props =>{
+    const [email, setEmail]= useState('');
+    const [password, setPassword]= useState('');
 
-    const yerr = true;
+    const handleSignIn = ()=>{
+        firebase.auth().signInWithEmailAndPassword(email,password)
+        .then(()=>{
+            props.setScreen(0);
+        })
+        .catch((error)=>{
+            console.log('auth failed '+error+' && email='+email);
+        });
+     
+    }
     return   (
     <View style={styles.container}>
         <View style ={styles.header}>
@@ -20,9 +31,9 @@ const Login = props =>{
         <View style ={styles.footer}>
             <Text style={styles.title}>Welcome to SELf-Q!</Text>
             <Text style = {styles.text}>Sign in with account</Text>
-            <TextInput placeholder={"Email"} style ={styles.input}/>
-            <TextInput placeholder={"Password"} style ={styles.input}/>
-            <Button style={{width:'25%'}} title="Sign In" onPress ={()=>props.setScreen(0)}/>
+            <TextInput placeholder={"Email"} style ={styles.input} onChangeText={setEmail}/>
+            <TextInput placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
+            <Button style={{width:'25%'}} title="Sign In" onPress ={handleSignIn}/>
             <View style ={{alignItems:'center'}}> 
                 <Text style = {styles.clickableText}>New user? Sign up.</Text>
             </View>
