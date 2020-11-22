@@ -35,7 +35,7 @@ export default function App() {
   //console.log(firebase.auth().currentUser.uid)
   const setGoalsHanlder=goals=>{
     //console.log(firebase.auth().currentUser.uid)
-    db.ref(firebase.auth().currentUser.uid).set(goals);
+    db.ref(firebase.auth().currentUser.uid+'/set-list').set(goals);
     return setCourseGoals(goals)
   }
 
@@ -61,7 +61,7 @@ export default function App() {
   }
   screen = <Home setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder} setNoDB={setCourseGoals}/>
   if (currScreen==1 ){
-    screen = <AddSet prompList= {qList} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
+    screen = <AddSet answers={answers} prompList= {qList} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   }
   if (currScreen==2){
     screen = <Login setScreen = {setScreen}/>

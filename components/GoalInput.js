@@ -12,7 +12,7 @@ const GoalInput = props =>{
           <View style={styles.inputContainer}>
             <Text style={{fontWeight:'bold', color :props.color}}>{props.header}</Text>
             <Text>{props.question}</Text>
-            <TextInput placeholder={props.header} style ={styles.input} onChangeText = {goalInputHandler} value={props.input}/>
+            <TextInput text={props.text} placeholder={props.header} style ={styles.input} onChangeText = {goalInputHandler} value={props.input}/>
             
           </View>
     );

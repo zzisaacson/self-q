@@ -5,22 +5,38 @@ import GoalItem from '../components/GoalItem';
 import firebase from 'firebase';
 //import Card from '../components/Card'
 
+var once = false;
 const Home = props =>{
-    var serverList = {};
+
     const db = firebase.database();
-    db.ref(firebase.auth().currentUser.uid).once("value", function(snapshot) {
-      console.log(snapshot.val())
-      if(snapshot.val()!=null){
-        props.setNoDB(snapshot.val());
-      }
-    }, function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
-    });
+    if (!once){
+      db.ref(firebase.auth().currentUser.uid+'/set-list').once("value", function(snapshot) {
+        console.log(snapshot.val())
+        if(snapshot.val()!=null){
+          props.setNoDB(snapshot.val());
+        }
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+      once=true;
+   }
+
 
     const removeGoalHandler = goalId=>{
-        props.setQList(currentGoals=>{
-          return currentGoals.filter((goal)=>goal.id !==goalId);
+        db.ref(firebase.auth().currentUser.uid+'/detail-list/'+goalId).once("value", function(snapshot) {
+          const data=snapshot.val();
+          var answers =[];
+          console.log(data);
+          for (key in data.keys){
+            if(key!='name'){
+              answers.push(data[key]['answer']);
+            }
+          }
+          console.log(answers);
+        }, function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
         });
+        //props.setScreen(1);
       }; 
     return   (
     <View style={styles.screen}>
