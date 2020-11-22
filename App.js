@@ -28,9 +28,14 @@ const db = firebase.database();
 export default function App() { 
   
   const [currScreen, setScreen]= useState(2);
-  const [qList, setQList]= useState(4);
   const [courseGoals, setCourseGoals] = useState([]);
   const [colorList, setColorList] = useState(['lightgrey','lightgrey','lightgrey','lightblue']); 
+  const [qInfo, setQInfo]= useState(4);
+  const [rid, setRid]=useState(0);
+
+  if (screen==2 && firebase.auth().currentUser!=null){
+    setScreen(0);
+  }
 
   //console.log(firebase.auth().currentUser.uid)
   const setGoalsHanlder=goals=>{
@@ -40,6 +45,7 @@ export default function App() {
   }
 
   const setScreenHandler=screen=>{
+   
     var cList = [];
     if(screen == 0){
       cList= ['lightblue','lightgrey','lightgrey','lightgrey'];
@@ -59,15 +65,15 @@ export default function App() {
     setColorList(cList)
     return setScreen(screen)
   }
-  screen = <Home setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder} setNoDB={setCourseGoals}/>
+  screen = <Home setRid={setRid} setQInfo={setQInfo } setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder} setNoDB={setCourseGoals}/>
   if (currScreen==1 ){
-    screen = <AddSet answers={answers} prompList= {qList} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
+    screen = <AddSet rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   }
   if (currScreen==2){
     screen = <Login setScreen = {setScreen}/>
   }
   if (currScreen==4){
-    screen = <TypeSelect setQList={setQList} setScreen = {setScreen}/>
+    screen = <TypeSelect setQInfo={setQInfo} setScreen = {setScreen} setRid={setRid}/>
   }
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   const {width,height} = Dimensions.get("screen");

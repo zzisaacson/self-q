@@ -10,61 +10,182 @@ const TypeSelect = props =>{
     const [academic_open, set_academic_open]= useState(true);
     const [personal_open, set_personal_open]= useState(false);
     const science=()=>{
-        props.setQList(['What are my questions? Which question is most relevent?',
-                        'How will I gather information? What is my hypothesis?',
-                        'How will I design an experiment? How is this similar to previous experiments?',
-                        'What is the best choice?',
-                        'What do I do first, second ..? Is this working?',
-                        'What did I learn? How do I know?']);
+        props.setRid(Math.random().toString().substring(2));
+        props.setQInfo({'name':'',
+                        'focus':{
+                            'prompt':'What are my questions? Which question is most relevent?',
+                            'answer':''
+                        },
+                        'gather':{
+                            'prompt':'How will I gather information? What is my hypothesis?',
+                            'answer':''
+                        },
+                        'brainstorm':{
+                            'prompt':  'How will I design an experiment? How is this similar to previous experiments?',
+                            'answer':''
+                        },
+                        'evaluate':{
+                            'prompt':'What is the best choice?',
+                            'answer':''
+                        },
+                        'plan':{
+                            'prompt':'What do I do first, second ..? Is this working?',
+                            'answer':''
+                        },
+                        'reflect':{
+                            'prompt':'What did I learn? How do I know?',
+                            'answer':''
+                        }});
         props.setScreen(1);
     }
     const math=()=>{
-        props.setQList(['What is the problem asking me to solve?',
-                        'How do I know? What do I need to know?',
-                        'What are the ways I can solve this problem?',
-                        'What is the best way to solve this problem?',
-                        'Can I make a model?',
-                        'Did it work? How do I know?']);
+        props.setRid(Math.random().toString().substring(2));
+        props.setQInfo({'name':'',
+                        'focus':{
+                            'prompt':'What is the problem asking me to solve?',
+                            'answer':''
+                        },
+                        'gather':{
+                            'prompt':'How do I know? What do I need to know?',
+                            'answer':''
+                        },
+                        'brainstorm':{
+                            'prompt':   'What are the ways I can solve this problem?',
+                            'answer':''
+                        },
+                        'evaluate':{
+                            'prompt': 'What is the best way to solve this problem?',
+                            'answer':''
+                        },
+                        'plan':{
+                            'prompt':  'Can I make a model?',
+                            'answer':''
+                        },
+                        'reflect':{
+                            'prompt':'Did it work? How do I know?',
+                            'answer':''
+                        }});
         props.setScreen(1);
     }
     const reading=()=>{
-        props.setQList(["Do I understand what I'm reading? Does what I'm reading make sense?",
-                        'What do I understand? What do I need to understand?',
-                        'What strategies could help me understand?',
-                        'Which is the best choice? Why?',
-                        'What should I tr first? Second?',
-                        'Is this working? Do I understand now?']);
+        props.setRid(Math.random().toString().substring(2));
+        props.setQInfo({'name':'',
+        'focus':{
+            'prompt':"Do I understand what I'm reading? Does what I'm reading make sense?",
+            'answer':''
+        },
+        'gather':{
+            'prompt':'What do I understand? What do I need to understand?',
+            'answer':''
+        },
+        'brainstorm':{
+            'prompt':   'What strategies could help me understand?',
+            'answer':''
+        },
+        'evaluate':{
+            'prompt':  'Which is the best choice? Why?',
+            'answer':''
+        },
+        'plan':{
+            'prompt':  'What should I try first? Second?',
+            'answer':''
+        },
+        'reflect':{
+            'prompt': 'Is this working? Do I understand now?',
+            'answer':''
+        }});
+  
         props.setScreen(1);
     }
 
     const writing=()=>{
-        props.setQList(['How do I select a topic/focus? What questions do I have about any topic/focus? What are my best questions?',
-                        'How will I gather information on some or all of my questions?',
-                        'How could I organize and present my information?',
-                        'What is the best choice? Why?',
-                        'What do I do first, second ..? Is this working?',
-                        'What was surprising about my research? What did I do well and how can I improve?']);
+        props.setRid(Math.random().toString().substring(2));
+        props.setQInfo({'name':'',
+        'focus':{
+            'prompt':'How do I select a topic/focus? What questions do I have about any topic/focus? What are my best questions?',
+            'answer':''
+        },
+        'gather':{
+            'prompt': 'How will I gather information on some or all of my questions?',
+            'answer':''
+        },
+        'brainstorm':{
+            'prompt':    'How could I organize and present my information?',
+            'answer':''
+        },
+        'evaluate':{
+            'prompt':   'What is the best choice? Why?',
+            'answer':''
+        },
+        'plan':{
+            'prompt':  'What do I do first, second ..? Is this working?',
+            'answer':''
+        },
+        'reflect':{
+            'prompt': 'What was surprising about my research? What did I do well and how can I improve?',
+            'answer':''
+        }});
+
         props.setScreen(1);
     }
 
     const social=()=>{
-        props.setQList(['What are my questions? Which question is most relevent?',
-                        'How will I gather information? What is my hypothesis?',
-                        'How will I design an experiment? How is this similar to previous experiments?',
-                        'What is the best choice?',
-                        'What do I do first, second ..? Is this working?',
-                        'What did I learn? How do I know?']);
+        props.setRid(Math.random().toString().substring(2));
+        props.setQInfo({'name':'',
+        'focus':{
+            'prompt':'What happened?',
+            'answer':''
+        },
+        'gather':{
+            'prompt': 'Who? What? Where? When? Why? How?',
+            'answer':''
+        },
+        'brainstorm':{
+            'prompt':    'What am I willing to do? What have a I tried? What might work?',
+            'answer':''
+        },
+        'evaluate':{
+            'prompt':   'What are the pros and cons? What is the best choice? ',
+            'answer':''
+        },
+        'plan':{
+            'prompt':  'What are my next steps? How can I do it?',
+            'answer':''
+        },
+        'reflect':{
+            'prompt': 'Did it work? How do I know? Do I need to go back and try again to solve this?',
+            'answer':''
+        }});
         props.setScreen(1);
     }
 
     const emotional=()=>{
-        props.setQList(['What am I feeling?',
-                        'What is causing this feeling?',
-                        'What strategies can I use to make myself feel better?',
-                        'Has this helped me in the past? How did it help? How did I feel after?',
-                        'How can I use this strategy?',
-                        'Did it work? How do I know? Do I need to go back and try again to solve this?']);
-        props.setScreen(1);
+        props.setRid(Math.random().toString().substring(2));
+        props.setQInfo({'name':'',
+        'focus':{
+            'prompt':'What am I feeling?',
+            'answer':''
+        },
+        'gather':{
+            'prompt': 'What is causing this feeling?',
+            'answer':''
+        },
+        'brainstorm':{
+            'prompt':     'What strategies can I use to make myself feel better?',
+            'answer':''
+        },
+        'evaluate':{
+            'prompt':   'Has this helped me in the past? How did it help? How did I feel after?',
+            'answer':''
+        },
+        'plan':{
+            'prompt':  'How can I use this strategy?',
+            'answer':''
+        },
+        'reflect':{
+            'prompt': 'Did it work? How do I know? Do I need to go back and try again to solve this?',
+            'answer':''
+        }});
     }
 
     var academic = 

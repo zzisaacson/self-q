@@ -6,39 +6,41 @@ import firebase from 'firebase'
 
 const AddSet = props =>{
     const db = firebase.database();
-    const [userInput, setUserInput]= useState('');
-    const [focus, setFocus]= useState('');
-    const [gather, setGather]= useState('');
-    const [brainstorm, setBrainstorm]= useState('');
-    const [evaluate, setEvaluate]= useState('');
-    const [plan, setPlan]= useState('');
-    const [reflect, setReflect]= useState('');
+    const [userInput, setUserInput]= useState(props.qInfo['name']);
+    const [focus, setFocus]= useState(props.qInfo['focus']['answer']);
+    const [gather, setGather]= useState(props.qInfo['gather']['answer']);
+    const [brainstorm, setBrainstorm]= useState(props.qInfo['brainstorm']['answer']);
+    const [evaluate, setEvaluate]= useState(props.qInfo['evaluate']['answer']);
+    const [plan, setPlan]= useState(props.qInfo['plan']['answer']);
+    const [reflect, setReflect]= useState(props.qInfo['reflect']['answer']);
     const addGoalHandler = goalTitle=>{
-        const rid =Math.random().toString().substring(2)
-        props.setQList([...props.qList, {id: rid, value: goalTitle}]);
+        const rid =props.rid;
+        if (!rid in props.qList.filter(q=>q['id'])){
+            props.setQList([...props.qList, {id: rid, value: goalTitle}]);
+        }
         const details = {'name': goalTitle,
                         'focus':{
-                            'prompt':props.prompList[0],
+                            'prompt':props.qInfo['focus']['prompt'],
                             'answer':focus
                         },
                         'gather':{
-                            'prompt':props.prompList[1],
+                            'prompt':props.qInfo['gather']['prompt'],
                             'answer':gather
                         },
                         'brainstorm':{
-                            'prompt':props.prompList[2],
+                            'prompt':props.qInfo['brainstorm']['prompt'],
                             'answer':brainstorm
                         },
                         'evaluate':{
-                            'prompt':props.prompList[3],
+                            'prompt':props.qInfo['evaluate']['prompt'],
                             'answer':evaluate
                         },
                         'plan':{
-                            'prompt':props.prompList[4],
+                            'prompt':props.qInfo['plan']['prompt'],
                             'answer':plan
                         },
                         'reflect':{
-                            'prompt':props.prompList[5],
+                            'prompt':props.qInfo['reflect']['prompt'],
                             'answer':reflect
                         }};
         db.ref(firebase.auth().currentUser.uid+'/detail-list/'+rid).set(details);
@@ -54,19 +56,19 @@ const AddSet = props =>{
                 alignItems: 'center'
             }}>
                 <Text style={{fontWeight:'bold'}} >Name this Question Set</Text>
-                <TextInput placeholder = 'Name' style={{
+                <TextInput value = {userInput} placeholder = 'Name' style={{
             width: '80%', 
             borderColor:'black', 
             borderWidth:1, 
             padding:10,
             marginBottom: 10
         }} onChangeText ={text=>setUserInput(text)}/>
-                <GoalInput input = {focus} setInput={setFocus} text={props.answers[0]}color ='red' header='Select A Focus' question = {props.prompList[0]}/>
-                <GoalInput input = {gather} setInput={setGather} text={props.answers[1]} color ='orange' header='Gather Information' question = {props.prompList[1]}/>
-                <GoalInput input = {brainstorm} setInput={setBrainstorm} text={props.answers[2]} color ='yellow' header='Brainstorm' question = {props.prompList[2]}/>
-                <GoalInput input = {evaluate} setInput={setEvaluate} color ='green' text={props.answers[3]} header='Evaluate' question = {props.prompList[3]}/>
-                <GoalInput input = {plan} setInput={setPlan} color ='blue' text={props.answers[4]} header='Plan and Act' question = {props.prompList[4]}/>
-                <GoalInput input = {reflect} setInput={setReflect} text={props.answers[5]}  color ='purple' header='Reflect' question = {props.prompList[5]}/>
+                <GoalInput input = {focus} setInput={setFocus} text={props.qInfo['focus']['prompt']}color ='red' header='Select A Focus' question = {props.qInfo['focus']['prompt']}/>
+                <GoalInput input = {gather} setInput={setGather} text={props.qInfo['gather']['prompt']} color ='orange' header='Gather Information' question = {props.qInfo['gather']['prompt']}/>
+                <GoalInput input = {brainstorm} setInput={setBrainstorm} text={props.qInfo['brainstorm']['prompt']} color ='yellow' header='Brainstorm' question = {props.qInfo['brainstorm']['prompt']}/>
+                <GoalInput input = {evaluate} setInput={setEvaluate} color ='green' text={props.qInfo['evaluate']['prompt']} header='Evaluate' question = {props.qInfo['evaluate']['prompt']}/>
+                <GoalInput input = {plan} setInput={setPlan} color ='blue' text={props.qInfo['plan']['prompt']} header='Plan and Act' question = {props.qInfo['plan']['prompt']}/>
+                <GoalInput input = {reflect} setInput={setReflect} text={props.qInfo['reflect']['prompt']}  color ='purple' header='Reflect' question = {props.qInfo['reflect']['prompt']}/>
                 <Button style={{width:'20%'}} title='ADD' onPress = {addGoalHandler.bind(this, userInput)}/>
             </View>
         </ScrollView>

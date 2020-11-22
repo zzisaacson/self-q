@@ -23,20 +23,17 @@ const Home = props =>{
 
 
     const removeGoalHandler = goalId=>{
+        // props.setQList(currentGoals=>{
+        //   return currentGoals.filter((goal)=>goal.id !==goalId);
+        // });
         db.ref(firebase.auth().currentUser.uid+'/detail-list/'+goalId).once("value", function(snapshot) {
           const data=snapshot.val();
-          var answers =[];
-          console.log(data);
-          for (key in data.keys){
-            if(key!='name'){
-              answers.push(data[key]['answer']);
-            }
-          }
-          console.log(answers);
+          props.setRid(goalId);
+          props.setQInfo(data);
+          props.setScreen(1);
         }, function (errorObject) {
           console.log("The read failed: " + errorObject.code);
         });
-        //props.setScreen(1);
       }; 
     return   (
     <View style={styles.screen}>
