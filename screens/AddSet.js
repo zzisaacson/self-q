@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet,FlatList, TextInput, ScrollView} from 'react-native';
+import {View, Text, Button, StyleSheet,FlatList, TextInput, ScrollView, ImagePropTypes} from 'react-native';
 
 import GoalInput from '../components/GoalInput';
 
@@ -31,12 +31,12 @@ const AddSet = props =>{
             padding:10,
             marginBottom: 10
         }} onChangeText ={text=>setUserInput(text)}/>
-                <GoalInput input = {focus} setInput={setFocus} color ='red' header='Select A Focus' question = 'What are my questions? Which question is most relevent?'/>
-                <GoalInput input = {gather} setInput={setGather} color ='orange' header='Gather Information' question = 'How will I gather information? What is my hypothesis?'/>
-                <GoalInput input = {brainstorm} setInput={setBrainstorm} color ='yellow' header='Brainstorm' question = 'How will I design an experiment> How is this similar to previous experiments?'/>
-                <GoalInput input = {evaluate} setInput={setEvaluate} color ='green' header='Evaluate' question = 'What is the best choice?'/>
-                <GoalInput input = {plan} setInput={setPlan} color ='blue' header='Plan and Act' question = 'What do I do first, second ..? Is this working?'/>
-                <GoalInput input = {reflect} setInput={setReflect} color ='purple' header='Reflect' question = 'What did I learn? How do I know?'/>
+                <GoalInput input = {focus} setInput={setFocus} color ='red' header='Select A Focus' question = {props.prompList[0]}/>
+                <GoalInput input = {gather} setInput={setGather} color ='orange' header='Gather Information' question = {props.prompList[1]}/>
+                <GoalInput input = {brainstorm} setInput={setBrainstorm} color ='yellow' header='Brainstorm' question = {props.prompList[2]}/>
+                <GoalInput input = {evaluate} setInput={setEvaluate} color ='green' header='Evaluate' question = {props.prompList[3]}/>
+                <GoalInput input = {plan} setInput={setPlan} color ='blue' header='Plan and Act' question = {props.prompList[4]}/>
+                <GoalInput input = {reflect} setInput={setReflect} color ='purple' header='Reflect' question = {props.prompList[5]}/>
                 <Button style={{width:'20%'}} title='ADD' onPress = {addGoalHandler.bind(this, userInput)}/>
             </View>
         </ScrollView>

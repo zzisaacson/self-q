@@ -9,7 +9,7 @@ import firebase from 'firebase';
 const Login = props =>{
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
-
+    const db = firebase.database();
     const handleSignIn = ()=>{
         firebase.auth().signInWithEmailAndPassword(email,password)
         .then(()=>{

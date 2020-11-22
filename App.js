@@ -6,6 +6,7 @@ import AddCustomSet from './screens/AddCustomSet';
 import Login from './screens/Login';
 import Tab from './components/Tab';
 import MenuBar from './components/MenuBar';
+import TypeSelect from './screens/TypeSelect';
 
 
 import firebase from 'firebase';
@@ -27,11 +28,14 @@ const db = firebase.database();
 export default function App() { 
   
   const [currScreen, setScreen]= useState(2);
+  const [qList, setQList]= useState(4);
   const [courseGoals, setCourseGoals] = useState([]);
   const [colorList, setColorList] = useState(['lightgrey','lightgrey','lightgrey','lightblue']); 
 
+  //console.log(firebase.auth().currentUser.uid)
   const setGoalsHanlder=goals=>{
-    db.ref().set(goals);
+    //console.log(firebase.auth().currentUser.uid)
+    db.ref(firebase.auth().currentUser.uid).set(goals);
     return setCourseGoals(goals)
   }
 
@@ -46,18 +50,24 @@ export default function App() {
     else if(screen==2){
       cList= ['lightgrey','lightgrey','lightblue','lightgrey'];
     }
-    else {
+    else if(screen==3) {
       cList= ['lightgrey','lightgrey','lightgrey','lightblue'];
+    }
+    else{
+      cList= ['lightgrey','lightblue','lightgrey','lightgrey'];
     }
     setColorList(cList)
     return setScreen(screen)
   }
-  screen = <Home setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
+  screen = <Home setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder} setNoDB={setCourseGoals}/>
   if (currScreen==1 ){
-    screen = <AddSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
+    screen = <AddSet prompList= {qList} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   }
   if (currScreen==2){
     screen = <Login setScreen = {setScreen}/>
+  }
+  if (currScreen==4){
+    screen = <TypeSelect setQList={setQList} setScreen = {setScreen}/>
   }
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   const {width,height} = Dimensions.get("screen");
