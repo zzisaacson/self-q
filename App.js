@@ -10,6 +10,7 @@ import TypeSelect from './screens/TypeSelect';
 
 
 import firebase from 'firebase';
+import SignUp from './screens/SignUp';
 //import { firebaseConfig } from './components/config';
 //import { firebaseConfig } from './components/config';
 const firebaseConfig={
@@ -45,7 +46,7 @@ export default function App() {
   }
 
   const setScreenHandler=screen=>{
-   
+    console.log('To '+screen +' and beyond');
     var cList = [];
     if(screen == 0){
       cList= ['lightblue','lightgrey','lightgrey','lightgrey'];
@@ -70,7 +71,10 @@ export default function App() {
     screen = <AddSet rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   }
   if (currScreen==2){
-    screen = <Login setScreen = {setScreen}/>
+    screen = <Login setScreen = {setScreenHandler}/>
+  }
+  if (currScreen==3){
+    screen = <SignUp setScreen = {setScreenHandler}/>
   }
   if (currScreen==4){
     screen = <TypeSelect setQInfo={setQInfo} setScreen = {setScreen} setRid={setRid}/>

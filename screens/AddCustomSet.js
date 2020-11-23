@@ -37,7 +37,7 @@ const AddSet = props =>{
                 <CustomGoalInput input = {evaluate} setInput={setEvaluate} color ='green' header='Evaluate' question = 'Ask and evaluation question'/>
                 <CustomGoalInput input = {plan} setInput={setPlan} color ='blue' header='Plan and Act' question = 'Ask a plan and action question'/>
                 <CustomGoalInput input = {reflect} setInput={setReflect} color ='purple' header='Reflect' question = 'Ask a reflection question'/>
-                <Button style={{width:'20%'}} title='ADD' onPress = {addGoalHandler.bind(this, userInput)}/>
+                <Button style={{margin:15,width:'20%'}} title='ADD' onPress = {addGoalHandler.bind(this, userInput)}/>
             </View>
         </ScrollView>
     );

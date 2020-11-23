@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet,FlatList, Dimensions, Image, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, Button, StyleSheet,FlatList, Dimensions, Image} from 'react-native';
 import firebase from 'firebase';
 //import * as GoogleSignIn from 'expo-google-sign-in';
 
 
 
 
-const Login = props =>{
+const SignUp = props =>{
+    console.log('HERE SIR');
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
-    const handleSignIn = ()=>{
-        firebase.auth().signInWithEmailAndPassword(email,password)
+    const handleSignUp = ()=>{
+        firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(()=>{
             props.setScreen(0);
         })
@@ -19,8 +20,9 @@ const Login = props =>{
         });
      
     }
-    const setScreenHandler=()=>{
-        props.setScreen(3);
+    const handleBack = ()=>{
+        props.setScreen(2);
+     
     }
     return   (
     <View style={styles.container}>
@@ -32,21 +34,24 @@ const Login = props =>{
         </View>
         <View style ={styles.footer}>
             <Text style={styles.title}>Welcome to SELf-Q!</Text>
-            <Text style = {styles.text}>Sign in with account</Text>
+            <Text style = {styles.text}>Register With A New Account</Text>
             <TextInput placeholder={"Email"} style ={styles.input} onChangeText={setEmail}/>
             <TextInput placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
-            <Button style={{width:'25%'}} title="Sign In" onPress ={handleSignIn}/>
-            <View style ={{alignItems:'center'}}> 
-                <TouchableOpacity onPress={setScreenHandler}>
-                    <Text  style = {styles.clickableText}>New user? Sign up.</Text>
-                </TouchableOpacity>
+          
+            <View style={styles.centerRow}>
+                <View style={styles.button}>
+                    <Button style={styles.button} title="Sign Up" onPress ={()=>handleSignUp()}/>
+                </View>
+                <View style={styles.button}>
+                    <Button style={styles.button} title="Back" onPress ={()=>handleBack()}/>
+                </View>
             </View>
         </View>
     </View>
     );
 }
 
-const {height} = Dimensions.get("screen");
+const {height,width} = Dimensions.get("screen");
 const height_logo = height * 0.14;
 
 const styles = StyleSheet.create({
@@ -60,7 +65,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     footer: {
-        flex: 1,
+        flex: 2,
         backgroundColor: '#fff',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
@@ -112,8 +117,16 @@ const styles = StyleSheet.create({
          borderWidth:1, 
          padding:5,
         margin: 10
-       }
+       },
+    button:{
+        padding:20, 
+        width:'20%'
+    },
+    centerRow:{
+        flexDirection:'row',
+        justifyContent:'center'
+    }
   });
   
 
-export default Login;
+export default SignUp;
