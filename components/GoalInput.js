@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, TextInput, Button, StyleSheet, Modal, Text} from 'react-native';
+import {View, TextInput, Button, StyleSheet, Modal, Text, TouchableOpacity} from 'react-native';
 
 const GoalInput = props =>{
     const [enteredGoal, setEnteredGoal] = useState(''); 
@@ -11,7 +11,9 @@ const GoalInput = props =>{
       
           <View style={styles.inputContainer}>
             <Text style={{fontWeight:'bold', color :props.color}}>{props.header}</Text>
-            <Text>{props.question}</Text>
+            <TouchableOpacity onPress={()=>props.useCustom(true)}>
+              <Text>{props.question}</Text>
+            </TouchableOpacity>
             <TextInput text={props.text} placeholder={props.header} style ={styles.input} onChangeText = {goalInputHandler} value={props.input}/>
             
           </View>

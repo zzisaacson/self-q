@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {View, TextInput, Button, StyleSheet, Modal, Text} from 'react-native';
 
 const CustomGoalInput = props =>{
-    const [enteredGoal, setEnteredGoal] = useState(''); 
 
     function goalInputHandler(enteredText){
         props.setInput(enteredText);
@@ -11,7 +10,7 @@ const CustomGoalInput = props =>{
       
           <View style={styles.inputContainer}>
             <Text style={{fontWeight:'bold', color :props.color}}>{props.header}</Text>
-            <TextInput style ={styles.input} placeholder={props.question}></TextInput>
+            <TextInput style ={styles.input} placeholder ={props.header+' question'} value={props.prompt} onChangeText={props.setPrompt}></TextInput>
             <TextInput placeholder={props.header} style ={styles.input} onChangeText = {goalInputHandler} value={props.input}/>
             
           </View>

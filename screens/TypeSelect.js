@@ -13,7 +13,7 @@ const TypeSelect = props =>{
         props.setRid(Math.random().toString().substring(2));
         props.setQInfo({'name':'',
                         'focus':{
-                            'prompt':'What are my questions? Which question is most relevent?',
+                            'prompt':'What are my questions? Which question is most relevant?',
                             'answer':''
                         },
                         'gather':{

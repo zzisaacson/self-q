@@ -41,7 +41,7 @@ export default function App() {
   const setGoalsHanlder=goals=>{
     //console.log(firebase.auth().currentUser.uid)
     db.ref(firebase.auth().currentUser.uid+'/set-list').set(goals);
-    return setCourseGoals(goals)
+    return setCourseGoals(goals);
   }
 
   const setScreenHandler=screen=>{
