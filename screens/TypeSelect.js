@@ -186,6 +186,36 @@ const TypeSelect = props =>{
             'prompt': 'Did it work? How do I know? Do I need to go back and try again to solve this?',
             'answer':''
         }});
+        props.setScreen(1);
+    }
+    const custom=()=>{
+        props.setRid(Math.random().toString().substring(2));
+        props.setQInfo({'name':'',
+        'focus':{
+            'prompt':'',
+            'answer':''
+        },
+        'gather':{
+            'prompt': '',
+            'answer':''
+        },
+        'brainstorm':{
+            'prompt':     '',
+            'answer':''
+        },
+        'evaluate':{
+            'prompt':   '',
+            'answer':''
+        },
+        'plan':{
+            'prompt':  '',
+            'answer':''
+        },
+        'reflect':{
+            'prompt': '',
+            'answer':''
+        }});
+        props.setScreen(7);
     }
 
     var academic = 
@@ -233,6 +263,15 @@ const TypeSelect = props =>{
     <View>
         <ScrollView>
             <View style={styles.row}>
+                <View style={styles.extraSpacing}>
+                    <TouchableOpacity onPress={custom}>
+                        <Image style={styles.image}
+                        source={require('../assets/selfq_custom.png')}
+                        resizeMode={"stretch"}/>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View style={styles.row}>
                 <TouchableOpacity style={styles.dropdown} onPress= {set_academic_open.bind(this,!academic_open)}>
                     <View style = {styles.listItem}>
                         <Text>{(academic_open?'v':'>') +'  Academic'}</Text>
@@ -279,7 +318,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#ccc',
         borderColor:'black',
         borderWidth:1
-      }
+      },
+      extraSpacing:{
+          marginRight:image_width+15
+        }
   });
   
 

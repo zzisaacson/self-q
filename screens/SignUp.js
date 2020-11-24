@@ -10,13 +10,15 @@ const SignUp = props =>{
     console.log('HERE SIR');
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
+    const [error, setError]=useState('');
     const handleSignUp = ()=>{
+        setError('Loading...');
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(()=>{
             props.setScreen(0);
         })
         .catch((error)=>{
-            console.log('auth failed '+error+' && email='+email);
+            setError(error+' Please try again.');
         });
      
     }
@@ -37,6 +39,7 @@ const SignUp = props =>{
             <Text style = {styles.text}>Register With A New Account</Text>
             <TextInput placeholder={"Email"} style ={styles.input} onChangeText={setEmail}/>
             <TextInput placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
+            <Text style={styles.text}>{error}</Text>
           
             <View style={styles.centerRow}>
                 <View style={styles.button}>

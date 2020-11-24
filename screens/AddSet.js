@@ -60,8 +60,14 @@ const AddSet = props =>{
                             'answer':reflect
                         }};
         db.ref(firebase.auth().currentUser.uid+'/detail-list/'+rid).set(details);
-        console.log(details);
-        props.setScreen(0);
+        var toPage=0;
+        if(focusP!=props.qInfo['focus']['prompt']||gatherP!=props.qInfo['gather']['prompt']||brainstormP!=props.qInfo['brainstorm']['prompt']||
+            evaluateP!=props.qInfo['evaluate']['prompt']||planP!=props.qInfo['plan']['prompt']||reflectP!=props.qInfo['reflect']['prompt']  ){
+                props.setQInfo(details);
+                toPage=6;
+            }
+        //console.log(details);
+        props.setScreen(toPage);
       };
 
     const regInput=<React.Fragment>
@@ -99,7 +105,7 @@ const custInput=<React.Fragment>
             marginBottom: 10
         }} onChangeText ={text=>setUserInput(text)}/>
                 {input}
-                <Button style={{width:'20%'}} title='ADD' onPress = {addGoalHandler.bind(this, userInput)}/>
+                <Button style={{width:'20%'}} title='DONE' onPress = {addGoalHandler.bind(this, userInput)}/>
             </View>
         </ScrollView>
     );

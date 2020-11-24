@@ -5,30 +5,35 @@ import GoalItem from '../components/GoalItem';
 import firebase from 'firebase';
 //import Card from '../components/Card'
 
-var once = 0;
-const Home = props =>{
-
+//var once = 0;
+const SelectCustom = props =>{
+    const [nameList, setNameList]=useState([]);
     const db = firebase.database();
-    if (firebase.auth().currentUser.uid!=once){
-      db.ref(firebase.auth().currentUser.uid+'/set-list').on("value", function(snapshot) {
-        console.log(snapshot.val())
+    //if (firebase.auth().currentUser.uid!=once){
+      db.ref(firebase.auth().currentUser.uid+'/custom-prompts').once("value", function(snapshot) {
+
+        //console.log(snapshot.val())
         if(snapshot.val()!=null){
-          props.setNoDB(snapshot.val());
+          var l =[];
+            for (var n in snapshot.val()){
+               l.push({'id':n,'value':n});
+           }
+          setNameList(l);
         }
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
-      once=firebase.auth().currentUser.uid;
-   }
+     // once=firebase.auth().currentUser.uid;
+  // }
 
 
     const removeGoalHandler = goalId=>{
         // props.setQList(currentGoals=>{
         //   return currentGoals.filter((goal)=>goal.id !==goalId);
         // });
-        db.ref(firebase.auth().currentUser.uid+'/detail-list/'+goalId).once("value", function(snapshot) {
+        db.ref(firebase.auth().currentUser.uid+'/custom-prompts/'+goalId).once("value", function(snapshot) {
           const data=snapshot.val();
-          props.setRid(goalId);
+          console.log(goalId)
           props.setQInfo(data);
           props.setScreen(1);
         }, function (errorObject) {
@@ -37,8 +42,8 @@ const Home = props =>{
       }; 
     return   (
     <View style={styles.screen}>
-      <Button title  = 'New Question Set' onPress={()=>props.setScreen(4)}/>
-      <FlatList data = {props.qList}
+      <Button title  = 'New Custom Set' onPress={()=>props.setScreen(1)}/>
+      <FlatList data = {nameList}
       keyExtractor={(item, index)=> item.id}
       renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={removeGoalHandler}title ={itemData.item.value}/>}/>
     </View>
@@ -51,4 +56,4 @@ const styles = StyleSheet.create({
       }
 });
 
-export default Home;
+export default SelectCustom;

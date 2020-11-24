@@ -1,30 +1,26 @@
 import React, {useState} from 'react';
-import {View,Dimensions, Image, Button, StyleSheet,FlatList} from 'react-native';
-
+import {View,Dimensions, Image, Button, StyleSheet,FlatList, TouchableOpacity} from 'react-native';
+import firebase from 'firebase';
 
 const Tab = props =>{
     var img = "../assets/home.png";
-    /*if(screen == 0){
-        img = '../assets/home.png';
-      }
-      else if(screen==1){
-        img = '../assets/document.png';
-      }
-      else if(screen==2){
-        img = '../assets/classroom.png';
-      }
-      else {
-        img = '../assets/home.png';
-      }*/
+    const handlePress=()=>{
+        if(firebase.auth().currentUser!=null){
+            props.setScreen(0);
+        }
+    }
     return   (
+    
     <View style={{backgroundColor:props.colorList[props.screen], flex:1,
         alignItems:'center',
         borderColor:'grey',
         borderWidth:1}} onPress={()=> props.setScreen(props.screen)}>
+        <TouchableOpacity onPress={handlePress}>
         <Image 
             source={require('../assets/home.png')}
             style={styles.logo}
             resizeMode={"stretch"}/>
+        </TouchableOpacity>
     </View>
     );
 }
