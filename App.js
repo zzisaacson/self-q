@@ -15,6 +15,9 @@ import SwipeAddSet from './screens/SwipeAddSet';
 
 import firebase from 'firebase';
 import SignUp from './screens/SignUp';
+import ClassroomMain from './screens/ClassroomMain';
+import ClassroomCreate from './screens/ClassroomCreate';
+import ClassroomJoin from './screens/ClassroomJoin';
 //import { firebaseConfig } from './components/config';
 //import { firebaseConfig } from './components/config';
 const firebaseConfig={
@@ -58,7 +61,7 @@ export default function App() {
     else if(screen==1||screen==4||screen==7||screen==8){
       cList= ['lightgrey','lightblue','lightgrey','lightgrey'];
     }
-    else if(false){
+    else if(screen==9||screen==10||screen==11){
       cList= ['lightgrey','lightgrey','lightblue','lightgrey'];
     }
     else if(screen==2 ||screen==3 || screen==5) {
@@ -93,7 +96,16 @@ export default function App() {
     screen = <SelectCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==8){
-    screen = <SwipeAddSet db={db} rid={rid} qList={courseGoals} setQList={setGoalsHanlder} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <SwipeAddSet rid={rid} qList={courseGoals} setQList={setGoalsHanlder} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+  }
+  if (currScreen==9){
+    screen = <ClassroomMain setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+  }
+  if (currScreen==10){
+    screen = <ClassroomCreate setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+  }
+  if (currScreen==11){
+    screen = <ClassroomJoin setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   const {width,height} = Dimensions.get("screen");
