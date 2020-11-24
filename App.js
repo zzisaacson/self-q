@@ -10,6 +10,7 @@ import TypeSelect from './screens/TypeSelect';
 import Settings from './screens/Settings';
 import AddCustomPrompts from './screens/AddCustomPrompts';
 import SelectCustom from './screens/SelectCustom';
+import SwipeAddSet from './screens/SwipeAddSet';
 
 
 import firebase from 'firebase';
@@ -54,7 +55,7 @@ export default function App() {
     if(screen == 0){
       cList= ['lightblue','lightgrey','lightgrey','lightgrey'];
     }
-    else if(screen==1||screen==4){
+    else if(screen==1||screen==4||screen==7||screen==8){
       cList= ['lightgrey','lightblue','lightgrey','lightgrey'];
     }
     else if(false){
@@ -90,6 +91,9 @@ export default function App() {
   }
   if (currScreen==7){
     screen = <SelectCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+  }
+  if (currScreen==8){
+    screen = <SwipeAddSet db={db} rid={rid} qList={courseGoals} setQList={setGoalsHanlder} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   const {width,height} = Dimensions.get("screen");
