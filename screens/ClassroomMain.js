@@ -1,17 +1,23 @@
 import React, {useState} from 'react';
 import {View, Text,TouchableOpacity, TextInput, Button, StyleSheet,FlatList, Dimensions, Image, ScrollView} from 'react-native';
 import firebase from 'firebase';
+import GoalItem from '../components/GoalItem';
 //import * as GoogleSignIn from 'expo-google-sign-in';
 
 
 
 
 const ClassroomMain = props =>{
+    console.log(props.classes);
+    const[classList, setClassList]=useState([{'id':'social studies', 'value':'social studies'}]);
+    console.log(classList==props.classes);
+    const clickClassHandler=()=>{
 
+    }
+     
 
     return   (
-    <View>
-        <ScrollView>
+    <View style={{padding:20}}>
             <View style={styles.row}>
                 <View style={{margin:15}}>
                     <Button title=' Join a Class ' onPress={()=>props.setScreen(11)}/>  
@@ -20,8 +26,10 @@ const ClassroomMain = props =>{
                     <Button onPress={()=>props.setScreen(10)} title='Create a Class'/>
                 </View>
             </View>
+            <FlatList style={{flex:1}}data = {props.classes}
+            keyExtractor={(item, index)=> item.id}
+            renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={clickClassHandler}title ={itemData.item.value}/>}/>
 
-        </ScrollView>
     </View>
     );
 }

@@ -7,7 +7,7 @@ const TabG = props =>{
 
     const handlePress=()=>{
       if(firebase.auth().currentUser!=null){
-          props.setScreen(9);
+          props.goClassroom();
       }
   }
     return   (

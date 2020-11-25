@@ -12,7 +12,7 @@ const MenuBar = props =>{
         <View style={{flexDirection:'row'}}>
             <Tab setScreen = {props.setScreen} currScreen ={props.screen} screen={0} colorList={props.colorList}></Tab>
             <TabN setScreen = {props.setScreen} currScreen ={props.screen} screen={1} colorList={props.colorList}></TabN>
-            <TabG setScreen = {props.setScreen} currScreen ={props.screen} screen={2} colorList={props.colorList}></TabG>
+            <TabG goClassroom={props.goClassroom} setScreen = {props.setScreen} currScreen ={props.screen} screen={2} colorList={props.colorList}></TabG>
             <TabS setScreen = {props.setScreen} currScreen ={props.screen} screen={3} colorList={props.colorList}></TabS>
       </View>
     );

@@ -40,6 +40,7 @@ export default function App() {
   const [colorList, setColorList] = useState(['lightgrey','lightgrey','lightgrey','lightblue']); 
   const [qInfo, setQInfo]= useState(4);
   const [rid, setRid]=useState(0);
+  const [classes, setClasses]=useState([]);
 
   if (screen==2 && firebase.auth().currentUser!=null){
     setScreen(0);
@@ -50,6 +51,32 @@ export default function App() {
     //console.log(firebase.auth().currentUser.uid)
     db.ref(firebase.auth().currentUser.uid+'/set-list').set(goals);
     return setCourseGoals(goals);
+  }
+
+  const goClassroomHandler=()=>{
+    var l =[];
+    //console.log(firebase.auth().currentUser.uid)
+    db.ref('/classes').once("value", function(snapshot) {
+      const data=snapshot.val();
+      const uid = firebase.auth().currentUser.uid;
+      
+      for(var c in data){
+          
+          for(var m in data[c]['members']){
+              if(uid==data[c]['members'][m]){
+                  l.push({'id':c,'value':c});
+              }
+          }
+          
+      }
+
+      console.log(l);
+      setClasses(l);
+      setScreenHandler(9);
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code+' Please try again');
+    });
+    
   }
 
   const setScreenHandler=screen=>{
@@ -99,7 +126,7 @@ export default function App() {
     screen = <SwipeAddSet rid={rid} qList={courseGoals} setQList={setGoalsHanlder} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==9){
-    screen = <ClassroomMain setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomMain classes={classes} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==10){
     screen = <ClassroomCreate setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
@@ -119,7 +146,7 @@ export default function App() {
         {screen}
       </View>
     <View style={{justifyContent:'flex-end'}}>
-      <MenuBar setScreen ={setScreenHandler} screen ={currScreen} colorList={colorList}></MenuBar>
+      <MenuBar goClassroom={goClassroomHandler} setScreen ={setScreenHandler} screen ={currScreen} colorList={colorList}></MenuBar>
     </View>
     </View>
   );
