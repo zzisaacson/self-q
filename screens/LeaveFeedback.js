@@ -4,8 +4,9 @@ import {Image, View, Text, Button, StyleSheet,FlatList, TextInput, ScrollView, I
 import GoalInput from '../components/GoalInput';
 import CustomGoalInput from '../components/CustomGoalInput';
 import firebase from 'firebase'
+import FeedbackGoalInput from '../components/FeedbackGoalInput';
 
-const AddSetClass = props =>{
+const LeaveFeedback = props =>{
     const db = firebase.database();
     // console.log('here sir');
     // console.log(props.qInfo);
@@ -25,6 +26,13 @@ const AddSetClass = props =>{
     const [evaluateP, setEvaluateP]= useState(props.qInfo['evaluate']['prompt']);
     const [planP, setPlanP]= useState(props.qInfo['plan']['prompt']);
     const [reflectP, setReflectP]= useState(props.qInfo['reflect']['prompt']);
+
+    const [focusR, setFocusR]= useState('');
+    const [gatherR, setGatherR]= useState('');
+    const [brainstormR, setBrainstormR]= useState('');
+    const [evaluateR, setEvaluateR]= useState('');
+    const [planR, setPlanR]= useState('');
+    const [reflectR, setReflectR]= useState('');
     const addGoalHandler = goalTitle=>{
         const rid =props.rid;
         // var l =[]
@@ -68,63 +76,18 @@ const AddSetClass = props =>{
         props.setScreen(12);
       };
 
-      const handleSwipeButton=()=>{
-        const details = {'name': userInput,
-        'focus':{
-            'prompt':focusP,
-            'answer':focus
-        },
-        'gather':{
-            'prompt':gatherP,
-            'answer':gather
-        },
-        'brainstorm':{
-            'prompt':brainstormP,
-            'answer':brainstorm
-        },
-        'evaluate':{
-            'prompt':evaluateP,
-            'answer':evaluate
-        },
-        'plan':{
-            'prompt':planP,
-            'answer':plan
-        },
-        'reflect':{
-            'prompt':reflectP,
-            'answer':reflect
-        }};
-        props.setQInfo(details);
-          props.setScreen(17);
-      }
+    const responses=<React.Fragment>
+    <FeedbackGoalInput input = {focus} setInput={setFocusR} color ='red' header='Select A Focus' question = {props.qInfo['focus']['prompt'] }/>
+    <FeedbackGoalInput input = {gather} setInput={setGatherR}  color ='orange' header='Gather Information' question = {props.qInfo['gather']['prompt']}/>
+    <FeedbackGoalInput input = {brainstorm} setInput={setBrainstormR} color ='yellow' header='Brainstorm' question = {props.qInfo['brainstorm']['prompt']}/>
+    <FeedbackGoalInput input = {evaluate} setInput={setEvaluateR} color ='green'header='Evaluate' question = {props.qInfo['evaluate']['prompt']}/>
+    <FeedbackGoalInput input = {plan} setInput={setPlanR} color ='blue'  header='Plan and Act' question = {props.qInfo['plan']['prompt']}/>
+    <FeedbackGoalInput input = {reflect} setInput={setReflectR}  color ='purple' header='Reflect' question = {props.qInfo['reflect']['prompt']}/></React.Fragment>;
 
-    const regInput=<React.Fragment>
-    <GoalInput input = {focus} setInput={setFocus} text={props.qInfo['focus']['prompt']}color ='red' header='Select A Focus' question = {props.qInfo['focus']['prompt'] }useCustom={setUseCustom}/>
-    <GoalInput input = {gather} setInput={setGather} text={props.qInfo['gather']['prompt']} color ='orange' header='Gather Information' question = {props.qInfo['gather']['prompt']}useCustom={setUseCustom}/>
-    <GoalInput input = {brainstorm} setInput={setBrainstorm} text={props.qInfo['brainstorm']['prompt']} color ='yellow' header='Brainstorm' question = {props.qInfo['brainstorm']['prompt']}useCustom={setUseCustom}/>
-    <GoalInput input = {evaluate} setInput={setEvaluate} color ='green' text={props.qInfo['evaluate']['prompt']} header='Evaluate' question = {props.qInfo['evaluate']['prompt']}useCustom={setUseCustom}/>
-    <GoalInput input = {plan} setInput={setPlan} color ='blue' text={props.qInfo['plan']['prompt']} header='Plan and Act' question = {props.qInfo['plan']['prompt']}useCustom={setUseCustom}/>
-    <GoalInput input = {reflect} setInput={setReflect} text={props.qInfo['reflect']['prompt']}  color ='purple' header='Reflect' question = {props.qInfo['reflect']['prompt']}useCustom={setUseCustom}/></React.Fragment>;
 
-const custInput=<React.Fragment>
-<CustomGoalInput color='red' input = {focus} setInput={setFocus}  header='Select A Focus' prompt={focusP} setPrompt={setFocusP}/>
-<CustomGoalInput color ='orange' input = {gather} setInput={setGather}  header='Gather Information' prompt={gatherP} setPrompt={setGatherP}/>
-<CustomGoalInput color ='yellow' input = {brainstorm} setInput={setBrainstorm}  header='Brainstorm' prompt={brainstormP} setPrompt={setBrainstormP}/>
-<CustomGoalInput color ='green' input = {evaluate} setInput={setEvaluate}  header='Evaluate' prompt={evaluateP} setPrompt={setEvaluateP}/>
-<CustomGoalInput color ='blue' input = {plan} setInput={setPlan}  header='Plan and Act' prompt={planP} setPrompt={setPlanP}/>
-<CustomGoalInput color ='purple' input = {reflect} setInput={setReflect}  header='Reflect' prompt={reflectP} setPrompt={setReflectP}/>
-</React.Fragment>;
-    var input=useCustom? custInput:regInput;
 
     return(
         <ScrollView>
-            <View style={{width:'90%', flexDirection:'row-reverse'}}>
-                <TouchableOpacity onPress={handleSwipeButton}>
-                    <Image style={{height:50,width:50, margin:16}}
-                        source={require('../assets/swipe_btn.png')}
-                        resizeMode={"stretch"}/>
-                </TouchableOpacity>
-            </View>
                 
             <View style={{
                 padding:30,
@@ -133,15 +96,15 @@ const custInput=<React.Fragment>
                 alignItems: 'center'
             }}>
                 
-                <Text style={{fontWeight:'bold'}} >Name this Question Set</Text>
-                <TextInput value = {userInput} placeholder = 'Name' style={{
+                <Text style={{fontWeight:'bold'}} >Leave Feedback</Text>
+                <Text style={{
             width: '80%', 
             borderColor:'black', 
             borderWidth:1, 
             padding:10,
             marginBottom: 10
-        }} onChangeText ={text=>setUserInput(text)}/>
-                {input}
+        }} > {userInput}</Text>
+                {responses}
                 <Button style={{width:'20%'}} title='DONE' onPress = {addGoalHandler.bind(this, userInput)}/>
             </View>
         </ScrollView>
@@ -166,4 +129,4 @@ const styles = StyleSheet.create({
       }
 });
 
-export default AddSetClass;
+export default LeaveFeedback;

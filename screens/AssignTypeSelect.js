@@ -215,7 +215,7 @@ const AssignTypeSelect = props =>{
             'prompt': '',
             'answer':''
         }});
-        props.setScreen(15);
+        props.setScreen(19);
     }
 
     var academic = 

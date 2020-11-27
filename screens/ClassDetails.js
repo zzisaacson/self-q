@@ -25,6 +25,7 @@ const ClassroomDetails = props =>{
     };
 
     const ownerAssignmentClicked=(id)=>{
+        props.setRid(id);
         props.setScreen(18);
     }
     var isOwned = firebase.auth().currentUser.uid==props.classDetails['owner'];

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, View, Text, Button, StyleSheet,FlatList, TextInput, ScrollView, ImagePropTypes, TouchableOpacity} from 'react-native';
+import {Image, View, Text, Button, StyleSheet,FlatList, TextInput, ScrollView, ImagePropTypes, TouchableOpacity, AsyncStorage} from 'react-native';
 
 import GoalInput from '../components/GoalInput';
 import CustomGoalInput from '../components/CustomGoalInput';
@@ -27,7 +27,13 @@ const AssignSet = props =>{
         const rid =props.rid;
         var rid_contained=false;
         var l =[];
-       (props.classDetails['assignments']!=null?props.classDetails['assignments']:[]).forEach(element=>{
+        var assignments=[];
+        if(props.classDetails['assignments']!=null && props.classDetails['assignments']['set-list']!=null){
+            assignments=props.classDetails['assignments']['set-list'];
+        }
+        console.log(props.classDetails);
+        console.log(assignments);
+        assignments.forEach(element=>{
             if(element['id']!=rid){
                 l.push(element);
             }
@@ -60,7 +66,7 @@ const AssignSet = props =>{
                         }};
         //console.log(details);
         db.ref('/classes/'+props.className+'/assignments/details/'+rid).set(details);
-        var toPage=0;
+        var toPage=12;
         if(focusP!=props.qInfo['focus']['prompt']||gatherP!=props.qInfo['gather']['prompt']||brainstormP!=props.qInfo['brainstorm']['prompt']||
             evaluateP!=props.qInfo['evaluate']['prompt']||planP!=props.qInfo['plan']['prompt']||reflectP!=props.qInfo['reflect']['prompt']  ){
                 props.setQInfo(details);
@@ -70,35 +76,7 @@ const AssignSet = props =>{
         props.setScreen(toPage);
       };
 
-      const handleSwipeButton=()=>{
-        const details = {'name': userInput,
-        'focus':{
-            'prompt':focusP,
-            'answer':focus
-        },
-        'gather':{
-            'prompt':gatherP,
-            'answer':gather
-        },
-        'brainstorm':{
-            'prompt':brainstormP,
-            'answer':brainstorm
-        },
-        'evaluate':{
-            'prompt':evaluateP,
-            'answer':evaluate
-        },
-        'plan':{
-            'prompt':planP,
-            'answer':plan
-        },
-        'reflect':{
-            'prompt':reflectP,
-            'answer':reflect
-        }};
-        props.setQInfo(details);
-          props.setScreen(8);
-      }
+    
 
     const regInput=<React.Fragment>
     <GoalInput input = {focus} setInput={setFocus} text={props.qInfo['focus']['prompt']}color ='red' header='Select A Focus' question = {props.qInfo['focus']['prompt'] }useCustom={setUseCustom}/>
@@ -144,21 +122,5 @@ const custInput=<React.Fragment>
     
 }
 
-const styles = StyleSheet.create({
-    screen:{
-        padding:30,
-        alignItems:'center'
-      },
-      button:{
-        width:'20%' 
-      },
-      input:{
-        width: '80%', 
-        borderColor:'black', 
-        borderWidth:1, 
-        padding:10,
-        marginBottom: 10
-      }
-});
 
 export default AssignSet;

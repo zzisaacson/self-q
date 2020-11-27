@@ -10,12 +10,17 @@ import GoalItem from '../components/GoalItem';
 const GradingStudList = props =>{
     
     const handleStudClick=(id)=>{
-        var qInfo = props.classDetails['assignments']['details'][id];
-        if (props.classDetails['responses']!=null&&props.classDetails['responses'][id]!=null&&props.classDetails['responses'][id][firebase.auth().currentUser.uid]!=null){
-            qInfo = props.classDetails['responses'][id][firebase.auth().currentUser.uid];
+        console.log('handleStudClick');
+        console.log(props.classDetails);
+        console.log(props.rid);
+        var qInfo = props.classDetails['assignments']['details'][props.rid];
+        if (props.classDetails['responses']!=null&&props.classDetails['responses'][props.rid]!=null&&props.classDetails['responses'][props.rid][id]!=null){
+            qInfo = props.classDetails['responses'][props.rid][id];
+            
         }
+        //console.log(qInfo);
         props.setQInfo(qInfo);
-        props.setScreen(16);
+        props.setScreen(20);
     };
 
 
