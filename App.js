@@ -19,6 +19,8 @@ import ClassroomMain from './screens/ClassroomMain';
 import ClassroomCreate from './screens/ClassroomCreate';
 import ClassroomJoin from './screens/ClassroomJoin';
 import ClassroomDetails from './screens/ClassDetails';
+import AssignTypeSelect from './screens/AssignTypeSelect';
+import AssignSet from './screens/AssignSet';
 //import { firebaseConfig } from './components/config';
 //import { firebaseConfig } from './components/config';
 const firebaseConfig={
@@ -132,13 +134,22 @@ export default function App() {
     screen = <ClassroomMain setClassName={setClassName} setClassDetails={setClassDetails} classes={classes} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==10){
-    screen = <ClassroomCreate setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomCreate setClassDetails={setClassDetails}setClassName={setClassName}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==11){
     screen = <ClassroomJoin  setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==12){
-    screen = <ClassroomDetails name ={className}classDetails={classDetails} class='social studies' assignments={[]} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomDetails name ={className}classDetails={classDetails} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+  }
+  if (currScreen==13){
+    screen = <AssignTypeSelect setQInfo={setQInfo} setScreen = {setScreen} setRid={setRid}/>
+  }
+  if (currScreen==14){
+    screen = <AssignCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+  }
+  if (currScreen==15){
+    screen = <AssignSet className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails}/>
   }
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   const {width,height} = Dimensions.get("screen");

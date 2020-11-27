@@ -12,7 +12,7 @@ const ClassroomMain = props =>{
     const clickClassHandler=(name)=>{
         props.setClassName(name);
         db.ref('/classes/'+name).once("value", function(snapshot) {
-            const data=snapshot.val();
+            var data=snapshot.val();
             props.setClassDetails(data);
             props.setScreen(12);
           }, function (errorObject) {

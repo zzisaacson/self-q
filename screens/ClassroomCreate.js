@@ -14,13 +14,20 @@ const ClassroomCreate= props =>{
    
     const handleCreate = ()=>{
         setError('Loading...');
+        console.log('HERERE mememememe');
         db.ref('/classes/'+name.toLowerCase()).once("value", function(snapshot) {
             const data=snapshot.val();
             if(data==null){
                 db.ref('/classes/'+name.toLowerCase()+'/password').set(password);
                 db.ref('/classes/'+name.toLowerCase()+'/members').set([firebase.auth().currentUser.uid]);
                 db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
-                props.setScreen(9);
+                props.setClassName(name.toLowerCase());
+                props.setClassDetails({'password':password,
+                                    'members':[[firebase.auth().currentUser.uid]],
+                                    'owner':firebase.auth().currentUser.uid
+
+                })
+                props.setScreen(12);
             }
             else{
                 setError('Class name already exists, please choose another. ')

@@ -8,11 +8,13 @@ import GoalItem from '../components/GoalItem';
 
 
 const ClassroomDetails = props =>{
-
+    console.log(props.classDetails)
     const assignHandler=()=>{
-
+        props.setScreen(13);
     }
     var isOwned = firebase.auth().currentUser.uid==props.classDetails['owner'];
+
+    var data = props.classDetails['assignments']!=null&&props.classDetails['assignments']['set-list'] !=null?props.classDetails['assignments']['set-list']:[];
 
     return   (
     <View style={{padding:20}}>
@@ -22,12 +24,12 @@ const ClassroomDetails = props =>{
                     <Text>{'Password: ' +props.classDetails['password']}</Text>
                 </View> 
                 <View style={{margin:15}}>
-                    <Button title=' Assign ' />  
+                    <Button title=' Assign ' onPress={assignHandler}/>  
                 </View> 
             </View>}
-            <FlatList style={{flex:1}}data = {props.assignments}
+            <FlatList style={{flex:1}}data = {data}
             keyExtractor={(item, index)=> item.id}
-            renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={assignHandler}title ={itemData.item.value}/>}/>
+            renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={()=>5}title ={itemData.item.value}/>}/>
 
     </View>
     );
