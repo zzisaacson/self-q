@@ -7,7 +7,7 @@ import firebase from 'firebase'
 
 const AddSet = props =>{
     const db = firebase.database();
-    const [useCustom, setUseCustom]= useState(false);
+    const [useCustom, setUseCustom]= useState(props.qInfo['focus']['prompt']=='');
 
     const [userInput, setUserInput]= useState(props.qInfo['name']);
     const [focus, setFocus]= useState(props.qInfo['focus']['answer']);
@@ -33,7 +33,7 @@ const AddSet = props =>{
             }
         });
         props.setQList([...l, {id: rid, value: goalTitle}]);
-        const details = {'name': goalTitle,
+        const details = {'name': userInput,
                         'focus':{
                             'prompt':focusP,
                             'answer':focus

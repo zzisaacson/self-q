@@ -9,6 +9,7 @@ const ClassroomJoin= props =>{
     const [name, setName]= useState('');
     const [password, setPassword]= useState('');
     const [error, setError]=useState('');
+    const [realName, setRealName]=useState('');
 
     const db= firebase.database();
    
@@ -24,11 +25,17 @@ const ClassroomJoin= props =>{
                     setError('You are already in this class.');
                 }
                 else{
-                    if(password!=data[password]){
+                    if(password!=data['password']){
                         setError('Incorrect Password.')
                     }
                     else{
+                        var names=  data['names']!=null? data['names']:[]; 
                         db.ref('/classes/'+name.toLowerCase()+'/members').set([...data['members'], firebase.auth().currentUser.uid ]);
+                        db.ref('/classes/'+name.toLowerCase()+'/names').set([...names, {'id':firebase.auth().currentUser.uid,'value': realName }]);
+                        //console.log(props.classes);
+                        //console.log({'id':name.toLowerCase,'value':name.toLowerCase});
+                        props.setClasses([...props.classes, {'id':name.toLowerCase(),'value':name.toLowerCase()}]);
+                        console.log(props.classes);
                         props.setScreen(9);
                     }
                 }
@@ -44,6 +51,7 @@ const ClassroomJoin= props =>{
     <View style={styles.container}>
         <View >
             <Text style={styles.title}>Join a Class</Text>
+            <TextInput placeholder={"Enter your real name"} style ={styles.input} onChangeText={setRealName}/>
             <TextInput placeholder={"Class Name"} style ={styles.input} onChangeText={setName}/>
             <TextInput placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
             <Text style={styles.text}>{error}</Text>

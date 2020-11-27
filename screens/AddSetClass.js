@@ -5,9 +5,9 @@ import GoalInput from '../components/GoalInput';
 import CustomGoalInput from '../components/CustomGoalInput';
 import firebase from 'firebase'
 
-const AssignSet = props =>{
+const AddSetClass = props =>{
     const db = firebase.database();
-    const [useCustom, setUseCustom]= useState(true);
+    const [useCustom, setUseCustom]= useState(props.qInfo['focus']['prompt']=='');
 
     const [userInput, setUserInput]= useState(props.qInfo['name']);
     const [focus, setFocus]= useState(props.qInfo['focus']['answer']);
@@ -25,14 +25,13 @@ const AssignSet = props =>{
     const [reflectP, setReflectP]= useState(props.qInfo['reflect']['prompt']);
     const addGoalHandler = goalTitle=>{
         const rid =props.rid;
-        var rid_contained=false;
-        var l =[];
-       (props.classDetails['assignments']!=null?props.classDetails['assignments']:[]).forEach(element=>{
-            if(element['id']!=rid){
-                l.push(element);
-            }
-        });
-        db.ref('/classes/'+props.className+'/assignments/set-list').set([...l, {id: rid, value: goalTitle}]);
+        // var l =[]
+        // props.qList.forEach(element=>{
+        //     if(element['id']!=rid){
+        //         l.push(element);
+        //     }
+        // });
+        // props.setQList([...l, {id: rid, value: goalTitle}]);
         const details = {'name': goalTitle,
                         'focus':{
                             'prompt':focusP,
@@ -59,15 +58,12 @@ const AssignSet = props =>{
                             'answer':reflect
                         }};
         //console.log(details);
-        db.ref('/classes/'+props.className+'/assignments/details/'+rid).set(details);
-        var toPage=0;
-        if(focusP!=props.qInfo['focus']['prompt']||gatherP!=props.qInfo['gather']['prompt']||brainstormP!=props.qInfo['brainstorm']['prompt']||
-            evaluateP!=props.qInfo['evaluate']['prompt']||planP!=props.qInfo['plan']['prompt']||reflectP!=props.qInfo['reflect']['prompt']  ){
-                props.setQInfo(details);
-                toPage=6;
-            }
-        //console.log(details);
-        props.setScreen(toPage);
+        db.ref('classes/'+props.className+'/responses/'+rid+'/'+firebase.auth().currentUser.uid).set(details);
+        var classDetails = props.classDetails;
+        classDetails['responses'][rid][firebase.auth().currentUser.uid]=details;
+        console.log(classDetails);
+        props.setClassDetails(classDetails);
+        props.setScreen(12);
       };
 
       const handleSwipeButton=()=>{
@@ -97,7 +93,7 @@ const AssignSet = props =>{
             'answer':reflect
         }};
         props.setQInfo(details);
-          props.setScreen(8);
+          props.setScreen(17);
       }
 
     const regInput=<React.Fragment>
@@ -120,6 +116,13 @@ const custInput=<React.Fragment>
 
     return(
         <ScrollView>
+            <View style={{width:'90%', flexDirection:'row-reverse'}}>
+                <TouchableOpacity onPress={handleSwipeButton}>
+                    <Image style={{height:50,width:50, margin:16}}
+                        source={require('../assets/swipe_btn.png')}
+                        resizeMode={"stretch"}/>
+                </TouchableOpacity>
+            </View>
                 
             <View style={{
                 padding:30,
@@ -128,8 +131,8 @@ const custInput=<React.Fragment>
                 alignItems: 'center'
             }}>
                 
-                <Text style={{fontWeight:'bold'}} >Ask the class a question</Text>
-                <TextInput value = {userInput} placeholder = 'Question' style={{
+                <Text style={{fontWeight:'bold'}} >Name this Question Set</Text>
+                <TextInput value = {userInput} placeholder = 'Name' style={{
             width: '80%', 
             borderColor:'black', 
             borderWidth:1, 
@@ -137,7 +140,7 @@ const custInput=<React.Fragment>
             marginBottom: 10
         }} onChangeText ={text=>setUserInput(text)}/>
                 {input}
-                <Button style={{width:'20%'}} title='ASSIGN' onPress = {addGoalHandler.bind(this, userInput)}/>
+                <Button style={{width:'20%'}} title='DONE' onPress = {addGoalHandler.bind(this, userInput)}/>
             </View>
         </ScrollView>
     );
@@ -161,4 +164,4 @@ const styles = StyleSheet.create({
       }
 });
 
-export default AssignSet;
+export default AddSetClass;

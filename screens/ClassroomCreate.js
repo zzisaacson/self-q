@@ -14,7 +14,7 @@ const ClassroomCreate= props =>{
    
     const handleCreate = ()=>{
         setError('Loading...');
-        console.log('HERERE mememememe');
+        //console.log('HERERE mememememe');
         db.ref('/classes/'+name.toLowerCase()).once("value", function(snapshot) {
             const data=snapshot.val();
             if(data==null){
