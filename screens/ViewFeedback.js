@@ -5,8 +5,9 @@ import GoalInput from '../components/GoalInput';
 import CustomGoalInput from '../components/CustomGoalInput';
 import firebase from 'firebase'
 import FeedbackGoalInput from '../components/FeedbackGoalInput';
+import FeedbackGoalView from '../components/FeedbackGoalView';
 
-const LeaveFeedback = props =>{
+const ViewFeedback = props =>{
     const db = firebase.database();
     // console.log('here sir');
     // console.log(props.qInfo);
@@ -36,42 +37,18 @@ const LeaveFeedback = props =>{
     const [gFeedback, setGFeedback]=useState(props.fInfo['gFeedback']);
     const [grade, setGrade]=useState(props.fInfo['grade']);
     const handleDone = ()=>{
-        const rid =props.rid;
-        // var l =[]
-        // props.qList.forEach(element=>{
-        //     if(element['id']!=rid){
-        //         l.push(element);
-        //     }
-        // });
-        // props.setQList([...l, {id: rid, value: goalTitle}]);
-        const details = {'grade': grade,
-                        'gFeedback':gFeedback,
-                        'focus':focusR,
-                        'gather':gatherR,
-                        'brainstorm':brainstormR,
-                        'evaluate':evaluateR,
-                        'plan':planR,
-                        'reflect':reflectR};
-        //console.log(details);
-        db.ref('classes/'+props.className+'/responses/'+rid+'/'+props.student).set(props.qInfo);
-        db.ref('classes/'+props.className+'/responses/'+rid+'/'+props.student+'/feedback').set(details);
-        var classDetails = props.classDetails;
-        console.log(rid);
-        console.log(classDetails);
-        classDetails['responses'][rid][props.student]=props.qInfo;
-        classDetails['responses'][rid][props.student]['feedback']=details;
-        //console.log(classDetails);
-        props.setClassDetails(classDetails);
-        props.setScreen(18);
+       
+        //props.setClassDetails(classDetails);
+        props.setScreen(12);
       };
 
     const responses=<React.Fragment>
-    <FeedbackGoalInput comment={focusR}input = {focus} setInput={setFocusR} color ='red' header='Select A Focus' question = {props.qInfo['focus']['prompt'] }/>
-    <FeedbackGoalInput comment={gatherR}input = {gather} setInput={setGatherR}  color ='orange' header='Gather Information' question = {props.qInfo['gather']['prompt']}/>
-    <FeedbackGoalInput comment={brainstormR}input = {brainstorm} setInput={setBrainstormR} color ='yellow' header='Brainstorm' question = {props.qInfo['brainstorm']['prompt']}/>
-    <FeedbackGoalInput comment={evaluateR}input = {evaluate} setInput={setEvaluateR} color ='green'header='Evaluate' question = {props.qInfo['evaluate']['prompt']}/>
-    <FeedbackGoalInput comment={planR}input = {plan} setInput={setPlanR} color ='blue'  header='Plan and Act' question = {props.qInfo['plan']['prompt']}/>
-    <FeedbackGoalInput comment={reflectR} input = {reflect} setInput={setReflectR}  color ='purple' header='Reflect' question = {props.qInfo['reflect']['prompt']}/></React.Fragment>;
+    <FeedbackGoalView comment={focusR}input = {focus} setInput={setFocusR} color ='red' header='Select A Focus' question = {props.qInfo['focus']['prompt'] }/>
+    <FeedbackGoalView comment={gatherR}input = {gather} setInput={setGatherR}  color ='orange' header='Gather Information' question = {props.qInfo['gather']['prompt']}/>
+    <FeedbackGoalView comment={brainstormR}input = {brainstorm} setInput={setBrainstormR} color ='yellow' header='Brainstorm' question = {props.qInfo['brainstorm']['prompt']}/>
+    <FeedbackGoalView comment={evaluateR}input = {evaluate} setInput={setEvaluateR} color ='green'header='Evaluate' question = {props.qInfo['evaluate']['prompt']}/>
+    <FeedbackGoalView comment={planR}input = {plan} setInput={setPlanR} color ='blue'  header='Plan and Act' question = {props.qInfo['plan']['prompt']}/>
+    <FeedbackGoalView comment={reflectR} input = {reflect} setInput={setReflectR}  color ='purple' header='Reflect' question = {props.qInfo['reflect']['prompt']}/></React.Fragment>;
 
 
 
@@ -88,20 +65,12 @@ const LeaveFeedback = props =>{
                 <Text style={{fontWeight:'bold'}} >Leave Feedback</Text>
                 <Text style={{
             width: '80%', 
-            borderColor:'black', 
-            borderWidth:1, 
             padding:10,
             marginBottom: 10
         }} > {userInput}</Text>
                 {responses}
-                <TextInput value={gFeedback}style={styles.input} placeholder='General Feedback' onChangeText={text=>setGFeedback(text)}/>
-                <TextInput value={grade}  style={{
-        width: '10%', 
-        borderColor:'black', 
-        borderWidth:1, 
-        padding:10,
-        marginBottom: 10
-      }} placeholder='Grade' onChangeText={text=>setGrade(text)}/>
+                <Text style={{fontStyle:'italic'}}>{gFeedback!=''?'Feedback: '+gFeedback:''}</Text>
+                <Text style={{fontStyle:'italic'}} >{'Grade: '+grade}</Text>
                 <Button style={{width:'20%'}} title='DONE' onPress = {handleDone}/>
             </View>
         </ScrollView>
@@ -126,4 +95,4 @@ const styles = StyleSheet.create({
       }
 });
 
-export default LeaveFeedback;
+export default ViewFeedback;

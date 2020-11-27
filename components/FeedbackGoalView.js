@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button, StyleSheet, Modal, Text, TouchableOpacity} from 'react-native';
 
-const FeedbackGoalInput = props =>{
-    const [commentMode, setCommentMode] = useState(props.comment!=''); 
+const FeedbackGoalView = props =>{
+  
 
     return  (
       
@@ -12,14 +12,14 @@ const FeedbackGoalInput = props =>{
               <Text>{props.question}</Text>
  
             <TouchableOpacity onPress={()=>setCommentMode(true)}>
-              <Text  style ={styles.italics}> {props.input}</Text>
+              <Text> {props.input}</Text>
             </TouchableOpacity>
-            {commentMode&& <View style={{width:'100%'}}>
-              <TextInput value={props.comment}style={styles.input} placeholder={'Leave a comment on '+props.header} onChangeText={text=>props.setInput(text)}/>
+          <View style={{width:'100%'}}>
+    <Text style={styles.italics}>{props.comment!=''?'Instructor feedback: '+props.comment:''}</Text>
 
               </View>
 
-            }
+  
             
           </View>
     );
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
      }
 });
 
-export default FeedbackGoalInput;
+export default FeedbackGoalView;

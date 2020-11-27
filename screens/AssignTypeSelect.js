@@ -126,7 +126,7 @@ const AssignTypeSelect = props =>{
             'answer':''
         }});
 
-        props.setScreen(13);
+        props.setScreen(15);
     }
 
     const social=()=>{
