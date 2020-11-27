@@ -19,6 +19,7 @@ const ClassroomCreate= props =>{
             if(data==null){
                 db.ref('/classes/'+name.toLowerCase()+'/password').set(password);
                 db.ref('/classes/'+name.toLowerCase()+'/members').set([firebase.auth().currentUser.uid]);
+                db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
                 props.setScreen(9);
             }
             else{

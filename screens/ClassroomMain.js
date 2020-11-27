@@ -8,12 +8,19 @@ import GoalItem from '../components/GoalItem';
 
 
 const ClassroomMain = props =>{
-    console.log(props.classes);
-    const[classList, setClassList]=useState([{'id':'social studies', 'value':'social studies'}]);
-    console.log(classList==props.classes);
-    const clickClassHandler=()=>{
-
-    }
+    const db = firebase.database();
+    const clickClassHandler=(name)=>{
+        props.setClassName(name);
+        db.ref('/classes/'+name).once("value", function(snapshot) {
+            const data=snapshot.val();
+            props.setClassDetails(data);
+            props.setScreen(12);
+          }, function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
+          });
+        }; 
+       
+   
      
 
     return   (
@@ -28,7 +35,7 @@ const ClassroomMain = props =>{
             </View>
             <FlatList style={{flex:1}}data = {props.classes}
             keyExtractor={(item, index)=> item.id}
-            renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={clickClassHandler}title ={itemData.item.value}/>}/>
+            renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={id=>clickClassHandler(id)}title ={itemData.item.value}/>}/>
 
     </View>
     );
