@@ -40,8 +40,14 @@ const firebaseConfig={
   appId: "1:815667248878:web:5101ab55ce6deac57ffdff",
   measurementId: "G-C9QTCTBDSL"
 }
-firebase.initializeApp(firebaseConfig);
+var done =false;
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}else {
+  firebase.app(); // if already initialized, use that one
+}
 const db = firebase.database();
+console.disableYellowBox = true;
 
 export default function App() { 
   
@@ -57,7 +63,8 @@ export default function App() {
   const [fInfo, setFInfo]=useState('');
 
 
-  if (screen==2 && firebase.auth().currentUser!=null){
+  if (currScreen==2 && firebase.auth().currentUser!=null && !done){
+    done=true;
     setScreen(0);
   }
 
@@ -85,7 +92,7 @@ export default function App() {
           
       }
 
-      console.log(l);
+      //console.log(l);
       setClasses(l);
       setScreenHandler(9);
     }, function (errorObject) {
@@ -115,7 +122,7 @@ export default function App() {
     setColorList(cList)
     return setScreen(screen)
   }
-  screen = <Home setRid={setRid} setQInfo={setQInfo } setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder} setNoDB={setCourseGoals}/>
+  var screen = <Home setRid={setRid} setQInfo={setQInfo } setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder} setNoDB={setCourseGoals}/>
   if (currScreen==1 ){
     screen = <AddSet rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   }
@@ -144,7 +151,7 @@ export default function App() {
     screen = <ClassroomMain setClassName={setClassName} setClassDetails={setClassDetails} classes={classes} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==10){
-    screen = <ClassroomCreate setClassDetails={setClassDetails}setClassName={setClassName}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomCreate classes={classes}setClasses={setClasses} setClassDetails={setClassDetails}setClassName={setClassName}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==11){
     screen = <ClassroomJoin  classes={classes}setClasses={setClasses}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
@@ -159,7 +166,7 @@ export default function App() {
     screen = <AssignCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==15){
-    screen = <AssignSet className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails}/>
+    screen = <AssignSet className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails}/>
   }
   if (currScreen==16){
     screen = <AddSetClass classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
@@ -181,10 +188,10 @@ export default function App() {
   }
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   const {width,height} = Dimensions.get("screen");
-  var space = 64;
-  Platform.select({
-    web: space+=110
-  });
+  var space = 64+50+300;
+  if(Platform.OS=='android'){
+    space-=300;
+  }
   return (
     <View style={{height:height-space+64}}>
       <View style={{height:height-space}}>

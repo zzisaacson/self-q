@@ -55,9 +55,8 @@ const ClassroomDetails = props =>{
     var complete=[];
     if(!isOwned){
         data.forEach(element => {
-            if(props.classDetails['responses'][element['id']][firebase.auth().currentUser.uid]==null){
-                // console.log('HERE MY MAN');
-                // console.log(props.classDetails['assignments']['details'][element['id']]);
+            if(props.classDetails['responses']==null||props.classDetails['responses'][element['id']]==null||props.classDetails['responses'][element['id']][firebase.auth().currentUser.uid]==null){
+
                 to_do.push(element);
             }
             else{

@@ -147,7 +147,7 @@ const SwipeAddSetClass = props =>{
                     backgroundColor:'red',
                     padding:20
                 }}>
-                    <TextInput value={focusP} onChangeText={setFocusP} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a focus question'></TextInput>
+                    <TextInput value={focusP} onChangeText={setFocusP} style={{backgroundColor:'#FFFFFF',width: '100%', borderColor:'#000000', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a focus question'></TextInput>
                     <TextInput value={focus} onChangeText={setFocus} multiline={true} style={{backgroundColor:'white',width: '100%', height:'70%',borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Answer the focus question'></TextInput>
                     <View style={{height:'15%',width:'100%',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                             <TouchableOpacity style={{height:120,width:120}} onPress={()=>setCurrQ((currQ+6)%7)}>

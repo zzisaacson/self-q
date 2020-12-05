@@ -260,7 +260,7 @@ const TypeSelect = props =>{
 </View></React.Fragment>;
 
     return   (
-    <View>
+
         <ScrollView>
             <View style={styles.row}>
                 <View style={styles.extraSpacing}>
@@ -290,7 +290,6 @@ const TypeSelect = props =>{
             {personal_open && personal}
 
         </ScrollView>
-    </View>
     );
 }
 

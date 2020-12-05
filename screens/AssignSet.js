@@ -66,14 +66,25 @@ const AssignSet = props =>{
                         }};
         //console.log(details);
         db.ref('/classes/'+props.className+'/assignments/details/'+rid).set(details);
-        var toPage=12;
-        if(focusP!=props.qInfo['focus']['prompt']||gatherP!=props.qInfo['gather']['prompt']||brainstormP!=props.qInfo['brainstorm']['prompt']||
-            evaluateP!=props.qInfo['evaluate']['prompt']||planP!=props.qInfo['plan']['prompt']||reflectP!=props.qInfo['reflect']['prompt']  ){
-                props.setQInfo(details);
-                toPage=6;
-            }
-        //console.log(details);
-        props.setScreen(toPage);
+
+        db.ref('/classes/'+props.className).on("value", function(snapshot) {
+            const data=snapshot.val();
+            props.setClassDetails(data);
+
+            var toPage=12;
+            if(focusP!=props.qInfo['focus']['prompt']||gatherP!=props.qInfo['gather']['prompt']||brainstormP!=props.qInfo['brainstorm']['prompt']||
+                evaluateP!=props.qInfo['evaluate']['prompt']||planP!=props.qInfo['plan']['prompt']||reflectP!=props.qInfo['reflect']['prompt']  ){
+                    props.setQInfo(details);
+                    toPage=6;
+                }
+            //console.log(details);
+            props.setScreen(toPage);
+            
+          }, function (errorObject) {
+            setError("The read failed: " + errorObject.code+' Please try again.');
+          });
+
+       
       };
 
     

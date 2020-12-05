@@ -35,7 +35,7 @@ const ClassroomJoin= props =>{
                         //console.log(props.classes);
                         //console.log({'id':name.toLowerCase,'value':name.toLowerCase});
                         props.setClasses([...props.classes, {'id':name.toLowerCase(),'value':name.toLowerCase()}]);
-                        console.log(props.classes);
+                        //onsole.log(props.classes);
                         props.setScreen(9);
                     }
                 }
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         marginTop:5
     },
     smallHeader: {
-        color: '#05375',
+        color: '#05375a',
         fontWeight: 'bold',
         marginTop:10
     },

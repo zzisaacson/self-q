@@ -43,7 +43,7 @@ const Login= props =>{
             <Text style={styles.title}>Welcome to SELf-Q!</Text>
             <Text style = {styles.text}>Sign in with account</Text>
             <TextInput placeholder={"Email"} style ={styles.input} onChangeText={setEmail}/>
-            <TextInput placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
+            <TextInput secureTextEntry={true} placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
             <Text style={styles.text}>{error}</Text>
             <Button style={{width:'25%'}} title="Sign In" onPress ={handleSignIn}/>
             <View style ={{alignItems:'center'}}> 
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         marginTop:10
     },
     smallHeader: {
-        color: '#05375',
+        color: '#05375a',
         fontWeight: 'bold',
         marginTop:10
     },
@@ -122,7 +122,8 @@ const styles = StyleSheet.create({
          borderWidth:1, 
          padding:5,
         margin: 10
-       }
+       },
+       
   });
   
 

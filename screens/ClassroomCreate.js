@@ -18,12 +18,15 @@ const ClassroomCreate= props =>{
         db.ref('/classes/'+name.toLowerCase()).once("value", function(snapshot) {
             const data=snapshot.val();
             if(data==null){
+                console.log(props.classes);
+                props.setClasses([...props.classes, {'id':name.toLowerCase(),'value':name.toLowerCase()}]);
                 db.ref('/classes/'+name.toLowerCase()+'/password').set(password);
                 db.ref('/classes/'+name.toLowerCase()+'/members').set([firebase.auth().currentUser.uid]);
                 db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
                 props.setClassName(name.toLowerCase());
+                
                 props.setClassDetails({'password':password,
-                                    'members':[[firebase.auth().currentUser.uid]],
+                                    'members':[firebase.auth().currentUser.uid],
                                     'owner':firebase.auth().currentUser.uid
 
                 })
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
         marginTop:5
     },
     smallHeader: {
-        color: '#05375',
+        color: '#05375a',
         fontWeight: 'bold',
         marginTop:10
     },

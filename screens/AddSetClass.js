@@ -61,11 +61,19 @@ const AddSetClass = props =>{
                         }};
         //console.log(details);
         db.ref('classes/'+props.className+'/responses/'+rid+'/'+firebase.auth().currentUser.uid).set(details);
+
         var classDetails = props.classDetails;
-        classDetails['responses'][rid][firebase.auth().currentUser.uid]=details;
-        console.log(classDetails);
-        props.setClassDetails(classDetails);
-        props.setScreen(12);
+        db.ref('classes/'+props.className).on("value", function(snapshot) {
+            const data=snapshot.val();
+            console.log(data);
+            props.setClassDetails(data);
+            props.setScreen(12);
+            
+          }, function (errorObject) {
+            setError("The read failed: " + errorObject.code+' Please try again.');
+          });
+
+      
       };
 
       const handleSwipeButton=()=>{
