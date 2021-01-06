@@ -1,17 +1,30 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, Button, StyleSheet,FlatList, Dimensions, Image, TouchableOpacity} from 'react-native';
 import firebase from 'firebase';
+//import { useNavigation } from '@react-navigation/native';
 //import * as GoogleSignIn from 'expo-google-sign-in';
 
-
+//React.createContext
 
 const Login= props =>{
+   // global.nav = useNavigation();
+    //console.log(global.nav.navigate);
+    //nav.
+  //  console.log(props.navigation.getParam('setScreen'));
+   // const navigation = useNavigation();
+    //props=navigation.props;
+    //console.log('after: '+global.yep);
+    //props = {...global.props, props};
+    //console.log(props);
+
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
     const [error, setError]=useState('');
 
+
     firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
+        console.log('LOG '+global.linked)
+        if (user && !global.linked) {
           props.setScreen(0);
         }
      });

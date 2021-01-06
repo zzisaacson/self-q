@@ -7,6 +7,7 @@ import firebase from 'firebase';
 
 
 const TypeSelect = props =>{
+    props = {...global.props, props};
     const [academic_open, set_academic_open]= useState(true);
     const [personal_open, set_personal_open]= useState(false);
     const science=()=>{

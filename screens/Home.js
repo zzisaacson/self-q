@@ -7,13 +7,17 @@ import firebase from 'firebase';
 
 var once = 0;
 const Home = props =>{
-
+    //props = {...global.props, props};
     const db = firebase.database();
     if (firebase.auth().currentUser.uid!=once){
       db.ref(firebase.auth().currentUser.uid+'/set-list').on("value", function(snapshot) {
         console.log(snapshot.val())
         if(snapshot.val()!=null){
+          console.log(props.setNoDB);
           props.setNoDB(snapshot.val());
+          //props.globalUpdate();
+          //console.log(props);
+          //console.log(props.qList);
         }
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
