@@ -10,11 +10,13 @@ import GoalItem from '../components/GoalItem';
 const GradingStudList = props =>{
     const [toDoOpen, setToDoOpen]= useState(true);
     const [completeOpen, setCompleteOpen]= useState(false);
+    console.log("http://localhost:19006/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20"));
     
     const handleStudClick=(id)=>{
         // console.log('handleStudClick');
         // console.log(props.classDetails);
         // console.log(props.rid);
+       
         var qInfo = props.classDetails['assignments']['details'][props.rid];
         if (props.classDetails['responses']!=null&&props.classDetails['responses'][props.rid]!=null&&props.classDetails['responses'][props.rid][id]!=null){
             qInfo = props.classDetails['responses'][props.rid][id];
@@ -47,17 +49,24 @@ const GradingStudList = props =>{
     var to_grade=[];
     var graded=[];
     data.forEach(element => {
+        console.log(element);
         if(props.classDetails['responses'][props.rid]==null||props.classDetails['responses'][props.rid][element['id']]==null||props.classDetails['responses'][props.rid][element['id']]['feedback']==null){
            
             to_grade.push(element);
         }
         else{
-            graded.push(element);
+            console.log(element['value']);
+            const el ={'id':element['id'],'value': element['value']+" - "+props.classDetails['responses'][props.rid][element['id']]['feedback']['grade']};
+            graded.push(el);
         }
     });
 
     return   (
     <View style={{padding:20}}>
+        <View style={{flexDirection:'row'}}>
+            <Text style={{color:'grey'}}>{"Link to Share: "}</Text>
+            <TextInput style={{flex:1}}value={"http://localhost:19006/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20")}/>
+        </View> 
          <View style={styles.row}>
                 <TouchableOpacity style={{width:'100%'}} onPress= {()=>setToDoOpen(!toDoOpen)}>
                     <View style = {styles.listItem}>

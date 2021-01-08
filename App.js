@@ -68,8 +68,9 @@ export default function App() {
   const [className, setClassName]=useState('');
   const [student, setStudent]=useState('');
   const [fInfo, setFInfo]=useState('');
+  const [link, setLink]=useState('');
   const setScreenHandler=s=>{
-    console.log('To '+screen +' and beyond');
+    console.log('To '+s +' and beyond');
     var cList = [];
     if(s == 0){
       cList= ['lightblue','lightgrey','lightgrey','lightgrey'];
@@ -186,6 +187,10 @@ export default function App() {
                 fInfo = data['responses'][id][firebase.auth().currentUser.uid]['feedback'];
                 targetScreen=21;
             }
+            if(firebase.auth().currentUser.uid==data['owner']){
+              targetScreen=18;
+            }
+
             setFInfo(fInfo);
             setRid(id);
             setQInfo(qInfo);
@@ -361,7 +366,7 @@ export default function App() {
     screen = <ClassroomJoin  classes={classes}setClasses={setClasses}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==12){
-    screen = <ClassroomDetails setFInfo={setFInfo} setRid={setRid} name ={className}classDetails={classDetails} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomDetails link={link} setLink={setLink} setFInfo={setFInfo} setRid={setRid} name ={className}classDetails={classDetails} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==13){
     screen = <AssignTypeSelect setQInfo={setQInfo} setScreen = {setScreen} setRid={setRid}/>
@@ -370,7 +375,7 @@ export default function App() {
     screen = <AssignCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==15){
-    screen = <AssignSet className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails}/>
+    screen = <AssignSet setLink={setLink} className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails}/>
   }
   if (currScreen==16){
     screen = <AddSetClass classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
@@ -379,7 +384,7 @@ export default function App() {
     screen = <SwipeAddSetClass classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   }
   if (currScreen==18){
-    screen = <GradingStudList setFInfo={setFInfo}setStudent={setStudent} rid={rid}classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
+    screen = <GradingStudList link={link} setLink={setLink} setFInfo={setFInfo}setStudent={setStudent} rid={rid}classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   }
   if (currScreen==19){
     screen = <ClassSelectCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>

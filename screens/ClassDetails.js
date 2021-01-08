@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Text,TouchableOpacity, TextInput, Button, StyleSheet,FlatList, Dimensions, Image, ScrollView} from 'react-native';
 import firebase, { auth } from 'firebase';
 import GoalItem from '../components/GoalItem';
+import Popup from '../components/Popup';
 //import * as GoogleSignIn from 'expo-google-sign-in';
 
 
@@ -85,8 +86,10 @@ const ClassroomDetails = props =>{
     // }
 
     return   (
+    
     <View style={{padding:20}}>
-            <Text style={styles.header}>{props.name}</Text>
+         {props.link.length!=0&&<Popup link={props.link} setLink={props.setLink}/>}
+           <Text style={styles.header}>{props.name}</Text>
             {isOwned&&<View>
                 <View style={styles.row}>
                 <View style={{margin:15}}>
