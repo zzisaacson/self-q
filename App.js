@@ -34,6 +34,7 @@ import ViewFeedback from './screens/ViewFeedback';
 import AssignCustom from './screens/AssignCustom';
 import Blank from './components/Blank';
 import Linking from './components/Linking';
+import LinkLoading from './screens/LinkLoading';
 global.linked=false;
 //import { firebaseConfig } from './components/config';
 //import { firebaseConfig } from './components/config';
@@ -166,6 +167,10 @@ export default function App() {
             var data=snapshot.val();
             console.log(data)
             setClassDetails(data);
+
+            if(!data['members'].includes(firebase.auth().currentUser.uid)){
+              return;
+            }
             
             var qInfo = data['assignments']['details'][id];
             if (data['responses']!=null&&data['responses'][id]!=null&&data['responses'][id][firebase.auth().currentUser.uid]!=null){
@@ -394,6 +399,9 @@ export default function App() {
   }
   if (currScreen==21){
     screen = <ViewFeedback fInfo={fInfo} student={student} classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
+  }
+  if (currScreen==22){
+    screen = <LinkLoading/>
   }
   //const navigation = useNavigation();
   //navigation.setParams({setScreen:setScreenHandler});

@@ -4,7 +4,7 @@ import firebase from 'firebase';
 const Linking = props =>{
     global.linked=true;
     //console.log(global.linked);
-    //global.setScreen(9);
+    global.setScreen(22);
 
     firebase.auth().onAuthStateChanged((user) => {
        // console.log('LOG '+global.linked)
@@ -14,8 +14,7 @@ const Linking = props =>{
         }
      });
     return   (
-    <View>
-       
+    <View >
     </View>
     );
 }

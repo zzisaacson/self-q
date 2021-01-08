@@ -8,6 +8,9 @@ const TabS = props =>{
       if(firebase.auth().currentUser!=null){
           props.setScreen(5);
         }
+        else{
+            props.setScreen(2);
+        }
      }
     return   (
     <View style={{backgroundColor:props.colorList[props.screen], flex:1,

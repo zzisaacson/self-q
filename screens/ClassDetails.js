@@ -86,63 +86,73 @@ const ClassroomDetails = props =>{
     // }
 
     return   (
+    <View style={{height:'100%', width: '100%'}}>
+        <View style={{position:'absolute', zIndex: 3, elevation: 3}}>
+            {props.link.length!=0&&<Popup   link={props.link} setLink={props.setLink}/>}
+        </View>
     
-    <View style={{padding:20}}>
-         {props.link.length!=0&&<Popup link={props.link} setLink={props.setLink}/>}
-           <Text style={styles.header}>{props.name}</Text>
-            {isOwned&&<View>
+    
+        <View style={ {height:'100%',zIndex:0, elevation:0}}>
+            
+            <Text style={styles.header}>{props.name}</Text>
+            {isOwned&&
+            <View style={{height:'95%'}}>
                 <View style={styles.row}>
-                <View style={{margin:15}}>
-                    <Text>{'Password: ' +props.classDetails['password']}</Text>
-                </View> 
-                <View style={{margin:15}}>
-                    <Button title=' Assign ' onPress={assignHandler}/>  
-                </View> 
+                    <View style={{margin:15}}>
+                        <Text>{'Password: ' +props.classDetails['password']}</Text>
+                    </View> 
+                    <View style={{margin:15}}>
+                        <Button title=' Assign ' onPress={assignHandler}/>  
+                    </View> 
+                </View>
+                
+                <FlatList style={{flex:1}}data = {data}
+                keyExtractor={(item, index)=> item.id}x
+                renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={id=>ownerAssignmentClicked(id)}title ={itemData.item.value}/>}/>
             </View>
-             <FlatList style={{flex:1}}data = {data}
-             keyExtractor={(item, index)=> item.id}
-             renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={id=>ownerAssignmentClicked(id)}title ={itemData.item.value}/>}/>
-             </View>}
-             {!isOwned&&<View>
-            <View style={styles.row}>
-                <TouchableOpacity style={{width:'100%'}} onPress= {()=>setToDoOpen(!toDoOpen)}>
-                    <View style = {styles.listItem}>
-                        <Text>{(toDoOpen?'v':'>') +'  To-Do  '}</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
-            {
-             toDoOpen&&<View>
-                 <FlatList style={{flex:1}}data = {to_do}
-             keyExtractor={(item, index)=> item.id}
-             renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={(id)=>handleAssingmentClick(id)}title ={itemData.item.value}/>}/>
-             {to_do.length==0&&<Text style={{fontStyle:'italic'}}>All done.</Text>}
-             </View>
-
             }
+            {!isOwned&&
+            <View style={ {height:'100%',zIndex:0, elevation:0}}>
+                <View style={{...styles.row, height:'95%'}}>
+                    <TouchableOpacity style={{width:'100%'}} onPress= {()=>setToDoOpen(!toDoOpen)}>
+                        <View style = {styles.listItem}>
+                            <Text>{(toDoOpen?'v':'>') +'  To-Do  '}</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                {
+                toDoOpen&&<View>
+                    <FlatList style={{flex:1}}data = {to_do}
+                keyExtractor={(item, index)=> item.id}
+                renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={(id)=>handleAssingmentClick(id)}title ={itemData.item.value}/>}/>
+                {to_do.length==0&&<Text style={{fontStyle:'italic'}}>All done.</Text>}
+                </View>
 
-            <View style={styles.row}>
-                <TouchableOpacity style={{width:'100%'}} onPress= {()=>setCompleteOpen(!completeOpen)}>
-                    <View style = {styles.listItem}>
-                        <Text>{(completeOpen?'v':'>') +'  Complete  '}</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
-            {
-             completeOpen&&<FlatList style={{flex:1}}data = {complete}
-             keyExtractor={(item, index)=> item.id}
-             renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={(id)=>handleAssingmentClick(id)}title ={itemData.item.value}/>}/>
+                }
 
-            }
+                <View style={styles.row}>
+                    <TouchableOpacity style={{width:'100%'}} onPress= {()=>setCompleteOpen(!completeOpen)}>
+                        <View style = {styles.listItem}>
+                            <Text>{(completeOpen?'v':'>') +'  Complete  '}</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                {
+                completeOpen&&<FlatList style={{flex:1}}data = {complete}
+                keyExtractor={(item, index)=> item.id}
+                renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={(id)=>handleAssingmentClick(id)}title ={itemData.item.value}/>}/>
+
+                }
             </View>
+
+                
+                
+                }
+
 
             
-             
-             }
 
-
-           
-
+        </View>
     </View>
     );
 }
