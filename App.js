@@ -308,7 +308,7 @@ export default function App() {
   const nav = React.useRef(null);
   const navCon =  <NavigationContainer  linking={{ enabled: true }} ref={nav} fallback={<Login setScreen = {setScreenHandler}/>}>
   <Stack.Navigator>
-      <Stack.Screen  name="blank" component={Blank}/>
+      <Stack.Screen  name="selfq" component={Blank}/>
       <Stack.Screen  name="link" component={Linking}/>
       {/*<Stack.Screen  name="login" component={Login}/>
       <Stack.Screen  name="home" component={Home}/>
