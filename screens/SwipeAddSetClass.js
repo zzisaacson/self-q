@@ -144,7 +144,7 @@ const SwipeAddSetClass = props =>{
                     flex:1,
                     flexDirection :'column',
                     alignItems: 'center',
-                    backgroundColor:'red',
+                    backgroundColor:'#00FFFF',
                     padding:20
                 }}>
                     <TextInput value={focusP} onChangeText={setFocusP} style={{backgroundColor:'#FFFFFF',width: '100%', borderColor:'#000000', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a focus question'></TextInput>
@@ -174,7 +174,7 @@ const gatherPage=<React.Fragment>
             flex:1,
             flexDirection :'column',
             alignItems: 'center',
-            backgroundColor:'orange',
+            backgroundColor:'#AF69EF',
             padding:20
         }}>
             <TextInput value={gatherP} onChangeText={setGatherP} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a gathering information question'></TextInput>
@@ -264,7 +264,7 @@ const planPage=<React.Fragment>
             flex:1,
             flexDirection :'column',
             alignItems: 'center',
-            backgroundColor:'blue',
+            backgroundColor:'#ffdb58',
             padding:20
         }}>
             <TextInput value={planP} onChangeText={setPlanP} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a plan and action question'></TextInput>

@@ -66,11 +66,11 @@ const LeaveFeedback = props =>{
       };
 
     const responses=<React.Fragment>
-    <FeedbackGoalInput comment={focusR}input = {focus} setInput={setFocusR} color ='red' header='Select A Focus' question = {props.qInfo['focus']['prompt'] }/>
-    <FeedbackGoalInput comment={gatherR}input = {gather} setInput={setGatherR}  color ='orange' header='Gather Information' question = {props.qInfo['gather']['prompt']}/>
+    <FeedbackGoalInput comment={focusR}input = {focus} setInput={setFocusR} color ='#00FFFF' header='Select A Focus' question = {props.qInfo['focus']['prompt'] }/>
+    <FeedbackGoalInput comment={gatherR}input = {gather} setInput={setGatherR}  color ='#AF69EF' header='Gather Information' question = {props.qInfo['gather']['prompt']}/>
     <FeedbackGoalInput comment={brainstormR}input = {brainstorm} setInput={setBrainstormR} color ='yellow' header='Brainstorm' question = {props.qInfo['brainstorm']['prompt']}/>
     <FeedbackGoalInput comment={evaluateR}input = {evaluate} setInput={setEvaluateR} color ='green'header='Evaluate' question = {props.qInfo['evaluate']['prompt']}/>
-    <FeedbackGoalInput comment={planR}input = {plan} setInput={setPlanR} color ='blue'  header='Plan and Act' question = {props.qInfo['plan']['prompt']}/>
+    <FeedbackGoalInput comment={planR}input = {plan} setInput={setPlanR} color ='#ffdb58'  header='Plan and Act' question = {props.qInfo['plan']['prompt']}/>
     <FeedbackGoalInput comment={reflectR} input = {reflect} setInput={setReflectR}  color ='purple' header='Reflect' question = {props.qInfo['reflect']['prompt']}/></React.Fragment>;
 
 
