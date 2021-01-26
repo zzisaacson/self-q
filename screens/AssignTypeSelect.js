@@ -163,7 +163,7 @@ const AssignTypeSelect = props =>{
         props.setRid(Math.random().toString().substring(2));
         props.setQInfo({'name':'',
         'focus':{
-            'prompt':'What am I feeling?',
+            'prompt':'What am I feeling? How do I/they feel? What is she/he feeling?',
             'answer':''
         },
         'gather':{
@@ -175,18 +175,47 @@ const AssignTypeSelect = props =>{
             'answer':''
         },
         'evaluate':{
-            'prompt':   'Has this helped me in the past? How did it help? How did I feel after?',
+            'prompt':   'Has this helped me in the past? How did it help? How did it help? How did I feel after?',
             'answer':''
         },
         'plan':{
-            'prompt':  'How can I use this strategy?',
+            'prompt':  'What do I do first, second, and so on? Does this work? Is this working?',
             'answer':''
         },
         'reflect':{
-            'prompt': 'Did it work? How do I know? Do I need to go back and try again to solve this?',
+            'prompt': 'Did it work? How do I know? Do I need to go back and try again? ',
             'answer':''
         }});
-        props.setScreen(15);
+        props.setScreen(1);
+    }
+    const academicAndSocial=()=>{
+        props.setRid(Math.random().toString().substring(2));
+        props.setQInfo({'name':'',
+        'focus':{
+            'prompt':'What is the problem? What is the question? What is the task?',
+            'answer':''
+        },
+        'gather':{
+            'prompt': 'What do I know? What do I need to know? What is similar and what is different?',
+            'answer':''
+        },
+        'brainstorm':{
+            'prompt':     'How can I solve this problem? What are possible solutions? What can I do?',
+            'answer':''
+        },
+        'evaluate':{
+            'prompt':   'What is the best way to solve this problem? Does this make sense?',
+            'answer':''
+        },
+        'plan':{
+            'prompt':  'What do I do first, second, and so on? Does this work? Is this working?',
+            'answer':''
+        },
+        'reflect':{
+            'prompt': 'Did it work? How do I know? Do I need to go back and try again?',
+            'answer':''
+        }});
+        props.setScreen(1);
     }
     const custom=()=>{
         props.setRid(Math.random().toString().substring(2));
@@ -247,21 +276,32 @@ const AssignTypeSelect = props =>{
      var personal = 
     <React.Fragment>
     <View style={styles.row}>
+    <View style={styles.extraSpacing}>
     <TouchableOpacity onPress={social}>
     <Image style={styles.image}
     source={require('../assets/selfq_social.png')}
     resizeMode={"stretch"}/>
     </TouchableOpacity>
-    <TouchableOpacity onPress={emotional}>
-    <Image style={styles.image}
-    source={require('../assets/selfq_emotional.png')}
-    resizeMode={"stretch"}/>
-    </TouchableOpacity>
+    </View>
+   
 </View></React.Fragment>;
 
     return   (
-    
+
         <ScrollView>
+            <View style={styles.row}>
+             
+                        <TouchableOpacity onPress={academicAndSocial}>
+                            <Image style={styles.image}
+                            source={require('../assets/academic_social.png')}
+                            resizeMode={"stretch"}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={emotional}>
+                        <Image style={styles.image}
+                        source={require('../assets/selfq_emotional.png')}
+                        resizeMode={"stretch"}/>
+                        </TouchableOpacity>
+            </View>
             <View style={styles.row}>
                 <View style={styles.extraSpacing}>
                     <TouchableOpacity onPress={custom}>
@@ -270,6 +310,7 @@ const AssignTypeSelect = props =>{
                         resizeMode={"stretch"}/>
                     </TouchableOpacity>
                 </View>
+             
             </View>
             <View style={styles.row}>
                 <TouchableOpacity style={styles.dropdown} onPress= {set_academic_open.bind(this,!academic_open)}>
