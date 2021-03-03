@@ -186,7 +186,7 @@ const AssignTypeSelect = props =>{
             'prompt': 'Did it work? How do I know? Do I need to go back and try again? ',
             'answer':''
         }});
-        props.setScreen(1);
+        props.setScreen(15);
     }
     const academicAndSocial=()=>{
         props.setRid(Math.random().toString().substring(2));
@@ -215,7 +215,7 @@ const AssignTypeSelect = props =>{
             'prompt': 'Did it work? How do I know? Do I need to go back and try again?',
             'answer':''
         }});
-        props.setScreen(1);
+        props.setScreen(15);
     }
     const custom=()=>{
         props.setRid(Math.random().toString().substring(2));
