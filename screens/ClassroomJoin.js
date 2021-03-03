@@ -51,7 +51,7 @@ const ClassroomJoin= props =>{
     <View style={styles.container}>
         <View >
             <Text style={styles.title}>Join a Class</Text>
-            <TextInput placeholder={"Enter your real name"} style ={styles.input} onChangeText={setRealName}/>
+            <TextInput placeholder={"Enter your first name only"} style ={styles.input} onChangeText={setRealName}/>
             <TextInput placeholder={"Class Name"} style ={styles.input} onChangeText={setName}/>
             <TextInput placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
             <Text style={styles.text}>{error}</Text>

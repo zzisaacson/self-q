@@ -23,6 +23,27 @@ const AddSet = props =>{
     const [evaluateP, setEvaluateP]= useState(props.qInfo['evaluate']['prompt']);
     const [planP, setPlanP]= useState(props.qInfo['plan']['prompt']);
     const [reflectP, setReflectP]= useState(props.qInfo['reflect']['prompt']);
+
+
+    const [delText, setDelText]= useState( props.qList.map(element=>element['id']).includes(props.rid)? 'Delete':'Cancel');
+
+    const handleDelete =()=>{
+        if (delText=='Delete'||delText=='Cancel'){
+            setDelText(delText + ' (Press Again)')
+        }
+        else{
+            var l =[]
+            props.qList.forEach(element=>{
+                if(element['id']!=props.rid){
+                    l.push(element);
+                }
+            });
+
+            props.setQList(l);
+            props.setScreen(0);
+        }
+    }
+
     const addGoalHandler = goalTitle=>{
         const rid =props.rid;
         var rid_contained=false;
@@ -58,7 +79,7 @@ const AddSet = props =>{
                             'prompt':reflectP,
                             'answer':reflect
                         }};
-        console.log(details);
+        //console.log(details);
         db.ref(firebase.auth().currentUser.uid+'/detail-list/'+rid).set(details);
         var toPage=0;
         if(focusP!=props.qInfo['focus']['prompt']||gatherP!=props.qInfo['gather']['prompt']||brainstormP!=props.qInfo['brainstorm']['prompt']||
@@ -144,7 +165,12 @@ const custInput=<React.Fragment>
             marginBottom: 10
         }} onChangeText ={text=>setUserInput(text)}/>
                 {input}
-                <Button style={{width:'20%'}} title='DONE' onPress = {addGoalHandler.bind(this, userInput)}/>
+                <View style={{flexDirection:'row'}}>
+                    <View style={{marginRight:10}}>
+                        <Button style={{width:'20%'}} title='DONE' onPress = {addGoalHandler.bind(this, userInput)}/>
+                    </View>
+                    <Button style={{width:'20%'}} title={delText} onPress = {handleDelete}/>
+                </View>
             </View>
         </ScrollView>
     );

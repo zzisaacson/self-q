@@ -44,7 +44,7 @@ const LeaveFeedback = props =>{
         //     }
         // });
         // props.setQList([...l, {id: rid, value: goalTitle}]);
-        const details = {'grade': grade,
+        const details = {//'grade': grade,
                         'gFeedback':gFeedback,
                         'focus':focusR,
                         'gather':gatherR,
@@ -56,8 +56,8 @@ const LeaveFeedback = props =>{
         db.ref('classes/'+props.className+'/responses/'+rid+'/'+props.student).set(props.qInfo);
         db.ref('classes/'+props.className+'/responses/'+rid+'/'+props.student+'/feedback').set(details);
         var classDetails = props.classDetails;
-        console.log(rid);
-        console.log(classDetails);
+        //console.log(rid);
+        //console.log(classDetails);
         classDetails['responses'][rid][props.student]=props.qInfo;
         classDetails['responses'][rid][props.student]['feedback']=details;
         //console.log(classDetails);
@@ -95,13 +95,13 @@ const LeaveFeedback = props =>{
         }} > {userInput}</Text>
                 {responses}
                 <TextInput value={gFeedback}style={styles.input} placeholder='General Feedback' onChangeText={text=>setGFeedback(text)}/>
-                <TextInput value={grade}  style={{
+                {/* <TextInput value={grade}  style={{
         width: '10%', 
         borderColor:'black', 
         borderWidth:1, 
         padding:10,
         marginBottom: 10
-      }} placeholder='Grade' onChangeText={text=>setGrade(text)}/>
+      }} placeholder='Grade' onChangeText={text=>setGrade(text)}/> */}
                 <Button style={{width:'20%'}} title='DONE' onPress = {handleDone}/>
             </View>
         </ScrollView>

@@ -23,7 +23,7 @@ const GradingStudList = props =>{
             
         }
 
-        var fInfo={'grade': '',
+        var fInfo={//'grade': '',
         'gFeedback':'',
         'focus':'',
         'gather':'',
@@ -56,7 +56,7 @@ const GradingStudList = props =>{
         }
         else{
             console.log(element['value']);
-            const el ={'id':element['id'],'value': element['value']+" - "+props.classDetails['responses'][props.rid][element['id']]['feedback']['grade']};
+            const el ={'id':element['id'],'value': element['value']};//+" - "+props.classDetails['responses'][props.rid][element['id']]['feedback']['grade']};
             graded.push(el);
         }
     });
@@ -70,7 +70,7 @@ const GradingStudList = props =>{
          <View style={styles.row}>
                 <TouchableOpacity style={{width:'100%'}} onPress= {()=>setToDoOpen(!toDoOpen)}>
                     <View style = {styles.listItem}>
-                        <Text>{(toDoOpen?'v':'>') +'  To-Grade  '}</Text>
+                        <Text>{(toDoOpen?'v':'>') +'  To Provide Feeback  '}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -88,7 +88,7 @@ const GradingStudList = props =>{
             <View style={styles.row}>
                 <TouchableOpacity style={{width:'100%'}} onPress= {()=>setCompleteOpen(!completeOpen)}>
                     <View style = {styles.listItem}>
-                        <Text>{(completeOpen?'v':'>') +'  Graded  '}</Text>
+                        <Text>{(completeOpen?'v':'>') +'  Feedback Provided  '}</Text>
                     </View>
                 </TouchableOpacity>
             </View>

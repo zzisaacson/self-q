@@ -422,9 +422,12 @@ export default function App() {
 
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   const {height} = Dimensions.get("screen");
-  var space = 64+50+30;
-  if(Platform.OS=='android'){
-    space-=30;
+  var space = 0;
+  if(Platform.OS=='web'){
+    space = (64+50+30)*(height/1080);
+  }
+  else{
+    space=64+50;
   }
   return (
     <View style={{height:height-space+64}}>
