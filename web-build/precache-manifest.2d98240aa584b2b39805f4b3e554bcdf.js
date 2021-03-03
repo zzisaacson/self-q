@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/self-q/static/media/selfq_custom.89d6291b.png"
   },
   {
-    "revision": "8938e2d39f938ef4fbb0",
-    "url": "/self-q/static/js/app.26da0c8e.chunk.js"
+    "revision": "5ca816f8c6b1f051b786",
+    "url": "/self-q/static/js/app.ac6e8b70.chunk.js"
   },
   {
     "revision": "709e22aa4da0e05071f78b3c8792455a",
@@ -96,7 +96,7 @@ self.__precacheManifest = [
     "url": "/self-q/manifest.json"
   },
   {
-    "revision": "554c3d005fdb98a79c2c9065f8a55a11",
+    "revision": "a7f79de0cc7648fe2f2c6f4b4501f179",
     "url": "/self-q/index.html"
   },
   {

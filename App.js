@@ -421,9 +421,10 @@ export default function App() {
 
 
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
-  const {height} = Dimensions.get("screen");
+  var {height} = Dimensions.get("screen");
   var space = 0;
   if(Platform.OS=='web'){
+    height=height-50
     space = (64+50+30)*(height/1080);
   }
   else{
