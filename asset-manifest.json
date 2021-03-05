@@ -1,18 +1,18 @@
 {
   "files": {
-    "app.js": "/self-q/static/js/app.09f90bb4.chunk.js",
-    "app.js.map": "/self-q/static/js/app.09f90bb4.chunk.js.map",
+    "app.js": "/self-q/static/js/app.732ddcb9.chunk.js",
+    "app.js.map": "/self-q/static/js/app.732ddcb9.chunk.js.map",
     "runtime~app.js": "/self-q/static/js/runtime~app.8d09ddff.js",
     "runtime~app.js.map": "/self-q/static/js/runtime~app.8d09ddff.js.map",
-    "static/js/2.f2a4b8ec.chunk.js": "/self-q/static/js/2.f2a4b8ec.chunk.js",
-    "static/js/2.f2a4b8ec.chunk.js.map": "/self-q/static/js/2.f2a4b8ec.chunk.js.map",
+    "static/js/2.7f7015fc.chunk.js": "/self-q/static/js/2.7f7015fc.chunk.js",
+    "static/js/2.7f7015fc.chunk.js.map": "/self-q/static/js/2.7f7015fc.chunk.js.map",
     "favicon-16.png": "/self-q/favicon-16.png",
     "favicon-32.png": "/self-q/favicon-32.png",
     "favicon.ico": "/self-q/favicon.ico",
     "index.html": "/self-q/index.html",
     "manifest.json": "/self-q/manifest.json",
     "serve.json": "/self-q/serve.json",
-    "static/js/2.f2a4b8ec.chunk.js.LICENSE.txt": "/self-q/static/js/2.f2a4b8ec.chunk.js.LICENSE.txt",
+    "static/js/2.7f7015fc.chunk.js.LICENSE.txt": "/self-q/static/js/2.7f7015fc.chunk.js.LICENSE.txt",
     "static/media/academic_social.png": "/self-q/static/media/academic_social.8c7f8345.png",
     "static/media/classroom.png": "/self-q/static/media/classroom.c7ea54d6.png",
     "static/media/document.png": "/self-q/static/media/document.37fa493b.png",
@@ -33,7 +33,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.8d09ddff.js",
-    "static/js/2.f2a4b8ec.chunk.js",
-    "static/js/app.09f90bb4.chunk.js"
+    "static/js/2.7f7015fc.chunk.js",
+    "static/js/app.732ddcb9.chunk.js"
   ]
 }
