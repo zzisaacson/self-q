@@ -1,5 +1,5 @@
 import React, {useState } from 'react';
-import { Platform, View, Dimensions } from 'react-native';
+import { Platform, View, Dimensions, useWindowDimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
@@ -421,15 +421,17 @@ export default function App() {
 
 
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
-  var {height} = Dimensions.get("screen");
+  var height = Dimensions.get("window").height;
   var space = 0;
-  if(Platform.OS=='web'){
-    height=height-50
-    space = (64+50+30)*(height/1080);
-  }
-  else{
-    space=64+50;
-  }
+  // if(Platform.OS=='web'){
+  //   height=height-50
+  //   space = (64+50+30)*(height/1080);
+  // }
+  // else{
+  //   space=64+50;
+  // }
+  //height = useWindowDimensions().height;
+  space=64;
   return (
     <View style={{height:height-space+64}}>
       { <View style={{height:height-space}}>
