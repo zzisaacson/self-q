@@ -317,7 +317,7 @@ const TypeSelect = props =>{
             <View style={styles.row}>
                 <TouchableOpacity style={styles.dropdown} onPress= {set_academic_open.bind(this,!academic_open)}>
                     <View style = {styles.listItem}>
-                        <Text>{(academic_open?'v':'>') +'  Academic'}</Text>
+                        <Text>{(academic_open?'v':'>') +'  Academic SELf-Question sets by Subject Area'}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
