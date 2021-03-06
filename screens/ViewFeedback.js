@@ -35,7 +35,7 @@ const ViewFeedback = props =>{
     const [planR, setPlanR]= useState(props.fInfo['plan']);
     const [reflectR, setReflectR]= useState(props.fInfo['reflect']);
     const [gFeedback, setGFeedback]=useState(props.fInfo['gFeedback']);
-    const [grade, setGrade]=useState(props.fInfo['grade']);
+    //const [grade, setGrade]=useState(props.fInfo['grade']);
     const handleDone = ()=>{
        
         //props.setClassDetails(classDetails);
@@ -70,7 +70,7 @@ const ViewFeedback = props =>{
         }} > {userInput}</Text>
                 {responses}
                 <Text style={{fontStyle:'italic'}}>{gFeedback!=''?'Feedback: '+gFeedback:''}</Text>
-                <Text style={{fontStyle:'italic'}} >{'Grade: '+grade}</Text>
+                {/* <Text style={{fontStyle:'italic'}} >{'Grade: '+grade}</Text> */}
                 <Button style={{width:'20%'}} title='DONE' onPress = {handleDone}/>
             </View>
         </ScrollView>
