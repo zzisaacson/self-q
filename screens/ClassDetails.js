@@ -86,6 +86,7 @@ const ClassroomDetails = props =>{
     // }
 
     return   (
+    <ScrollView>
     <View style={{height:'100%', width: '100%'}}>
         <View style={{position:'absolute', zIndex: 3, elevation: 3}}>
             {props.link.length!=0&&<Popup   link={props.link} setLink={props.setLink}/>}
@@ -151,6 +152,7 @@ const ClassroomDetails = props =>{
     
     
     </View>
+    </ScrollView>
     );
 }
 

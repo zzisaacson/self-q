@@ -70,7 +70,7 @@ const Login= props =>{
 }
 
 const {height} = Dimensions.get("screen");
-const height_logo = height * 0.14;
+const height_logo = height * 0.14*3;
 
 const styles = StyleSheet.create({
     container: {
