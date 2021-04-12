@@ -22,9 +22,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "SelfqIOS"
+    },
+    "android": {
+      "package": "com.selfqandroid"
     },
     "scheme": "myapp",
-    "description": ""
+    "description": "",
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
