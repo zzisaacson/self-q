@@ -10,7 +10,7 @@ import GoalItem from '../components/GoalItem';
 const GradingStudList = props =>{
     const [toDoOpen, setToDoOpen]= useState(true);
     const [completeOpen, setCompleteOpen]= useState(false);
-    console.log("http://localhost:19006/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20"));
+    console.log("http://education.selfq.org/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20"));
     
     const handleStudClick=(id)=>{
         // console.log('handleStudClick');
@@ -63,9 +63,10 @@ const GradingStudList = props =>{
 
     return   (
     <View style={{padding:20}}>
+        <StatusBar hidden />
         <View style={{flexDirection:'row'}}>
             <Text style={{color:'grey'}}>{"Link to Share: "}</Text>
-            <TextInput style={{flex:1}}value={"http://localhost:19006/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20")}/>
+            <TextInput style={{flex:1}}value={"http://education.selfq.org/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20")}/>
         </View> 
          <View style={styles.row}>
                 <TouchableOpacity style={{width:'100%'}} onPress= {()=>setToDoOpen(!toDoOpen)}>

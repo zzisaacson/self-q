@@ -11,15 +11,21 @@ const SignUp = props =>{
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
     const [error, setError]=useState('');
+    const [invite, setInvite]=useState('')
     const handleSignUp = ()=>{
-        setError('Loading...');
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(()=>{
-            props.setScreen(0);
-        })
-        .catch((error)=>{
-            setError(error+' Please try again.');
-        });
+        if(invite=="education!2021"){
+            setError('Loading...');
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(()=>{
+                props.setScreen(0);
+            })
+            .catch((error)=>{
+                setError(error+' Please try again.');
+            });
+    }
+    else{
+        setError('Invalid invite code.')
+    }
      
     }
     const handleBack = ()=>{
@@ -39,6 +45,8 @@ const SignUp = props =>{
             <Text style = {styles.text}>Register With A New Account</Text>
             <TextInput placeholder={"Email"} style ={styles.input} onChangeText={setEmail}/>
             <TextInput secureTextEntry={true} placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
+            <Text style = {styles.text}>SELf-Q Is Currently Invite Only</Text>
+            <TextInput secureTextEntry={true} placeholder={"Invite Code"} style ={styles.input} onChangeText={setInvite}/>
             <Text style={styles.text}>{error}</Text>
           
             <View style={styles.centerRow}>

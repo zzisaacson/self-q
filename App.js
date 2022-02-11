@@ -306,7 +306,7 @@ export default function App() {
   };
   const Stack = createStackNavigator();
   const nav = React.useRef(null);
-  const navCon =  <NavigationContainer  linking={{ enabled: true }} ref={nav} fallback={<Login setScreen = {setScreenHandler}/>}>
+  const navCon =  <NavigationContainer  linking={{ prefixes: "http://education.selfq.org" }} ref={nav} fallback={<Login setScreen = {setScreenHandler}/>}>
   <Stack.Navigator>
       <Stack.Screen  name="selfq" component={Blank}/>
       <Stack.Screen  name="link" component={Linking}/>

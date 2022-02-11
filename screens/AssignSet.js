@@ -25,7 +25,7 @@ const AssignSet = props =>{
     const [reflectP, setReflectP]= useState(props.qInfo['reflect']['prompt']);
     const addGoalHandler = goalTitle=>{
         const rid =props.rid;
-        props.setLink("http://localhost:19006/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20"));
+        props.setLink("http://education.selfq.org/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20"));
         var rid_contained=false;
         var l =[];
         var assignments=[];
