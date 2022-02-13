@@ -176,7 +176,7 @@ const TypeSelect = props =>{
             'answer':''
         },
         'evaluate':{
-            'prompt':   'Has this helped me in the past? How did it help? How did it help? How did I feel after?',
+            'prompt':   'Has this helped me in the past? How did it help? How did I feel after?',
             'answer':''
         },
         'plan':{

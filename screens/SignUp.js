@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet,FlatList, Dimensions, Image} from 'react-native';
+import {TouchableOpacity, CheckBox, View, Text, TextInput, Button, StyleSheet,FlatList, Dimensions, Image} from 'react-native';
 import firebase from 'firebase';
 //import * as GoogleSignIn from 'expo-google-sign-in';
 
@@ -7,13 +7,13 @@ import firebase from 'firebase';
 
 
 const SignUp = props =>{
-    console.log('HERE SIR');
+    //console.log('HERE SIR');
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
     const [error, setError]=useState('');
-    const [invite, setInvite]=useState('')
+    const [isSelected, setSelection] = useState(false);
     const handleSignUp = ()=>{
-        if(invite=="education!2021"){
+        if(isSelected){
             setError('Loading...');
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(()=>{
@@ -24,7 +24,7 @@ const SignUp = props =>{
             });
     }
     else{
-        setError('Invalid invite code.')
+        setError('You must agree to Privacy Policy and Parental Agreement')
     }
      
     }
@@ -45,10 +45,20 @@ const SignUp = props =>{
             <Text style = {styles.text}>Register With A New Account</Text>
             <TextInput placeholder={"Email"} style ={styles.input} onChangeText={setEmail}/>
             <TextInput secureTextEntry={true} placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
-            <Text style = {styles.text}>SELf-Q Is Currently Invite Only</Text>
-            <TextInput secureTextEntry={true} placeholder={"Invite Code"} style ={styles.input} onChangeText={setInvite}/>
+            
+            <View style={styles.centerRow}>
+                <CheckBox
+                    value={isSelected}
+                    onValueChange={setSelection}
+                    style={ {
+                        alignSelf: "center",
+                    }}/>
+                <Text  style={styles.text}> I agree to the </Text>
+                <TouchableOpacity onPress={()=>{props.setScreen(23)}}>
+                    <Text  style = {styles.clickableText}>Privacy Policy and Parental Agreement</Text>
+                </TouchableOpacity>
+            </View>
             <Text style={styles.text}>{error}</Text>
-          
             <View style={styles.centerRow}>
                 <View style={styles.button}>
                     <Button style={styles.button} title="Sign Up" onPress ={()=>handleSignUp()}/>
@@ -135,7 +145,8 @@ const styles = StyleSheet.create({
     },
     centerRow:{
         flexDirection:'row',
-        justifyContent:'center'
+        justifyContent:'center',
+        alignItems: 'center'
     }
   });
   

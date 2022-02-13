@@ -35,6 +35,7 @@ import AssignCustom from './screens/AssignCustom';
 import Blank from './components/Blank';
 import Linking from './components/Linking';
 import LinkLoading from './screens/LinkLoading';
+import Agreements from './screens/Agreements';
 global.linked=false;
 //import { firebaseConfig } from './components/config';
 //import { firebaseConfig } from './components/config';
@@ -82,7 +83,7 @@ export default function App() {
     else if(s==9||s==10||s==11||s==12||s==13||s==14||s==15||s==16||s==17||s==18){
       cList= ['lightgrey','lightgrey','lightblue','lightgrey'];
     }
-    else if(s==2 ||s==3 || s==5) {
+    else if(s==2 ||s==3 || s==5 || s==23) {
       cList= ['lightgrey','lightgrey','lightgrey','lightblue'];
     }
     else{
@@ -402,6 +403,9 @@ export default function App() {
   }
   if (currScreen==22){
     screen = <LinkLoading/>
+  }
+  if (currScreen==23){
+    screen = <Agreements setScreen = {setScreenHandler}/>
   }
   //const navigation = useNavigation();
   //navigation.setParams({setScreen:setScreenHandler});
