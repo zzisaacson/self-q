@@ -54,6 +54,7 @@ const AssignSet = props =>{
             else{
 
                 console.log('Class already exists');
+                then();
             }
           }, function (errorObject) {
             setError("The read failed: " + errorObject.code+' Please try again');
@@ -69,7 +70,7 @@ const AssignSet = props =>{
             setError('The user with the nickname you specified does not exist.')
             return;
         }
-        props.setAssignTo('');
+        
         props.setClassName(props.nickname+'-'+assignTo);
         const then= ()=>{
             props.setClassName(props.nickname+'-'+assignTo);
@@ -136,7 +137,7 @@ const AssignSet = props =>{
                 setError("The read failed: " + errorObject.code+' Please try again.');
             });
 
-       
+            props.setAssignTo('');
       };
 
       checkAndCreateClass(props.nickname+'-'+assignTo, then);
