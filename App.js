@@ -161,8 +161,12 @@ export default function App() {
             var data=snapshot.val();
             console.log(data)
             setClassDetails(data);
+            var membersList = [];
+            for (var m in  props.classDetails['members']){
+                membersList.push(m);
+            }
 
-            if(!data['members'].keys().includes(firebase.auth().currentUser.uid)){
+            if(!membersList.includes(firebase.auth().currentUser.uid)){
               return;
             }
             
