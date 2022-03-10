@@ -78,6 +78,11 @@ export default function App() {
   const [assignTo, setAssignTo]=  useState('');
 
 
+  const setClassesHandler= (classes)=>{
+    //db.ref(firebase.auth().currentUser.uid+"/classes").set(classes);
+
+    setClasses(classes);
+  };
   const setScreenHandler=s=>{
     if (nicknameToIds==null){
       db.ref('/nicknames/').once("value", function(snapshot) {
@@ -224,26 +229,49 @@ export default function App() {
     
     console.log('going classroom!');
     console.log(firebase.auth().currentUser.uid);
-    db.ref('/classes/').once("value", function(snapshot) {
+
+    // const runMe = (index, data)=>{
+
+    //   db.ref('/classes/'+data[index]).once("value", function(snapshot) {
+      
+    //     const data=snapshot.val();
+        
+    //     const uid = firebase.auth().currentUser.uid;
+        
+    //     for(var c in data){
+    //       //console.log('data loop: '+c);
+    //       //console.log("YOYO: "+ typeof data[c]['members'] );
+    //         for(var m in data[c]['members']){
+    //             if(uid==m/*uid==data[c]['members'][m]*/){
+    //                 l.push({'id':c,'value':c});
+    //             }
+    //         }
+            
+    //     }
+  
+
+    //   }, function (errorObject) {
+    //     console.log("The read failed: " + errorObject.code+' Please try again');
+    //   });
+    // }
+    db.ref(firebase.auth().currentUser.uid).once("value", function(snapshot) {
       
       const data=snapshot.val();
-      
-      const uid = firebase.auth().currentUser.uid;
-      
-      for(var c in data){
-        //console.log('data loop: '+c);
-        //console.log("YOYO: "+ typeof data[c]['members'] );
-          for(var m in data[c]['members']){
-              if(uid==m/*uid==data[c]['members'][m]*/){
-                  l.push({'id':c,'value':c});
-              }
-          }
-          
-      }
 
-      console.log(l);
-      setClasses(l); 
+      
+      
+    if(data!= null && data['requests']!=null){
+     for(var item in data['requests']){
+      l.push({'id':item, 'value':item});
+     }
+   }
+      //console.log(l);
+      setClassesHandler(l); 
       setScreenHandler(9);
+      
+      
+      //runMe(0, data);
+      
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code+' Please try again');
     });
@@ -265,7 +293,7 @@ export default function App() {
       rid:rid,
       setRid:setRid,
       classes: classes,
-      setClasses: setClasses,
+      setClasses: setClassesHandler,
       classDetails:classDetails,
       setClassDetails:setClassDetails,
       className: className,
@@ -292,7 +320,7 @@ export default function App() {
     rid:rid,
     setRid:setRid,
     classes: classes,
-    setClasses: setClasses,
+    setClasses: setClassesHandler,
     classDetails:classDetails,
     setClassDetails:setClassDetails,
     className: className,
@@ -367,10 +395,10 @@ export default function App() {
     screen = <ClassroomMain setAssignTo={setAssignTo} nickname ={nickname} setClassName={setClassName} setClassDetails={setClassDetails} classes={classes} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==10){
-    screen = <ClassroomCreate classes={classes}setClasses={setClasses} setClassDetails={setClassDetails}setClassName={setClassName}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomCreate classes={classes}setClasses={setClassesHandler} setClassDetails={setClassDetails}setClassName={setClassName}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==11){
-    screen = <ClassroomJoin  classes={classes}setClasses={setClasses}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomJoin  classes={classes}setClasses={setClassesHandler}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==12){
     screen = <ClassroomDetails nickname={nickname} link={link} setLink={setLink} setFInfo={setFInfo} setRid={setRid} name ={className}classDetails={classDetails} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
@@ -382,7 +410,7 @@ export default function App() {
     screen = <AssignCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==15){
-    screen = <AssignSet  setAssignTo={setAssignTo} assignTo={assignTo} setClasssDetails={setClassDetails} setClassName={setClassName} nickname ={nickname} nicknameToIds={nicknameToIds} setLink={setLink} className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails} classes={classes} setClasses={setClasses}/>
+    screen = <AssignSet  setAssignTo={setAssignTo} assignTo={assignTo} setClasssDetails={setClassDetails} setClassName={setClassName} nickname ={nickname} nicknameToIds={nicknameToIds} setLink={setLink} className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails} classes={classes} setClasses={setClassesHandler}/>
   }
   if (currScreen==16){
     screen = <AddSetClass classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>

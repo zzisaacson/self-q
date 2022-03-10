@@ -45,6 +45,8 @@ const AssignSet = props =>{
                 members[(props.nicknameToIds[assignTo])]= true;
                 db.ref('/classes/'+name.toLowerCase()+'/members').set(members/*new Set([firebase.auth().currentUser.uid,props.nicknameToIds[assignTo]])*/);
                 db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
+                db.ref('/'+props.nicknameToIds[assignTo]+"/requests/"+name.toLowerCase()).set(true);
+                db.ref('/'+firebase.auth().currentUser.uid+"/requests/"+name.toLowerCase()).set(true);
                 props.setClassName(name.toLowerCase());
                 
                 props.setClassDetails({//'password':password,
