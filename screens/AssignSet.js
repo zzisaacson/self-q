@@ -10,7 +10,8 @@ const AssignSet = props =>{
     const [useCustom, setUseCustom]= useState(true);
 
     const [assignTo, setAssignTo]= useState('');
-    const [groupName, setGroupName] = useState('');
+    const [error, setError]=useState('');
+    //const [groupName, setGroupName] = useState('');
 
     const [userInput, setUserInput]= useState(props.qInfo['name']);
     const [focus, setFocus]= useState(props.qInfo['focus']['answer']);
@@ -28,101 +29,117 @@ const AssignSet = props =>{
     const [reflectP, setReflectP]= useState(props.qInfo['reflect']['prompt']);
 
     
-    const checkAndCreateClass = ()=>{
-        //setError('Loading...');
-        setGroupName(props.nickname+'-'+assignTo)
-        db.ref('/classes/'+groupName.toLowerCase()).once("value", function(snapshot) {
+    const checkAndCreateClass = (name, then)=>{
+        props.setClassName(name);
+        console.log('Name: '+name)
+        setError('Loading...');
+        db.ref('/classes/'+name.toLowerCase()).once("value", function(snapshot) {
             const data=snapshot.val();
             if(data==null){
-                console.log(props.classes);
-                props.setClasses([...props.classes, {'id':groupName.toLowerCase(),'value':groupName.toLowerCase()}]);
+                //console.log(props.classes);
+                props.setClasses([...props.classes, {'id':name.toLowerCase(),'value':name.toLowerCase()}]);
                 //db.ref('/classes/'+groupName.toLowerCase()+'/password').set(password);
-                db.ref('/classes/'+groupName.toLowerCase()+'/members').set([firebase.auth().currentUser.uid,]);
-                db.ref('/classes/'+groupName.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
-                props.setClassName(groupName.toLowerCase());
+                //console.log('members: '+[firebase.auth().currentUser.uid,props.nicknameToIds[assignTo]]);
+                db.ref('/classes/'+name.toLowerCase()+'/members').set([firebase.auth().currentUser.uid,props.nicknameToIds[assignTo]]);
+                db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
+                props.setClassName(name.toLowerCase());
                 
-                props.setClassDetails({'password':password,
+                props.setClassDetails({//'password':password,
                                     'members':[firebase.auth().currentUser.uid],
                                     'owner':firebase.auth().currentUser.uid
 
-                })
-                props.setScreen(12);
+                });
+                then();
             }
             else{
 
+                console.log('Class already exists');
             }
           }, function (errorObject) {
-            //setError("The read failed: " + errorObject.code+' Please try again');
-            console.log(errorObject.code);
+            setError("The read failed: " + errorObject.code+' Please try again');
+            //console.log(errorObject.code);
           });
+          
         };
 
     const addGoalHandler = goalTitle=>{
- 
 
-        const rid =props.rid;
-        props.setLink("http://education.selfq.org/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20"));
-        var rid_contained=false;
-        var l =[];
-        var assignments=[];
-        if(props.classDetails['assignments']!=null && props.classDetails['assignments']['set-list']!=null){
-            assignments=props.classDetails['assignments']['set-list'];
+        console.log(props.nicknameToIds);
+        if (!props.nicknameToIds.hasOwnProperty(assignTo)){
+            setError('The user with the nickname you specified does not exist.')
+            return;
         }
-        console.log(props.classDetails);
-        console.log(assignments);
-        assignments.forEach(element=>{
-            if(element['id']!=rid){
-                l.push(element);
-            }
-        });
-        db.ref('/classes/'+props.className+'/assignments/set-list').set([...l, {id: rid, value: goalTitle}]);
-        const details = {'name': goalTitle,
-                        'focus':{
-                            'prompt':focusP,
-                            'answer':focus
-                        },
-                        'gather':{
-                            'prompt':gatherP,
-                            'answer':gather
-                        },
-                        'brainstorm':{
-                            'prompt':brainstormP,
-                            'answer':brainstorm
-                        },
-                        'evaluate':{
-                            'prompt':evaluateP,
-                            'answer':evaluate
-                        },
-                        'plan':{
-                            'prompt':planP,
-                            'answer':plan
-                        },
-                        'reflect':{
-                            'prompt':reflectP,
-                            'answer':reflect
-                        }};
-        //console.log(details);
-        db.ref('/classes/'+props.className+'/assignments/details/'+rid).set(details);
-
-        db.ref('/classes/'+props.className).on("value", function(snapshot) {
-            const data=snapshot.val();
-            props.setClassDetails(data);
-
-            var toPage=12;
-            if(focusP!=props.qInfo['focus']['prompt']||gatherP!=props.qInfo['gather']['prompt']||brainstormP!=props.qInfo['brainstorm']['prompt']||
-                evaluateP!=props.qInfo['evaluate']['prompt']||planP!=props.qInfo['plan']['prompt']||reflectP!=props.qInfo['reflect']['prompt']  ){
-                    props.setQInfo(details);
-                    toPage=6;
-                }
-            //console.log(details);
-            props.setScreen(toPage);
+        props.setClassName(props.nickname+'-'+assignTo);
+        const then= ()=>{
+            props.setClassName(props.nickname+'-'+assignTo);
             
-          }, function (errorObject) {
-            setError("The read failed: " + errorObject.code+' Please try again.');
-          });
+            const rid =props.rid;
+            props.setLink("http://education.selfq.org/link?assignment="+props.rid+"&class="+(props.nickname+'-'+assignTo).replaceAll(" ", "%20"));
+            var rid_contained=false;
+            var l =[];
+            var assignments=[];
+            if(props.classDetails['assignments']!=null && props.classDetails['assignments']['set-list']!=null){
+                assignments=props.classDetails['assignments']['set-list'];
+            }
+            console.log(props.x);
+            console.log(assignments);
+            assignments.forEach(element=>{
+                if(element['id']!=rid){
+                    l.push(element);
+                }
+            });
+            console.log('About to set database to :'+[...l, {id: rid, value: goalTitle}])
+            db.ref('/classes/'+props.nickname+'-'+assignTo+'/assignments/set-list').set([...l, {id: rid, value: goalTitle}]);
+            const details = {'name': goalTitle,
+                            'focus':{
+                                'prompt':focusP,
+                                'answer':focus
+                            },
+                            'gather':{
+                                'prompt':gatherP,
+                                'answer':gather
+                            },
+                            'brainstorm':{
+                                'prompt':brainstormP,
+                                'answer':brainstorm
+                            },
+                            'evaluate':{
+                                'prompt':evaluateP,
+                                'answer':evaluate
+                            },
+                            'plan':{
+                                'prompt':planP,
+                                'answer':plan
+                            },
+                            'reflect':{
+                                'prompt':reflectP,
+                                'answer':reflect
+                            }};
+            //console.log(details);
+            db.ref('/classes/'+props.nickname+'-'+assignTo+'/assignments/details/'+rid).set(details);
+
+            db.ref('/classes/'+props.nickname+'-'+assignTo).on("value", function(snapshot) {
+                const data=snapshot.val();
+                props.setClassDetails(data);
+
+                var toPage=12;
+                if(focusP!=props.qInfo['focus']['prompt']||gatherP!=props.qInfo['gather']['prompt']||brainstormP!=props.qInfo['brainstorm']['prompt']||
+                    evaluateP!=props.qInfo['evaluate']['prompt']||planP!=props.qInfo['plan']['prompt']||reflectP!=props.qInfo['reflect']['prompt']  ){
+                        props.setQInfo(details);
+                        toPage=6;
+                    }
+                //console.log(details);
+                props.setScreen(toPage);
+                
+            }, function (errorObject) {
+                setError("The read failed: " + errorObject.code+' Please try again.');
+            });
 
        
       };
+
+      checkAndCreateClass(props.nickname+'-'+assignTo, then);
+    };
 
     
 
@@ -171,6 +188,7 @@ const AssignSet = props =>{
             marginBottom: 10
         }} onChangeText ={text=>setUserInput(text)}/>
                 {input}
+                <Text style={ {color: 'grey',marginTop:5}}>{error}</Text>
                 <Button style={{width:'20%'}} title='ASSIGN' onPress = {addGoalHandler.bind(this, userInput)}/>
             </View>
         </ScrollView>

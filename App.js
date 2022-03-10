@@ -51,6 +51,7 @@ const firebaseConfig={
   measurementId: "G-C9QTCTBDSL"
 }
 var done =false;
+var done2 = false;
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }else {
@@ -73,7 +74,7 @@ export default function App() {
   const [fInfo, setFInfo]=useState('');
   const [link, setLink]=useState('');
   const [nickname, setNickname] = useState('');
-  const [nicknameToIds, setNicknameToIds] = useState({});
+  const [nicknameToIds, setNicknameToIds] = useState(null);
 
 
   const setScreenHandler=s=>{
@@ -84,6 +85,10 @@ export default function App() {
     
         if(data!= null && Object.values(data).includes(firebase.auth().currentUser.uid)){
           setNickname(Object.keys(data).find(key => data[key] === firebase.auth().currentUser.uid));
+          console.log(nickname)
+        }
+        else{
+          console.log('Your nickname not found')
         }
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
@@ -99,6 +104,7 @@ export default function App() {
     }
     else if(s==9||s==10||s==11||s==12||s==13||s==14||s==15||s==16||s==17||s==18||s==24){
       cList= ['lightgrey','lightgrey','lightblue','lightgrey'];
+
     }
     else if(s==2 ||s==3 || s==5 || s==23) {
       cList= ['lightgrey','lightgrey','lightgrey','lightblue'];
@@ -107,7 +113,6 @@ export default function App() {
       cList= ['lightgrey','lightblue','lightgrey','lightgrey'];
     }
     setColorList(cList);
-    
 
     return setScreen(s)
   }
@@ -199,7 +204,7 @@ export default function App() {
 
   if (currScreen==2 && firebase.auth().currentUser!=null && !done){
     done=true;
-    setScreen(0);
+    setScreenHandler(0);
   }
 
   //console.log(firebase.auth().currentUser.uid)
@@ -211,13 +216,17 @@ export default function App() {
 
   const goClassroomHandler=()=>{
     var l =[];
-    //console.log(firebase.auth().currentUser.uid)
-    db.ref('/classes').once("value", function(snapshot) {
+    
+    console.log('going classroom!');
+    console.log(firebase.auth().currentUser.uid);
+    db.ref('/classes/').once("value", function(snapshot) {
+      
       const data=snapshot.val();
+      
       const uid = firebase.auth().currentUser.uid;
       
       for(var c in data){
-          
+        console.log('data loop: '+c);
           for(var m in data[c]['members']){
               if(uid==data[c]['members'][m]){
                   l.push({'id':c,'value':c});
@@ -334,7 +343,7 @@ export default function App() {
     screen = <SignUp setScreen = {setScreenHandler}/>
   }
   if (currScreen==4){
-    screen = <TypeSelect setQInfo={setQInfo} setScreen = {setScreen} setRid={setRid}/>
+    screen = <TypeSelect setQInfo={setQInfo} setScreen = {setScreenHandler} setRid={setRid}/>
   }
   if (currScreen==5){
     screen = <Settings setScreen={setScreenHandler}/>
@@ -367,7 +376,7 @@ export default function App() {
     screen = <AssignCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==15){
-    screen = <AssignSet nicknameToIds={nicknameToIds} setLink={setLink} className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails}/>
+    screen = <AssignSet  setClasssDetails={setClassDetails} setClassName={setClassName} nickname ={nickname} nicknameToIds={nicknameToIds} setLink={setLink} className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails} classes={classes} setClasses={setClasses}/>
   }
   if (currScreen==16){
     screen = <AddSetClass classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
