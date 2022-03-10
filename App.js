@@ -72,7 +72,23 @@ export default function App() {
   const [student, setStudent]=useState('');
   const [fInfo, setFInfo]=useState('');
   const [link, setLink]=useState('');
+  const [nickname, setNickname] = useState('');
+  const [nicknameToIds, setNicknameToIds] = useState({});
+
+
   const setScreenHandler=s=>{
+    if (nicknameToIds==null){
+      db.ref('/nicknames/').once("value", function(snapshot) {
+        var data=snapshot.val();
+        setNicknameToIds(data);
+    
+        if(data!= null && Object.values(data).includes(firebase.auth().currentUser.uid)){
+          setNickname(Object.keys(data).find(key => data[key] === firebase.auth().currentUser.uid));
+        }
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+    }
     console.log('To '+s +' and beyond');
     var cList = [];
     if(s == 0){
@@ -211,7 +227,7 @@ export default function App() {
       }
 
       console.log(l);
-      setClasses(l);
+      setClasses(l); 
       setScreenHandler(9);
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code+' Please try again');
@@ -333,7 +349,7 @@ export default function App() {
     screen = <SwipeAddSet rid={rid} qList={courseGoals} setQList={setGoalsHanlder} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==9){
-    screen = <ClassroomMain setClassName={setClassName} setClassDetails={setClassDetails} classes={classes} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomMain nickname ={nickname} setClassName={setClassName} setClassDetails={setClassDetails} classes={classes} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==10){
     screen = <ClassroomCreate classes={classes}setClasses={setClasses} setClassDetails={setClassDetails}setClassName={setClassName}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
@@ -351,7 +367,7 @@ export default function App() {
     screen = <AssignCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==15){
-    screen = <AssignSet setLink={setLink} className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails}/>
+    screen = <AssignSet nicknameToIds={nicknameToIds} setLink={setLink} className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails}/>
   }
   if (currScreen==16){
     screen = <AddSetClass classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
@@ -378,7 +394,7 @@ export default function App() {
     screen = <Agreements setScreen = {setScreenHandler}/>
   }
   if (currScreen==24){
-    screen = <CreateNickname setScreen = {setScreenHandler}/>
+    screen = <CreateNickname setNickname ={setNickname}setScreen = {setScreenHandler}/>
   }
   //const navigation = useNavigation();
   //navigation.setParams({setScreen:setScreenHandler});

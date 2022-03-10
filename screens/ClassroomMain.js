@@ -10,15 +10,18 @@ import GoalItem from '../components/GoalItem';
 const ClassroomMain = props =>{
     const db = firebase.database();
 
-    db.ref('/nicknames/').once("value", function(snapshot) {
-        var data=snapshot.val();
+    // db.ref('/nicknames/').once("value", function(snapshot) {
+    //     var data=snapshot.val();
 
-        if(data== null ||!Object.values(data).includes(firebase.auth().currentUser.uid)){
-            props.setScreen(24)
-        }
-      }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      });
+    //     if(data== null ||!Object.values(data).includes(firebase.auth().currentUser.uid)){
+    //         props.setScreen(24)
+    //     }
+    //   }, function (errorObject) {
+    //     console.log("The read failed: " + errorObject.code);
+    //   });
+    if(props.nickname.length<1){
+        props.setScreen(24);
+    }
 
     const clickClassHandler=(name)=>{
         props.setClassName(name);
@@ -32,11 +35,13 @@ const ClassroomMain = props =>{
           });
         }; 
        
-   
-     
 
     return   (
     <View style={{padding:20}}>
+         <View style={{flexDirection:'row'}}>
+            <Text style = {{color: 'grey', marginTop:5 }}>Your Nickname: </Text>
+            <Text style={{color: 'grey', marginTop:5, fontStyle:'italic'}}>{props.nickname}</Text>
+        </View>
             <View style={styles.row}>
                 <View style={{margin:15}}>
                     <Button title=' Create a Question Set ' onPress={()=>props.setScreen(13)}/>  
@@ -73,6 +78,7 @@ const styles = StyleSheet.create({
           marginRight:image_width+15
         }
   });
+  
   
 
 export default ClassroomMain;

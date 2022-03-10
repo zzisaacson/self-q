@@ -12,15 +12,20 @@ const CreateNickname= props =>{
 
    
     const handleSubmit= ()=>{
+        if(!(/^[A-Za-z\s]*$/.test(nickname)) || nickname.length<1){
+            setError('Nicknames cannot be empty, and cannot have special characters, only a-z');
+            return;
+        }
         setError('Loading...');
         const db = firebase.database();
         db.ref('/nicknames/').once("value", function(snapshot) {
             var data=snapshot.val();
-            if (data!=null && data.hasOwnProperty(nickname)){
+            if (data!=null && data.hasOwnProperty(nickname.toLocaleLowerCase())){
                 setError('A user with this nickname already exists, please select another.');
             }
             else{
-                db.ref('/nicknames/'+nickname).set(firebase.auth().currentUser.uid);
+                props.setNickname(nickname);
+                db.ref('/nicknames/'+nickname.toLocaleLowerCase()).set(firebase.auth().currentUser.uid);
                 props.setScreen(9);
             }
           }, function (errorObject) {

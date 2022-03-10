@@ -10,6 +10,7 @@ const AssignSet = props =>{
     const [useCustom, setUseCustom]= useState(true);
 
     const [assignTo, setAssignTo]= useState('');
+    const [groupName, setGroupName] = useState('');
 
     const [userInput, setUserInput]= useState(props.qInfo['name']);
     const [focus, setFocus]= useState(props.qInfo['focus']['answer']);
@@ -25,7 +26,40 @@ const AssignSet = props =>{
     const [evaluateP, setEvaluateP]= useState(props.qInfo['evaluate']['prompt']);
     const [planP, setPlanP]= useState(props.qInfo['plan']['prompt']);
     const [reflectP, setReflectP]= useState(props.qInfo['reflect']['prompt']);
+
+    
+    const checkAndCreateClass = ()=>{
+        //setError('Loading...');
+        setGroupName(props.nickname+'-'+assignTo)
+        db.ref('/classes/'+groupName.toLowerCase()).once("value", function(snapshot) {
+            const data=snapshot.val();
+            if(data==null){
+                console.log(props.classes);
+                props.setClasses([...props.classes, {'id':groupName.toLowerCase(),'value':groupName.toLowerCase()}]);
+                //db.ref('/classes/'+groupName.toLowerCase()+'/password').set(password);
+                db.ref('/classes/'+groupName.toLowerCase()+'/members').set([firebase.auth().currentUser.uid,]);
+                db.ref('/classes/'+groupName.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
+                props.setClassName(groupName.toLowerCase());
+                
+                props.setClassDetails({'password':password,
+                                    'members':[firebase.auth().currentUser.uid],
+                                    'owner':firebase.auth().currentUser.uid
+
+                })
+                props.setScreen(12);
+            }
+            else{
+
+            }
+          }, function (errorObject) {
+            //setError("The read failed: " + errorObject.code+' Please try again');
+            console.log(errorObject.code);
+          });
+        };
+
     const addGoalHandler = goalTitle=>{
+ 
+
         const rid =props.rid;
         props.setLink("http://education.selfq.org/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20"));
         var rid_contained=false;
