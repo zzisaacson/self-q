@@ -9,6 +9,8 @@ const AssignSet = props =>{
     const db = firebase.database();
     const [useCustom, setUseCustom]= useState(true);
 
+    const [assignTo, setAssignTo]= useState('');
+
     const [userInput, setUserInput]= useState(props.qInfo['name']);
     const [focus, setFocus]= useState(props.qInfo['focus']['answer']);
     const [gather, setGather]= useState(props.qInfo['gather']['answer']);
@@ -117,8 +119,16 @@ const AssignSet = props =>{
                 flexDirection :'column',
                 alignItems: 'center'
             }}>
+                <Text >Assign to user </Text>
+                <TextInput value = {assignTo} placeholder = 'User ID' style={{
+            width: '80%', 
+            borderColor:'black', 
+            borderWidth:1, 
+            padding:10,
+            marginBottom: 10
+        }} onChangeText ={text=>setAssignTo(text)}/>
                 
-                <Text style={{fontWeight:'bold'}} >Ask the class a question</Text>
+                <Text style={{fontWeight:'bold'}} ><br /><br />Ask a question</Text>
                 <TextInput value = {userInput} placeholder = 'Question' style={{
             width: '80%', 
             borderColor:'black', 

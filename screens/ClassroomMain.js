@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text,TouchableOpacity, TextInput, Button, StyleSheet,FlatList, Dimensions, Image, ScrollView} from 'react-native';
-import firebase from 'firebase';
+import firebase, { auth } from 'firebase';
 import GoalItem from '../components/GoalItem';
 //import * as GoogleSignIn from 'expo-google-sign-in';
 
@@ -9,6 +9,17 @@ import GoalItem from '../components/GoalItem';
 
 const ClassroomMain = props =>{
     const db = firebase.database();
+
+    db.ref('/nicknames/').once("value", function(snapshot) {
+        var data=snapshot.val();
+
+        if(data== null ||!Object.values(data).includes(firebase.auth().currentUser.uid)){
+            props.setScreen(24)
+        }
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+
     const clickClassHandler=(name)=>{
         props.setClassName(name);
         db.ref('/classes/'+name).once("value", function(snapshot) {
@@ -28,7 +39,7 @@ const ClassroomMain = props =>{
     <View style={{padding:20}}>
             <View style={styles.row}>
                 <View style={{margin:15}}>
-                    <Button title=' Create a Question Set ' onPress={()=>props.setScreen(11)}/>  
+                    <Button title=' Create a Question Set ' onPress={()=>props.setScreen(13)}/>  
                 </View> 
                 {/* <View style={{margin:15}}>
                     <Button onPress={()=>props.setScreen(10)} title='Create a Class'/>

@@ -36,6 +36,7 @@ import Blank from './components/Blank';
 import Linking from './components/Linking';
 import LinkLoading from './screens/LinkLoading';
 import Agreements from './screens/Agreements';
+import CreateNickname from './screens/CreateNickname';
 global.linked=false;
 //import { firebaseConfig } from './components/config';
 //import { firebaseConfig } from './components/config';
@@ -80,7 +81,7 @@ export default function App() {
     else if(s==1||s==4||s==7||s==8){
       cList= ['lightgrey','lightblue','lightgrey','lightgrey'];
     }
-    else if(s==9||s==10||s==11||s==12||s==13||s==14||s==15||s==16||s==17||s==18){
+    else if(s==9||s==10||s==11||s==12||s==13||s==14||s==15||s==16||s==17||s==18||s==24){
       cList= ['lightgrey','lightgrey','lightblue','lightgrey'];
     }
     else if(s==2 ||s==3 || s==5 || s==23) {
@@ -90,76 +91,46 @@ export default function App() {
       cList= ['lightgrey','lightblue','lightgrey','lightgrey'];
     }
     setColorList(cList);
-    //console.log(global.nav.current.navigate);
-    // if (s==0 ){
-    //   global.nav.current.navigate('home');
-    // }
-    // if (s==1){
-    //   global.nav.current.navigate('add-set');
-    // }
-    // if (s==2){
-    //   global.nav.current.navigate('login');
-    // }
-    // if (s==3){
-    //   global.nav.current.navigate('sign-up');
-    // }
-    // if (s==4){
-    //   global.nav.current.navigate('type-select');
-    // }
-    // if (s==5){
-    //   global.nav.current.navigate('settings');
-    // }
-    // if (s==6){
-    //   global.nav.current.navigate('add-custom-prompts');
-    // }
-    // if (s==7){
-    //   global.nav.current.navigate('select-custom');
-    // }
-    // if (s==8){
-    //   global.nav.current.navigate('swipe-add-set');
-    // }
-    // if (s==9){
-    //   global.nav.current.navigate('classroom-main');
-    // }
-    // if (s==10){
-    //   global.nav.current.navigate('classroom-create');
-    // }
-    // if (s==11){
-    //   global.nav.current.navigate('classroom-join');
-    // }
-    // if (s==12){
-    //   global.nav.current.navigate('classroom-data');
-    // }
-    // if (s==13){
-    //   global.nav.current.navigate('assign-type-select');
-    // }
-    // if (s==14){
-    //   global.nav.current.navigate('assign-custom');
-    // }
-    // if (s==15){
-    //   global.nav.current.navigate('assign-set');
-    // }
-    // if (s==16){
-    //   global.nav.current.navigate('add-set-class');
-    // }
-    // if (s==17){
-    //   global.nav.current.navigate('swipe-add-set-class');
-    // }
-    // if (s==18){
-    //   global.nav.current.navigate('grading-stud-list');
-    // }
-    // if (s==19){
-    //   global.nav.current.navigate('class-select-custom');
-    // }
-    // if (s==20){
-    //   global.nav.current.navigate('leave-feedback');
-    // }
-    // if (s==21){
-    //   global.nav.current.navigate('view-feedback');
-    // }
     
 
     return setScreen(s)
+  }
+
+  /*
+  Creates a "class" with names of parent and child if one does not already exist
+  and gives both users access to view this class
+  This is a vestige from when the app was classroom based. 
+  */
+  const parentAssignmentHandler =(parent, child)=>{
+    const name = parent+'-'+child;
+    db.ref('/classes/'+name.toLowerCase()).once("value", function(snapshot) {
+      const data=snapshot.val();
+      if(data==null){
+          //console.log(props.classes);
+          props.setClasses([...props.classes, {'id':name.toLowerCase(),'value':name.toLowerCase()}]);
+          //db.ref('/classes/'+name.toLowerCase()+'/password').set(password);
+          db.ref('/classes/'+name.toLowerCase()+'/members').set([firebase.auth().currentUser.uid]);
+          db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
+          setClassName(name.toLowerCase());
+          
+          setClassDetails({/*'password':password,*/
+                              'members':[parent, child],
+                              'owner':parent
+
+          });
+      }
+      else{
+          setClassName(name.toLowerCase());
+          setClassDetails({/*'password':password,*/
+          'members':[parent, child],
+          'owner':parent
+
+        });
+          console.log('Parent child pair already exists, proceeding...');
+      }
+    }, function (errorObject) {
+      setError("The read failed: " + errorObject.code+' Please try again');
+    });
   }
  
   global.handleAssignmentLink=(cls, id)=>{
@@ -211,7 +182,6 @@ export default function App() {
   
 
   if (currScreen==2 && firebase.auth().currentUser!=null && !done){
-    //console.log('memememememe');
     done=true;
     setScreen(0);
   }
@@ -406,6 +376,9 @@ export default function App() {
   }
   if (currScreen==23){
     screen = <Agreements setScreen = {setScreenHandler}/>
+  }
+  if (currScreen==24){
+    screen = <CreateNickname setScreen = {setScreenHandler}/>
   }
   //const navigation = useNavigation();
   //navigation.setParams({setScreen:setScreenHandler});

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text,TouchableOpacity, TextInput, Button, StyleSheet,FlatList, Dimensions, Image, ScrollView} from 'react-native';
+import {StatusBar, View, Text,TouchableOpacity, TextInput, Button, StyleSheet,FlatList, Dimensions, Image, ScrollView} from 'react-native';
 import firebase, { auth } from 'firebase';
 import GoalItem from '../components/GoalItem';
 //import * as GoogleSignIn from 'expo-google-sign-in';
