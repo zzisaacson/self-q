@@ -18,6 +18,7 @@ const GradingStudList = props =>{
         // console.log('handleStudClick');
         // console.log(props.classDetails);
         // console.log(props.rid);
+        props.setStudent(id);
        
         var qInfo = props.classDetails['assignments']['details'][props.rid];
         if (props.classDetails['responses']!=null&&props.classDetails['responses'][props.rid]!=null&&props.classDetails['responses'][props.rid][id]!=null){
@@ -45,7 +46,12 @@ const GradingStudList = props =>{
         props.setScreen(20);
     };
 
-    handleStudClick( props.classDetails['members'].find(member=> member!=firebase.auth().currentUser.uid));
+    var membersList = [];
+    for (var m in  props.classDetails['members']){
+        membersList.push(m);
+    }
+
+    handleStudClick( membersList.find(member=> member!=firebase.auth().currentUser.uid));
 
     var data = props.classDetails['names']!=null?props.classDetails['names']:[];
     

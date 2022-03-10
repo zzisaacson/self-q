@@ -40,7 +40,10 @@ const AssignSet = props =>{
                 props.setClasses([...props.classes, {'id':name.toLowerCase(),'value':name.toLowerCase()}]);
                 //db.ref('/classes/'+groupName.toLowerCase()+'/password').set(password);
                 //console.log('members: '+[firebase.auth().currentUser.uid,props.nicknameToIds[assignTo]]);
-                db.ref('/classes/'+name.toLowerCase()+'/members').set([firebase.auth().currentUser.uid,props.nicknameToIds[assignTo]]);
+                const members ={};
+                members[firebase.auth().currentUser.uid]=true;
+                members[(props.nicknameToIds[assignTo])]= true;
+                db.ref('/classes/'+name.toLowerCase()+'/members').set(members/*new Set([firebase.auth().currentUser.uid,props.nicknameToIds[assignTo]])*/);
                 db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
                 props.setClassName(name.toLowerCase());
                 

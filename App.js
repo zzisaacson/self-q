@@ -123,37 +123,37 @@ export default function App() {
   and gives both users access to view this class
   This is a vestige from when the app was classroom based. 
   */
-  const parentAssignmentHandler =(parent, child)=>{
-    const name = parent+'-'+child;
-    db.ref('/classes/'+name.toLowerCase()).once("value", function(snapshot) {
-      const data=snapshot.val();
-      if(data==null){
-          //console.log(props.classes);
-          props.setClasses([...props.classes, {'id':name.toLowerCase(),'value':name.toLowerCase()}]);
-          //db.ref('/classes/'+name.toLowerCase()+'/password').set(password);
-          db.ref('/classes/'+name.toLowerCase()+'/members').set([firebase.auth().currentUser.uid]);
-          db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
-          setClassName(name.toLowerCase());
+  // const parentAssignmentHandler =(parent, child)=>{
+  //   const name = parent+'-'+child;
+  //   db.ref('/classes/'+name.toLowerCase()).once("value", function(snapshot) {
+  //     const data=snapshot.val();
+  //     if(data==null){
+  //         //console.log(props.classes);
+  //         props.setClasses([...props.classes, {'id':name.toLowerCase(),'value':name.toLowerCase()}]);
+  //         //db.ref('/classes/'+name.toLowerCase()+'/password').set(password);
+  //         db.ref('/classes/'+name.toLowerCase()+'/members').set([firebase.auth().currentUser.uid]);
+  //         db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
+  //         setClassName(name.toLowerCase());
           
-          setClassDetails({/*'password':password,*/
-                              'members':[parent, child],
-                              'owner':parent
+  //         setClassDetails({/*'password':password,*/
+  //                             'members':[parent, child],
+  //                             'owner':parent
 
-          });
-      }
-      else{
-          setClassName(name.toLowerCase());
-          setClassDetails({/*'password':password,*/
-          'members':[parent, child],
-          'owner':parent
+  //         });
+  //     }
+  //     else{
+  //         setClassName(name.toLowerCase());
+  //         setClassDetails({/*'password':password,*/
+  //         'members':[parent, child],
+  //         'owner':parent
 
-        });
-          console.log('Parent child pair already exists, proceeding...');
-      }
-    }, function (errorObject) {
-      setError("The read failed: " + errorObject.code+' Please try again');
-    });
-  }
+  //       });
+  //         console.log('Parent child pair already exists, proceeding...');
+  //     }
+  //   }, function (errorObject) {
+  //     setError("The read failed: " + errorObject.code+' Please try again');
+  //   });
+  // }
  
   global.handleAssignmentLink=(cls, id)=>{
         setClassName(cls);
@@ -162,7 +162,7 @@ export default function App() {
             console.log(data)
             setClassDetails(data);
 
-            if(!data['members'].includes(firebase.auth().currentUser.uid)){
+            if(!data['members'].keys().includes(firebase.auth().currentUser.uid)){
               return;
             }
             
@@ -227,9 +227,10 @@ export default function App() {
       const uid = firebase.auth().currentUser.uid;
       
       for(var c in data){
-        console.log('data loop: '+c);
+        //console.log('data loop: '+c);
+        //console.log("YOYO: "+ typeof data[c]['members'] );
           for(var m in data[c]['members']){
-              if(uid==data[c]['members'][m]){
+              if(uid==m/*uid==data[c]['members'][m]*/){
                   l.push({'id':c,'value':c});
               }
           }
