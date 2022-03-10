@@ -75,6 +75,7 @@ export default function App() {
   const [link, setLink]=useState('');
   const [nickname, setNickname] = useState('');
   const [nicknameToIds, setNicknameToIds] = useState(null);
+  const [assignTo, setAssignTo]=  useState('');
 
 
   const setScreenHandler=s=>{
@@ -358,7 +359,7 @@ export default function App() {
     screen = <SwipeAddSet rid={rid} qList={courseGoals} setQList={setGoalsHanlder} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==9){
-    screen = <ClassroomMain nickname ={nickname} setClassName={setClassName} setClassDetails={setClassDetails} classes={classes} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomMain setAssignTo={setAssignTo} nickname ={nickname} setClassName={setClassName} setClassDetails={setClassDetails} classes={classes} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==10){
     screen = <ClassroomCreate classes={classes}setClasses={setClasses} setClassDetails={setClassDetails}setClassName={setClassName}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
@@ -367,7 +368,7 @@ export default function App() {
     screen = <ClassroomJoin  classes={classes}setClasses={setClasses}setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==12){
-    screen = <ClassroomDetails link={link} setLink={setLink} setFInfo={setFInfo} setRid={setRid} name ={className}classDetails={classDetails} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
+    screen = <ClassroomDetails nickname={nickname} link={link} setLink={setLink} setFInfo={setFInfo} setRid={setRid} name ={className}classDetails={classDetails} setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==13){
     screen = <AssignTypeSelect setQInfo={setQInfo} setScreen = {setScreen} setRid={setRid}/>
@@ -376,7 +377,7 @@ export default function App() {
     screen = <AssignCustom setQInfo={setQInfo} qInfo ={qInfo} setScreen={setScreenHandler}/>
   }
   if (currScreen==15){
-    screen = <AssignSet  setClasssDetails={setClassDetails} setClassName={setClassName} nickname ={nickname} nicknameToIds={nicknameToIds} setLink={setLink} className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails} classes={classes} setClasses={setClasses}/>
+    screen = <AssignSet  setAssignTo={setAssignTo} assignTo={assignTo} setClasssDetails={setClassDetails} setClassName={setClassName} nickname ={nickname} nicknameToIds={nicknameToIds} setLink={setLink} className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} classDetails ={classDetails} setClassDetails={setClassDetails} classes={classes} setClasses={setClasses}/>
   }
   if (currScreen==16){
     screen = <AddSetClass classDetails={classDetails} setClassDetails={setClassDetails}className={className}rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>

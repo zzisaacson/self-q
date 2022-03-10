@@ -15,7 +15,7 @@ const FeedbackGoalView = props =>{
               <Text> {props.input}</Text>
             </TouchableOpacity>
           <View style={{width:'100%'}}>
-    <Text style={styles.italics}>{props.comment!=''?'Instructor feedback: '+props.comment:''}</Text>
+    <Text style={styles.italics}>{props.comment!=''?'Parent feedback: '+props.comment:''}</Text>
 
               </View>
 

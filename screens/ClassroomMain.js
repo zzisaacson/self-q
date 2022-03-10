@@ -25,6 +25,7 @@ const ClassroomMain = props =>{
 
     const clickClassHandler=(name)=>{
         props.setClassName(name);
+        props.setAssignTo(name.replace(props.nickname,'').replace('-',''));
         db.ref('/classes/'+name).once("value", function(snapshot) {
             var data=snapshot.val();
             //console.log(data)
@@ -52,7 +53,7 @@ const ClassroomMain = props =>{
             </View>
             <FlatList style={{flex:1}}data = {props.classes}
             keyExtractor={(item, index)=> item.id}
-            renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={id=>clickClassHandler(id)}title ={itemData.item.value}/>}/>
+            renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={id=>clickClassHandler(id)}title ={itemData.item.value.replace(props.nickname,'')}/>}/>
 
     </View>
     );

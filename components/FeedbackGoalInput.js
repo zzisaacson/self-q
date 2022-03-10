@@ -14,7 +14,7 @@ const FeedbackGoalInput = props =>{
             <TouchableOpacity onPress={()=>setCommentMode(true)}>
               <Text  style ={styles.italics}> {props.input}</Text>
             </TouchableOpacity>
-            {commentMode&& <View style={{width:'100%'}}>
+            {commentMode&& <View style={{padding:2,width:'100%'}}>
               <TextInput value={props.comment}style={styles.input} placeholder={'Leave a comment on '+props.header} onChangeText={text=>props.setInput(text)}/>
 
               </View>
@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
         width:'80%',
         flex:1,
         flexDirection :'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding:10
   
      },
      input:{

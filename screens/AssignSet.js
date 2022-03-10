@@ -9,7 +9,7 @@ const AssignSet = props =>{
     const db = firebase.database();
     const [useCustom, setUseCustom]= useState(true);
 
-    const [assignTo, setAssignTo]= useState('');
+    const [assignTo, setAssignTo]= useState(props.assignTo);
     const [error, setError]=useState('');
     //const [groupName, setGroupName] = useState('');
 
@@ -69,6 +69,7 @@ const AssignSet = props =>{
             setError('The user with the nickname you specified does not exist.')
             return;
         }
+        props.setAssignTo('');
         props.setClassName(props.nickname+'-'+assignTo);
         const then= ()=>{
             props.setClassName(props.nickname+'-'+assignTo);

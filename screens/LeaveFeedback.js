@@ -62,7 +62,7 @@ const LeaveFeedback = props =>{
         classDetails['responses'][rid][props.student]['feedback']=details;
         //console.log(classDetails);
         props.setClassDetails(classDetails);
-        props.setScreen(18);
+        props.setScreen(12);
       };
 
     const responses=<React.Fragment>

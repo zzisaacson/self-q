@@ -94,12 +94,9 @@ const ClassroomDetails = props =>{
 
         <View style={{padding:20}}>
          {props.link.length!=0&&<Popup link={props.link} setLink={props.setLink}/>}
-           <Text style={styles.header}>{props.name}</Text>
+           <Text style={styles.header}>{props.name.replace(props.nickname,'')}</Text>
             {isOwned&&<View>
-                <View style={styles.row}>
-                <View style={{margin:15}}>
-                    <Text>{'Password: ' +props.classDetails['password']}</Text>
-                </View> 
+                <View style={styles.row}> 
                 <View style={{margin:15}}>
                     <Button title=' Assign ' onPress={assignHandler}/>  
                 </View> 

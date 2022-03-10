@@ -12,6 +12,8 @@ const GradingStudList = props =>{
     const [completeOpen, setCompleteOpen]= useState(false);
     console.log("http://education.selfq.org/link?assignment="+props.rid+"&class="+props.className.replaceAll(" ", "%20"));
     
+   
+   
     const handleStudClick=(id)=>{
         // console.log('handleStudClick');
         // console.log(props.classDetails);
@@ -43,8 +45,10 @@ const GradingStudList = props =>{
         props.setScreen(20);
     };
 
+    handleStudClick( props.classDetails['members'].find(member=> member!=firebase.auth().currentUser.uid));
 
     var data = props.classDetails['names']!=null?props.classDetails['names']:[];
+    
 
     var to_grade=[];
     var graded=[];
