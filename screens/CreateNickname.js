@@ -12,8 +12,8 @@ const CreateNickname= props =>{
 
    
     const handleSubmit= ()=>{
-        if(!(/^[A-Za-z\s]*$/.test(nickname)) || nickname.length<1){
-            setError('Nicknames cannot be empty, and cannot have special characters, only a-z');
+        if(!(/^[a-z0-9]+$/i.test(nickname)) || nickname.length<1){
+            setError('Nicknames cannot be empty, and must be alpha-numeric.');
             return;
         }
         setError('Loading...');

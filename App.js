@@ -37,6 +37,7 @@ import Linking from './components/Linking';
 import LinkLoading from './screens/LinkLoading';
 import Agreements from './screens/Agreements';
 import CreateNickname from './screens/CreateNickname';
+import ChildSignUp from './screens/ChildSignUp';
 global.linked=false;
 //import { firebaseConfig } from './components/config';
 //import { firebaseConfig } from './components/config';
@@ -77,6 +78,22 @@ export default function App() {
   const [nicknameToIds, setNicknameToIds] = useState(null);
   const [assignTo, setAssignTo]=  useState('');
 
+  const clearAll = ()=>{
+    setScreen(2);
+    setCourseGoals([]);
+    setColorList(['lightgrey','lightgrey','lightgrey','lightblue']);
+    setQInfo(4);
+    setRid(0);
+    setClasses([]);
+    setClassDetails([]);
+    setClassName('');
+    setStudent('');
+    setFInfo('');
+    setLink('');
+    setNickname('');
+    setNicknameToIds(null);
+    setAssignTo('');
+  }
 
   const setClassesHandler= (classes)=>{
     //db.ref(firebase.auth().currentUser.uid+"/classes").set(classes);
@@ -89,7 +106,7 @@ export default function App() {
         var data=snapshot.val();
         setNicknameToIds(data);
     
-        if(data!= null && Object.values(data).includes(firebase.auth().currentUser.uid)){
+        if(data!= null &&  firebase.auth().currentUser&&Object.values(data).includes(firebase.auth().currentUser.uid)){
           setNickname(Object.keys(data).find(key => data[key] === firebase.auth().currentUser.uid));
           console.log(nickname)
         }
@@ -108,7 +125,7 @@ export default function App() {
     else if(s==1||s==4||s==7||s==8){
       cList= ['lightgrey','lightblue','lightgrey','lightgrey'];
     }
-    else if(s==9||s==10||s==11||s==12||s==13||s==14||s==15||s==16||s==17||s==18||s==24){
+    else if(s==9||s==10||s==11||s==12||s==13||s==14||s==15||s==16||s==17||s==18||s==24 || s==21 || s==20){
       cList= ['lightgrey','lightgrey','lightblue','lightgrey'];
 
     }
@@ -371,7 +388,7 @@ export default function App() {
     screen = <AddSet rid={rid} qInfo={qInfo} setQInfo={setQInfo} setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
   }
   if (currScreen==2){
-    screen = <Login setScreen = {setScreenHandler} nav={nav}/>
+    screen = <Login assignTo={assignTo} setScreen = {setScreenHandler} screen={screen} nav={nav}/>
   }
   if (currScreen==3){
     screen = <SignUp setScreen = {setScreenHandler}/>
@@ -438,6 +455,9 @@ export default function App() {
   }
   if (currScreen==24){
     screen = <CreateNickname setNickname ={setNickname}setScreen = {setScreenHandler}/>
+  }
+  if (currScreen==25){
+    screen = <ChildSignUp clearAll={clearAll} setClassDetails={setClassDetails} setClassName= {setClassName}setNicknameToIds={setNicknameToIds} nicknameToIds ={nicknameToIds} parentNickname = {nickname} nickname = {assignTo} setNickname ={setAssignTo}setScreen = {setScreenHandler}/>
   }
   //const navigation = useNavigation();
   //navigation.setParams({setScreen:setScreenHandler});

@@ -36,6 +36,9 @@ const LeaveFeedback = props =>{
     const [gFeedback, setGFeedback]=useState(props.fInfo['gFeedback']);
     const [grade, setGrade]=useState(props.fInfo['grade']);
     const handleDone = ()=>{
+        if(focus.length+gather.length+brainstorm.length+evaluate.length+plan.length+reflect.length<1){
+          return;
+        }
         const rid =props.rid;
         // var l =[]
         // props.qList.forEach(element=>{

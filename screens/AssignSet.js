@@ -81,7 +81,7 @@ const AssignSet = props =>{
 
             });
             then();
-            setError("The read failed: " + errorObject.code+' Please try again');
+            //setError("The read failed: " + errorObject.code+' Please try again');
             //console.log(errorObject.code);
           });
           

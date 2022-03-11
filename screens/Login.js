@@ -20,12 +20,19 @@ const Login= props =>{
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
     const [error, setError]=useState('');
+    const [done, setDone] = useState(false);
 
 
     firebase.auth().onAuthStateChanged((user) => {
         console.log('LOG '+global.linked)
-        if (user && !global.linked) {
-          props.setScreen(0);
+        console.log(props.screen+" "+props.assignTo);
+        if (/*!done&&*/user && !global.linked /*&&props.screen!=25 && props.assignTo.length<1*/) {
+            
+            console.log('inside');
+            if(firebase.auth().currentUser){
+                props.setScreen(0);
+            }
+            setDone(true);
         }
      });
    

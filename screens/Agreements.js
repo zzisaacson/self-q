@@ -17,7 +17,7 @@ const Agreements= props =>{
             </View>
             <View style ={styles.footer}>
             <View style={{width:'25%'}}>
-                <Button title="Go Back" onPress ={()=>props.setScreen(3)}/>
+                <Button title="Go Back" onPress ={()=>props.setScreen(firebase.auth().currentUser? 25:3)}/>
                </View> 
                 <Text style={styles.title}>Privacy Policy</Text>
                 <Text style = {styles.text}>{`[January, 2022]
@@ -27,6 +27,7 @@ SELf-Q LLC respects the privacy of our users (“user” or “you”). This Pri
 We reserve the right to make changes to this Privacy Policy at any time and for any reason.  We will alert you about any changes by updating the “Last updated” date of this Privacy Policy.  You are encouraged to periodically review this Privacy Policy to stay informed of updates. You will be deemed to have been made aware of, will be subject to, and will be deemed to have accepted the changes in any revised Privacy Policy by your continued use of the Application after the date such revised Privacy Policy is posted.  
 
 This privacy policy was created using Termly.
+This  policy was created using Termly.
 COLLECTION OF YOUR INFORMATION
 We may collect information about you in a variety of ways.  The information we may collect via the Application depends on the content and materials you use, and includes:  
 

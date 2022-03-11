@@ -45,11 +45,12 @@ const ClassroomMain = props =>{
         </View>
             <View style={styles.row}>
                 <View style={{margin:15}}>
-                    <Button title=' Create a Question Set ' onPress={()=>props.setScreen(13)}/>  
+                    <Button title=' Create a Question Set ' onPress={()=>props.setScreen(13)}/> 
+                     
                 </View> 
-                {/* <View style={{margin:15}}>
-                    <Button onPress={()=>props.setScreen(10)} title='Create a Class'/>
-                </View> */}
+                 <View style={{margin:15}}>
+                 <Button title=' Sign Up New Child ' onPress={()=>props.setScreen(25)}/>  
+                </View> 
             </View>
             <FlatList style={{flex:1}}data = {props.classes}
             keyExtractor={(item, index)=> item.id}
