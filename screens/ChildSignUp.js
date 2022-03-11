@@ -68,8 +68,9 @@ const ChildSignUp = props =>{
                 
                             });
                            // props.setScreen(12);
-                            firebase.auth().signOut();
                             props.clearAll();
+                            firebase.auth().signOut();
+                             props.setScreen(2);
                         })
                         .catch((error)=>{
                             setError(error+' Please try again.');

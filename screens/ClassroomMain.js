@@ -38,7 +38,7 @@ const ClassroomMain = props =>{
        
 
     return   (
-    <View style={{padding:20}}>
+    <ScrollView style={{padding:20}}>
          <View style={{flexDirection:'row'}}>
             <Text style = {{color: 'grey', marginTop:5 }}>Your Nickname: </Text>
             <Text style={{color: 'grey', marginTop:5, fontStyle:'italic'}}>{props.nickname}</Text>
@@ -56,7 +56,7 @@ const ClassroomMain = props =>{
             keyExtractor={(item, index)=> item.id}
             renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={id=>clickClassHandler(id)}title ={itemData.item.value.replace(props.nickname,'')}/>}/>
 
-    </View>
+    </ScrollView>
     );
 }
 

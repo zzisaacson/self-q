@@ -79,7 +79,7 @@ export default function App() {
   const [assignTo, setAssignTo]=  useState('');
 
   const clearAll = ()=>{
-    setScreen(2);
+    //setScreen(2);
     setCourseGoals([]);
     setColorList(['lightgrey','lightgrey','lightgrey','lightblue']);
     setQInfo(4);

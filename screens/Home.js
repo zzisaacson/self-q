@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet,FlatList} from 'react-native';
+import {View, ScrollView, Text, Button, StyleSheet,FlatList} from 'react-native';
 
 import GoalItem from '../components/GoalItem';
 import firebase from 'firebase';
@@ -40,12 +40,12 @@ const Home = props =>{
         });
       }; 
     return   (
-    <View style={styles.screen}>
+    <ScrollView style={styles.screen}>
       <Button title  = 'New Question Set' onPress={()=>props.setScreen(4)}/>
       <FlatList data = {props.qList}
       keyExtractor={(item, index)=> item.id}
       renderItem = {itemData=><GoalItem id = {itemData.item.id} onDelete ={removeGoalHandler}title ={itemData.item.value}/>}/>
-    </View>
+    </ScrollView>
     );
 }
 
