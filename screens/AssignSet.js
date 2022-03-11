@@ -59,9 +59,28 @@ const AssignSet = props =>{
             else{
 
                 console.log('Class already exists');
+                
                 then();
             }
           }, function (errorObject) {
+            props.setClasses([...props.classes, {'id':name.toLowerCase(),'value':name.toLowerCase()}]);
+            //db.ref('/classes/'+groupName.toLowerCase()+'/password').set(password);
+            //console.log('members: '+[firebase.auth().currentUser.uid,props.nicknameToIds[assignTo]]);
+            const members ={};
+            members[firebase.auth().currentUser.uid]=true;
+            members[(props.nicknameToIds[assignTo])]= true;
+            db.ref('/classes/'+name.toLowerCase()+'/members').set(members/*new Set([firebase.auth().currentUser.uid,props.nicknameToIds[assignTo]])*/);
+            db.ref('/classes/'+name.toLowerCase()+'/owner').set(firebase.auth().currentUser.uid);
+            db.ref('/'+props.nicknameToIds[assignTo]+"/requests/"+name.toLowerCase()).set(true);
+            db.ref('/'+firebase.auth().currentUser.uid+"/requests/"+name.toLowerCase()).set(true);
+            props.setClassName(name.toLowerCase());
+            
+            props.setClassDetails({//'password':password,
+                                'members':[firebase.auth().currentUser.uid],
+                                'owner':firebase.auth().currentUser.uid
+
+            });
+            then();
             setError("The read failed: " + errorObject.code+' Please try again');
             //console.log(errorObject.code);
           });
