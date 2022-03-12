@@ -1,5 +1,5 @@
 import React, {useState } from 'react';
-import { Platform, View, Dimensions, useWindowDimensions } from 'react-native';
+import { StatusBar,Platform, View, Dimensions, useWindowDimensions } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
@@ -490,6 +490,7 @@ export default function App() {
   space=64;
   return (
     <View style={{height:height-space+64}}>
+      <StatusBar hidden />
       { <View style={{height:height-space}}>
         {screen}
       </View> }

@@ -94,7 +94,7 @@ const LeaveFeedback = props =>{
                 flexDirection :'column',
                 alignItems: 'center'
             }}>
-              <Button style={{width:'20%'}} title='Answer on This Device' onPress = {handleAnswer}/>
+              <Button style={{width:'20%'}} title='Edit Answers on This Device' onPress = {handleAnswer}/>
                 
                 <Text style={{fontWeight:'bold'}} >Leave Feedback</Text>
                 <Text style={{
