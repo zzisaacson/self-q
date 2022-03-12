@@ -340,7 +340,7 @@ const TypeSelect = props =>{
 
 */
 const {width} = Dimensions.get("screen");
-const image_width =Math.min( width * 0.45,250);
+const image_width =Math.min( width * 0.35,250);
 const styles = StyleSheet.create({
     image:{
         height:image_width,

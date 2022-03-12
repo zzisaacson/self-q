@@ -397,7 +397,7 @@ export default function App() {
     screen = <TypeSelect setQInfo={setQInfo} setScreen = {setScreenHandler} setRid={setRid}/>
   }
   if (currScreen==5){
-    screen = <Settings setScreen={setScreenHandler}/>
+    screen = <Settings clearAll={clearAll} nickname={nickname}setScreen={setScreenHandler}/>
   }
   if (currScreen==6){
     screen = <AddCustomPrompts qInfo ={qInfo} setScreen={setScreenHandler}/>

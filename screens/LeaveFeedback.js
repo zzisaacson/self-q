@@ -35,8 +35,11 @@ const LeaveFeedback = props =>{
     const [reflectR, setReflectR]= useState(props.fInfo['reflect']);
     const [gFeedback, setGFeedback]=useState(props.fInfo['gFeedback']);
     const [grade, setGrade]=useState(props.fInfo['grade']);
+
+    const [error, setError]=useState('');
     const handleDone = ()=>{
         if(focus.length+gather.length+brainstorm.length+evaluate.length+plan.length+reflect.length<1){
+          setError("Your child must write a response before you can leave feedback.")
           return;
         }
         const rid =props.rid;
@@ -105,7 +108,8 @@ const LeaveFeedback = props =>{
         padding:10,
         marginBottom: 10
       }} placeholder='Grade' onChangeText={text=>setGrade(text)}/> */}
-                <Button style={{width:'20%'}} title='DONE' onPress = {handleDone}/>
+              <Text style={styles.text}>{error}</Text>
+              <Button style={{width:'20%'}} title='DONE' onPress = {handleDone}/>
             </View>
         </ScrollView>
     );
@@ -126,7 +130,10 @@ const styles = StyleSheet.create({
         borderWidth:1, 
         padding:10,
         marginBottom: 10
-      }
+      },    text: {
+        color: 'grey',
+        marginTop:5
+    },
 });
 
 export default LeaveFeedback;

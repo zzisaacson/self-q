@@ -45,7 +45,7 @@ const CreateNickname= props =>{
             resizeMode={"stretch"}/>
         </View>
         <View style ={styles.footer}>
-            <Text style={styles.title}>Nickname / User ID Required to Use The Family Page</Text>
+            <Text style={styles.title}>Nickname Required to Use The Family Page</Text>
             <Text style = {styles.text}>Please do not use your real full name nor any identifiable information. You will need to share your nickname to interact with other users, and once selected a nickname may not be able to be changed.</Text>
             <TextInput placeholder={"Nickname"} style ={styles.input} onChangeText={setNickname}/>
             <Text style={styles.text}>{error}</Text>

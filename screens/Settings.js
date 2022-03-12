@@ -9,12 +9,14 @@ const Settings= props =>{
 
     const handleSignOut = ()=>{
         firebase.auth().signOut();
+        props.clearAll();
         props.setScreen(2);
     }
     
     return   (
     <View style={styles.container}>
         <View style={{ alignItems:'center', justifyContent:'center'}}>
+            <Text style={{padding:10}}>Welcome to SELf-Q {props.nickname}!</Text>
             <Button  title="  Log Out  " onPress ={handleSignOut}/>
         </View>
     </View>
