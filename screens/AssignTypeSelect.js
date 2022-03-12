@@ -6,7 +6,7 @@ import firebase from 'firebase';
 
 
 
-const AssignTypeSelect = props =>{
+const Select = props =>{
     const [academic_open, set_academic_open]= useState(true);
     const [personal_open, set_personal_open]= useState(false);
     const science=()=>{
@@ -366,4 +366,4 @@ const styles = StyleSheet.create({
   });
   
 
-export default AssignTypeSelect;
+export default Select;
