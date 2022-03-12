@@ -37,6 +37,10 @@ const LeaveFeedback = props =>{
     const [grade, setGrade]=useState(props.fInfo['grade']);
 
     const [error, setError]=useState('');
+
+    const handleAnswer =()=>{
+      props.setScreen(16);
+    }
     const handleDone = ()=>{
         if(focus.length+gather.length+brainstorm.length+evaluate.length+plan.length+reflect.length<1){
           setError("Your child must write a response before you can leave feedback.")
@@ -90,6 +94,7 @@ const LeaveFeedback = props =>{
                 flexDirection :'column',
                 alignItems: 'center'
             }}>
+              <Button style={{width:'20%'}} title='Answer on This Device' onPress = {handleAnswer}/>
                 
                 <Text style={{fontWeight:'bold'}} >Leave Feedback</Text>
                 <Text style={{
@@ -110,6 +115,7 @@ const LeaveFeedback = props =>{
       }} placeholder='Grade' onChangeText={text=>setGrade(text)}/> */}
               <Text style={styles.text}>{error}</Text>
               <Button style={{width:'20%'}} title='DONE' onPress = {handleDone}/>
+              
             </View>
         </ScrollView>
     );

@@ -59,8 +59,14 @@ const AddSetClass = props =>{
                             'prompt':reflectP,
                             'answer':reflect
                         }};
-        //console.log(details);
-        db.ref('classes/'+props.className+'/responses/'+rid+'/'+firebase.auth().currentUser.uid).set(details);
+        console.log(props.className +" "+rid);
+        console.log(details);
+        var membersList = [];
+        for (var m in  props.classDetails['members']){
+            membersList.push(m);
+        }
+    
+        db.ref('classes/'+props.className+'/responses/'+rid+'/'+membersList.find(member=> member!=props.classDetails['owner'])).set(details);
 
         var classDetails = props.classDetails;
         db.ref('classes/'+props.className).on("value", function(snapshot) {

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TouchableOpacity, CheckBox, View, Text, TextInput, Button, StyleSheet,FlatList, Dimensions, Image} from 'react-native';
+import {ScrollView, TouchableOpacity, CheckBox, View, Text, TextInput, Button, StyleSheet,FlatList, Dimensions, Image} from 'react-native';
 import firebase from 'firebase';
 //import * as GoogleSignIn from 'expo-google-sign-in';
 
@@ -96,7 +96,7 @@ const ChildSignUp = props =>{
      
     }
     return   (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
         <View style ={styles.header}>
             <Image 
             source={require('../assets/self-q.png')}
@@ -132,7 +132,7 @@ const ChildSignUp = props =>{
                 </View>
             </View>
         </View>
-    </View>
+    </ScrollView>
     );
 }
 
