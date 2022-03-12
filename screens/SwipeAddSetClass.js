@@ -34,7 +34,7 @@ const SwipeAddSetClass = props =>{
         //     }
         // });
         // props.setQList([...l, {id: rid, value: goalTitle}]);
-        const details = {'name': userInput,
+        const details = {'name': goalTitle,
                         'focus':{
                             'prompt':focusP,
                             'answer':focus
@@ -59,13 +59,21 @@ const SwipeAddSetClass = props =>{
                             'prompt':reflectP,
                             'answer':reflect
                         }};
-        console.log(details);
+        console.log(String(details));
         db.ref('classes/'+props.className+'/responses/'+rid+'/'+firebase.auth().currentUser.uid).set(details);
+
         var classDetails = props.classDetails;
-        classDetails['responses'][rid][firebase.auth().currentUser.uid]=details;
-        console.log(classDetails);
-        props.setClassDetails(classDetails);
-        props.setScreen(12);
+        db.ref('classes/'+props.className).on("value", function(snapshot) {
+            const data=snapshot.val();
+            console.log(data);
+            props.setClassDetails(data);
+            props.setScreen(12);
+            
+          }, function (errorObject) {
+            setError("The read failed: " + errorObject.code+' Please try again.');
+          });
+
+      
       };
       const handleSwipeButton=()=>{
         const details = {'name': userInput,
@@ -114,7 +122,7 @@ const SwipeAddSetClass = props =>{
               }}>
                   <TextInput value={userInput} onChangeText={setUserInput} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Name this question set'></TextInput>
                   <View style={{height:'15%',width:'100%',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-                          <Button onPress={(userInput)=>addGoalHandler(userInput)} title={' DONE '}/>
+                  <Button style={{width:'20%'}} title='DONE' onPress = {addGoalHandler.bind(this, userInput)}/>
                           
                   </View>
                   <View style={{height:'70%',flexDirection:'column-reverse'}}>
