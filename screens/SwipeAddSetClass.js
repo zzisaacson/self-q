@@ -120,7 +120,7 @@ const SwipeAddSetClass = props =>{
                   alignItems: 'center',
                   padding:20
               }}>
-                  <TextInput value={userInput} onChangeText={setUserInput} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Name this question set'></TextInput>
+                  <TextInput value={userInput} onChangeText={setUserInput} style={{width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Name this question set'></TextInput>
                   <View style={{height:'15%',width:'100%',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                   <Button style={{width:'20%'}} title='DONE' onPress = {addGoalHandler.bind(this, userInput)}/>
                           
@@ -159,7 +159,7 @@ const SwipeAddSetClass = props =>{
                         <Image  source={require('../assets/focus.png')}
                                 style={{height:50,width:50, padding:10, marginTop:10}}
                                 resizeMode={"stretch"}/>
-                        <TextInput value={focusP} onChangeText={setFocusP} style={{backgroundColor:'#FFFFFF',width: '100%', borderColor:'#000000', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a focus question'></TextInput>
+                        <TextInput value={focusP} onChangeText={setFocusP} style={{backgroundColor:'#FFFFFF',width: '80%', borderColor:'#000000', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a focus question'></TextInput>
                     </View>
                     <TextInput value={focus} onChangeText={setFocus} multiline={true} style={{backgroundColor:'white',width: '100%', height:'70%',borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Answer the focus question'></TextInput>
                     <View style={{height:'15%',width:'100%',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
@@ -194,7 +194,7 @@ const gatherPage=<React.Fragment>
                 <Image  source={require('../assets/gather.png')}
                         style={{height:50,width:50, padding:10, marginTop:10}}
                         resizeMode={"stretch"}/>
-                <TextInput value={gatherP} onChangeText={setGatherP} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a gathering information question'></TextInput>
+                <TextInput value={gatherP} onChangeText={setGatherP} style={{backgroundColor:'white',width: '80%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a gathering information question'></TextInput>
             </View>
             <TextInput value={gather} onChangeText={setGather} multiline={true} style={{backgroundColor:'white',width: '100%', height:'70%',borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Answer the gathering information question'></TextInput>
             <View style={{height:'15%',width:'100%',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
@@ -229,7 +229,7 @@ const brainstormPage=<React.Fragment>
                 <Image  source={require('../assets/brainstorm.png')}
                         style={{height:50,width:50, padding:10, marginTop:10}}
                         resizeMode={"stretch"}/>
-                <TextInput value={brainstormP} onChangeText={setBrainstormP} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a brainstorming question'></TextInput>
+                <TextInput value={brainstormP} onChangeText={setBrainstormP} style={{backgroundColor:'white',width: '80%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a brainstorming question'></TextInput>
             </View>
             <TextInput value={brainstorm} onChangeText={setBrainstorm} multiline={true} style={{backgroundColor:'white',width: '100%', height:'70%',borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Answer the brainstorming question'></TextInput>
             <View style={{height:'15%',width:'100%',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
@@ -264,7 +264,7 @@ const evaluatePage=<React.Fragment>
                 <Image  source={require('../assets/evaluate.png')}
                         style={{height:50,width:50, padding:10, marginTop:10}}
                         resizeMode={"stretch"}/>
-                <TextInput value={evaluateP} onChangeText={setEvaluateP} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask an evaluation question'></TextInput>
+                <TextInput value={evaluateP} onChangeText={setEvaluateP} style={{backgroundColor:'white',width: '80%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask an evaluation question'></TextInput>
             </View>
             <TextInput value={evaluate} onChangeText={setEvaluate} multiline={true} style={{backgroundColor:'white',width: '100%', height:'70%',borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Answer the evaluation question'></TextInput>
             <View style={{height:'15%',width:'100%',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
@@ -299,7 +299,7 @@ const planPage=<React.Fragment>
                 <Image  source={require('../assets/plan.png')}
                         style={{height:50,width:50, padding:10, marginTop:10}}
                         resizeMode={"stretch"}/>
-                <TextInput value={planP} onChangeText={setPlanP} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a plan and action question'></TextInput>
+                <TextInput value={planP} onChangeText={setPlanP} style={{backgroundColor:'white',width: '80%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a plan and action question'></TextInput>
             </View>
             <TextInput value={plan} onChangeText={setPlan} multiline={true} style={{backgroundColor:'white',width: '100%', height:'70%',borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Answer the plan and action question'></TextInput>
             <View style={{height:'15%',width:'100%',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
@@ -334,7 +334,7 @@ const reflectPage=<React.Fragment>
                 <Image  source={require('../assets/reflect.png')}
                         style={{height:50,width:50, padding:10, marginTop:10}}
                         resizeMode={"stretch"}/>
-                <TextInput value={reflectP} onChangeText={setReflectP} style={{backgroundColor:'white',width: '100%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a reflection question'></TextInput>
+                <TextInput value={reflectP} onChangeText={setReflectP} style={{backgroundColor:'white',width: '80%', borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Ask a reflection question'></TextInput>
             </View>
             <TextInput value={reflect} onChangeText={setReflect} multiline={true} style={{backgroundColor:'white',width: '100%', height:'70%',borderColor:'black', borderWidth:1, padding:10,margin: 20}} placeholder='Answer the reflection question'></TextInput>
             <View style={{height:'15%',width:'100%',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
