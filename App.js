@@ -4,6 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import {StackNavigator} from '@react-navigation/stack'
+//import {SafeAreaProvider, SafeAreaView, useSafeAreaInsets, initialWindowMetrics} from 'react-native-safe-area-context';
+//import {SafeAreaProvider} from 'react-native-safe-area-view';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
 
 //import GLOBAl from './global'
 import Home from './screens/Home' 
@@ -78,6 +82,7 @@ export default function App() {
   const [nicknameToIds, setNicknameToIds] = useState(null);
   const [assignTo, setAssignTo]=  useState('');
 
+
   const clearAll = ()=>{
     //setScreen(2);
     setCourseGoals([]);
@@ -94,13 +99,15 @@ export default function App() {
     setNicknameToIds(null);
     setAssignTo('');
   }
-
+ 
+  
   const setClassesHandler= (classes)=>{
     //db.ref(firebase.auth().currentUser.uid+"/classes").set(classes);
 
     setClasses(classes);
   };
   const setScreenHandler=s=>{
+    
     if (nicknameToIds==null){
       db.ref('/nicknames/').once("value", function(snapshot) {
         var data=snapshot.val();
@@ -137,7 +144,15 @@ export default function App() {
     }
     setColorList(cList);
 
-    return setScreen(s)
+    const result = setScreen(s);
+    // try{
+    // rerender();
+    // }
+    // catch{
+    //   console.log('issue');
+    // }
+    return result;
+    
   }
 
   /*
@@ -477,28 +492,51 @@ export default function App() {
 
 
   //screen =<AddCustomSet setScreen = {setScreenHandler} qList ={courseGoals} setQList={setGoalsHanlder}/>
-  var height = Dimensions.get("window").height;
+  try{
+  //var insets = useSafeAreaInsets();
+  }
+  catch{
+    
+  }
+
   var space = 0;
-  // if(Platform.OS=='web'){
-  //   height=height-50
-  //   space = (64+50+30)*(height/1080);
+  //var insets = {'top':0, 'bottom':0};
+  //insets = useSafeAreaInsets();
+
+  var height = Dimensions.get("window").height;
+  space=getStatusBarHeight()*2;//insets.top-insets.bottom;
+  var mainScreen=<View style={{height:height-space}}>
+    {screen}
+
+  
+  </View>;
+  // const rerender= ()=>{
+  //   try{
+  //       insets = useSafeAreaInsets();
+  //   }
+  //   catch ( e){
+  //     console.log("still not working "+e);
+  //   }
+  //   space=insets.top-insets.bottom;
+  //   console.log(insets);
+  //   mainScreen=(<View style={{height:height-space}}>
+  //     {screen}
+  //   </View>);
   // }
-  // else{
-  //   space=64+50;
-  // }
-  //height = useWindowDimensions().height;
-  space=64;
+
   return (
-    <View style={{height:height-space+64}}>
+
+    <View>
       <StatusBar hidden />
-      { <View style={{height:height-space}}>
-        {screen}
-      </View> }
+      { mainScreen}
+      
       {navCon}
     <View style={{justifyContent:'flex-end'}}>
       <MenuBar goClassroom={goClassroomHandler} setScreen ={setScreenHandler} screen ={currScreen} colorList={colorList}></MenuBar>
     </View>
     </View>
+
+
   );
 
 

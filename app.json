@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "SELf-Q",
+    "name": "SELf-Q Education",
     "slug": "SELf-Q",
     "platforms": [
       "ios",
@@ -9,7 +9,7 @@
     ],
     "version": "2.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/ios_icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -26,7 +26,8 @@
       "bundleIdentifier": "SelfqIOS"
     },
     "android": {
-      "package": "com.selfqandroid"
+      "package": "com.selfqandroid",
+      "permissions": []
     },
     "scheme": "myapp",
     "description": "",

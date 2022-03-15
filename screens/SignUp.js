@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {ScrollView,TouchableOpacity, CheckBox, View, Text, TextInput, Button, StyleSheet,FlatList, Dimensions, Image} from 'react-native';
+import {ScrollView,TouchableOpacity, View, Text, TextInput, Button, StyleSheet,FlatList, Dimensions, Image} from 'react-native';
+import { Checkbox } from 'react-native-paper';
 import firebase from 'firebase';
 //import {  } from 'react-native-gesture-handler';
 //import * as GoogleSignIn from 'expo-google-sign-in';
@@ -47,11 +48,16 @@ const SignUp = props =>{
             <TextInput placeholder={"Email"} style ={styles.input} onChangeText={setEmail}/>
             <TextInput secureTextEntry={true} placeholder={"Password"} style ={styles.input} onChangeText={setPassword}/>
             
+            <ScrollView style={{flexDirection:'row'}}>
             <View style={styles.centerRow}>
-                <CheckBox
-                    value={isSelected}
-                    onValueChange={setSelection}
+                <Checkbox.Android
+                    status={isSelected ? 'checked' : 'unchecked'}
+                    onPress={() => {
+                        setSelection(!isSelected);
+                      }}
+                    
                     style={ {
+                        uncheckedColor:'grey',
                         alignSelf: "center",
                     }}/>
                 <Text  style={styles.text}> I agree to the </Text>
@@ -59,6 +65,7 @@ const SignUp = props =>{
                     <Text  style = {styles.clickableText}>Privacy Policy and Parental Agreement</Text>
                 </TouchableOpacity>
             </View>
+            </ScrollView>
             <Text style={styles.text}>{error}</Text>
             <View style={styles.centerRow}>
                 <View style={styles.button}>
