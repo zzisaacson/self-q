@@ -11,7 +11,7 @@ const FeedbackGoalInput = props =>{
             
               <Text>{props.question}</Text>
  
-            <TouchableOpacity onPress={()=>setCommentMode(true)}>
+            <TouchableOpacity style={{width:'100%'}}onPress={()=>setCommentMode(true)}>
               <Text  style ={styles.italics}> {props.input}</Text>
             </TouchableOpacity>
             {commentMode&& <View style={{padding:2,width:'100%'}}>

@@ -107,7 +107,9 @@ export default function App() {
     setClasses(classes);
   };
   const setScreenHandler=s=>{
-    
+    if(s!=12){
+      setLink('');
+    }
     if (nicknameToIds==null){
       db.ref('/nicknames/').once("value", function(snapshot) {
         var data=snapshot.val();
@@ -499,12 +501,12 @@ export default function App() {
     
   }
 
-  var space = 0;
+  var space = 64;
   //var insets = {'top':0, 'bottom':0};
   //insets = useSafeAreaInsets();
 
   var height = Dimensions.get("window").height;
-  space=getStatusBarHeight()*2;//insets.top-insets.bottom;
+  space+=getStatusBarHeight()*2;//insets.top-insets.bottom;
   var mainScreen=<View style={{height:height-space}}>
     {screen}
 

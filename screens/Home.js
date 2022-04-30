@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, ScrollView, Text, Button, StyleSheet,FlatList} from 'react-native';
+import {Linking, View, ScrollView, Text, Button, StyleSheet,FlatList} from 'react-native';
 
 import GoalItem from '../components/GoalItem';
 import firebase from 'firebase';
@@ -41,6 +41,10 @@ const Home = props =>{
       }; 
     return   (
     <ScrollView style={styles.screen}>
+      <Text style={{padding:4,color: 'blue'}}
+      onPress={() => Linking.openURL('http://howto.education.selfq.org/wp-content/uploads/2022/04/How-To-SELf-Q-1.pdf')}>
+  How To SELf-Q
+</Text>
       <Button title  = 'New Question Set' onPress={()=>props.setScreen(4)}/>
       <FlatList data = {props.qList}
       keyExtractor={(item, index)=> item.id}

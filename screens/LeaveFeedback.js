@@ -96,23 +96,17 @@ const LeaveFeedback = props =>{
             }}>
               <Button style={{width:'20%'}} title='Edit Answers on This Device' onPress = {handleAnswer}/>
                 
-                <Text style={{fontWeight:'bold'}} >Leave Feedback</Text>
+                <Text style={{fontWeight:'bold'}} > {'\n\n'}Leave Feedback</Text>
+                
                 <Text style={{
             width: '80%', 
-            borderColor:'black', 
-            borderWidth:1, 
+            backgroundColor:'grey', 
             padding:10,
             marginBottom: 10
         }} > {userInput}</Text>
+        <TextInput value={gFeedback}style={styles.input} placeholder='General Feedback' onChangeText={text=>setGFeedback(text)}/>
                 {responses}
-                <TextInput value={gFeedback}style={styles.input} placeholder='General Feedback' onChangeText={text=>setGFeedback(text)}/>
-                {/* <TextInput value={grade}  style={{
-        width: '10%', 
-        borderColor:'black', 
-        borderWidth:1, 
-        padding:10,
-        marginBottom: 10
-      }} placeholder='Grade' onChangeText={text=>setGrade(text)}/> */}
+                
               <Text style={styles.text}>{error}</Text>
               <Button style={{width:'20%'}} title='DONE' onPress = {handleDone}/>
               

@@ -88,7 +88,7 @@ const AssignSet = props =>{
         };
 
     const addGoalHandler = goalTitle=>{
-
+        setAssignTo(assignTo.toLowerCase());
         console.log(props.nicknameToIds);
         if (!props.nicknameToIds.hasOwnProperty(assignTo)){
             setError('The user with the nickname you specified does not exist.')
@@ -100,7 +100,7 @@ const AssignSet = props =>{
             props.setClassName(props.nickname+'-'+assignTo);
             
             const rid =props.rid;
-            props.setLink("http://education.selfq.org/link?assignment="+props.rid+"&class="+(props.nickname+'-'+assignTo).replaceAll(" ", "%20"));
+            props.setLink("http://education.selfq.org/link?assignment="+props.rid+"&class="+(props.nickname+'-'+assignTo.toLowerCase()));
             var rid_contained=false;
             var l =[];
             var assignments=[];
@@ -142,9 +142,9 @@ const AssignSet = props =>{
                                 'answer':reflect
                             }};
             //console.log(details);
-            db.ref('/classes/'+props.nickname+'-'+assignTo+'/assignments/details/'+rid).set(details);
+            db.ref('/classes/'+props.nickname+'-'+assignTo.toLowerCase()+'/assignments/details/'+rid).set(details);
 
-            db.ref('/classes/'+props.nickname+'-'+assignTo).on("value", function(snapshot) {
+            db.ref('/classes/'+props.nickname+'-'+assignTo.toLowerCase()).on("value", function(snapshot) {
                 const data=snapshot.val();
                 props.setClassDetails(data);
 
@@ -205,7 +205,7 @@ const AssignSet = props =>{
             marginBottom: 10
         }} onChangeText ={text=>setAssignTo(text)}/>
                 
-                <Text style={{fontWeight:'bold'}} ><br /><br />Ask a question</Text>
+                <Text style={{fontWeight:'bold'}} >{"\n\n"}Ask a question</Text>
                 <TextInput value = {userInput} placeholder = 'Question' style={{
             width: '80%', 
             borderColor:'black', 
